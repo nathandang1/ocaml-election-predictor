@@ -10,9 +10,9 @@ type t = {
   pref_percent : float;
 }
 
-type d = c * float list
+type d = (c * float) list
 
-let outcome state data =
+let outcome state (data : d) =
   let biden_val = List.assoc Biden data in
   let trump_val = List.assoc Trump data in
   let biden_boost =
