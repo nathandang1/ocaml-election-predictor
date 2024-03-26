@@ -1,4 +1,5 @@
-type t = {name: string; votes: int; pop: int}
+type c = Biden | Trump
+type t = {name: string; votes: int; pop: int ; pref_can : c ; percent_win : float}
 
 type d = float list
 
