@@ -12,7 +12,7 @@ module type F = sig
   type d
 
   val of_name : string -> t
-  val extract : string -> d
+  val extract : t -> d
 end
 
 module Make (Extr : ExtractableType) : F with type d = Extr.t = struct
