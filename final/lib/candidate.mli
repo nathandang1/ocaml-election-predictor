@@ -1,5 +1,3 @@
 type t
 
-val name : t -> string 
-
-val party : t -> string 
+(* val name : t -> string val party : t -> string *)
