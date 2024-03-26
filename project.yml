@@ -1,4 +1,3 @@
----
 # Members of your group.
 group:
   - name: Nathan Dang
@@ -24,20 +23,4 @@ git-repo: "https://github.coecis.cornell.edu/ayk36/cs3110-final"
 # If you have no demo screencast, replace the url string with an empty string ""
 demo-video-url: ""
 # Write a short, attention-grabbing description of your project.
-desc: >
-Our project is an election outcome simulator. It allows users to input a list 
-of states, each with its own number of electoral votes and probability of 
-voting for a given candidate. The simulator then runs a large number of 
-simulations to determine the probability of each candidate winning the 
-election. The simulator also allows users to input a list of states that have 
-already been called, and it will update the probabilities accordingly. The 
-simulator is written in OCaml and uses the Jane Street Core library for 
-random number generation.
-  Our project is an interactive calculator. It supports standard mathematical
-  operations like addition, multiplication, negation, and division on both
-  integers and floating-point numbers. The interface is completely
-  programmable--new functions can easily be defined and assigned to new "keys"
-  in the visual interface.
-
-  Standard visual I/O is supported, but the calculator can also emit sound. By
-  pressing down a special key, it can play a little melody.
+desc: 
