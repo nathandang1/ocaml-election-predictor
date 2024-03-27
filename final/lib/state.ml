@@ -26,6 +26,8 @@ module S = struct
     in
     [ (Biden, biden_val +. biden_boost); (Trump, trump_val +. trump_boost) ]
 
+  let name_of state = state.name
+  let population_of state = state.pop
   let from_csv = false
 
   let of_data data =

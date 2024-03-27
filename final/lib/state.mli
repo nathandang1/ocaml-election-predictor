@@ -14,4 +14,20 @@ module S : sig
   val outcome : t -> d -> (c * float) list
   (** [outcome d] is each candidate's probability of winning given some data
       [d]. *)
+
+  val name_of : t -> string
+  (** [name_of state] is the name of the state [state]. *)
+
+  val population_of : t -> int
+  (** [population_of state] is the population of the state [state]. *)
+
+  val from_csv : bool
+  (** [from_csv] indicates whether a state can be extracted from a .csv file,
+      and is [false].*)
+
+  val of_data : string list list -> t
+  (** [of_data data] is the state created using information extracted from the
+      nested string list [data]. Requires that [data] contains a single list,
+      whose elements include the name of the state, its votes, its population,
+      its preferred candidate, and its preference percentage, in that order. *)
 end
