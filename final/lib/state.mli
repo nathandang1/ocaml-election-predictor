@@ -15,10 +15,10 @@ module S : sig
   (** [outcome d] is each candidate's probability of winning given some data
       [d]. *)
 
-  val name_of : t -> string
+  val name : t -> string
   (** [name_of state] is the name of the state [state]. *)
 
-  val population_of : t -> int
+  val population : t -> int
   (** [population_of state] is the population of the state [state]. *)
 
   val from_csv : bool
