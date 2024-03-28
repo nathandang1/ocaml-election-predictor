@@ -5,8 +5,8 @@ module C = struct
   }
 
   let create (nm, pty) = { name = nm; party = pty }
-  let name_of c = c.name
-  let party_of c = c.party
+  let name c = c.name
+  let party c = c.party
   let from_csv = false
 
   let of_data data =
