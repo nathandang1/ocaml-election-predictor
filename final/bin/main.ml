@@ -29,9 +29,9 @@ module ExtractStates = GroupExtract (StateFile)
 let candidates : Candidate.C.t list = ExtractCandidates.from_lst candidate_files
 let states : State.S.t list = ExtractStates.from_lst state_files
 
-let rec prompt_and_print states acc = match states with 
+let rec prompt_and_print (states : State.S.t list) acc = match states with 
 | [] -> acc
-| h :: t -> let () = print_endline ("what is the probability that Biden wins in " ^ h ^ "? (0.0 - 1.0)") in 
+| h :: t -> let () = print_endline ("what is the probability that Biden wins in " ^ h.name ^ "? (0.0 - 1.0)") in 
 let the_input = read_line () in 
 match (float_of_string_opt the_input) with 
 | None -> let () = print_endline ("please enter a valid probability") in prompt_and_print states acc
