@@ -28,7 +28,6 @@ module ExtractStates = GroupExtract (StateFile)
 
 let candidates : Candidate.C.t list = ExtractCandidates.from_lst candidate_files
 let states : State.S.t list = ExtractStates.from_lst state_files
-let () = print_endline (string_of_int (List.length states))
 
 let rec prompt_and_print (states_list : State.S.t list) acc =
   match states_list with
