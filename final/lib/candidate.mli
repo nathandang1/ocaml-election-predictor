@@ -1,6 +1,9 @@
 (** A C is a candidate for an election. *)
 module C : sig
-  type t
+  type t = {
+    name : string;
+    party : string;
+  }
   (** [t] represents a candidate in an election. *)
 
   val create : string * string -> t
