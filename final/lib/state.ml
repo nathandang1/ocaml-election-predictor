@@ -7,24 +7,16 @@ module S = struct
     name : string;
     votes : int;
     pop : int;
-    pref_can : c;
+    pref_can : string;
     pref_percent : float;
   }
 
-  type d = (C.t * float list) list
+  type d = (string * float) list
 
   let outcome state (data : d) =
-    let biden_val = List.assoc Biden data in
-    let trump_val = List.assoc Trump data in
-    let biden_boost =
-      if state.pref_can = Biden then state.pref_percent /. 5.
-      else -1. *. state.pref_percent /. 20.
-    in
-    let trump_boost =
-      if state.pref_can = Trump then state.pref_percent /. 5.
-      else -1. *. state.pref_percent /. 20.
-    in
-    [ (Biden, biden_val +. biden_boost); (Trump, trump_val +. trump_boost) ]
+    let pref_can_curr = List.assoc state.pref_can data in
+    let pref_can_new = pref_can_curr +. state.pref_percent in
+    (state.pref_can, pref_can_new) :: List.remove_assoc state.pref_can data
 
   let name state = state.name
   let population state = state.pop
@@ -37,7 +29,7 @@ module S = struct
           name = nm;
           votes = int_of_string vts;
           pop = int_of_string p;
-          pref_can = (if c = "Donald Trump" then Trump else Biden);
+          pref_can = (if c = "Donald Trump" then "Trump" else "Biden");
           pref_percent = float_of_string c_per;
         }
     | _ -> failwith "invalid data"

@@ -11,7 +11,7 @@ module S : sig
   type d
   (** [d] is the state-specific data. *)
 
-  val outcome : t -> d -> (c * float) list
+  val outcome : t -> d -> d
   (** [outcome d] is each candidate's probability of winning given some data
       [d]. *)
 
