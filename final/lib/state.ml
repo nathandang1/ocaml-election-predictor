@@ -29,7 +29,7 @@ module S = struct
           name = nm;
           votes = int_of_string vts;
           pop = int_of_string p;
-          pref_can = (if c = "Donald Trump" then "Trump" else "Biden");
+          pref_can = c;
           pref_percent = float_of_string c_per;
         }
     | _ -> failwith "invalid data"
