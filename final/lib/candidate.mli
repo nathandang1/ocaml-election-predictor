@@ -6,10 +6,10 @@ module C : sig
   val create : string * string -> t
   (** [create (nm, pty)] creates a candidate with name [nm] and party [pty]. *)
 
-  val name_of : t -> string
+  val name : t -> string
   (** [name_of c] is the name of candidate [c]. *)
 
-  val party_of : t -> string
+  val party : t -> string
   (** [party_of c] is the political party of candidate [c]. *)
 
   val from_csv : bool
