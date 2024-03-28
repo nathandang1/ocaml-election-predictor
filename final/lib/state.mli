@@ -3,12 +3,18 @@ module S : sig
   type c
   (** [c] is a tuple of candidates for the election. *)
 
-  type t
+  type t = {
+    name : string;
+    votes : int;
+    pop : int;
+    pref_can : string;
+    pref_percent : float;
+  }
   (** [t] contains the basic instances of a State *)
   (* = {name: string; votes: int; pop: int ; pref_can : c ; percent_win :
      float} *)
 
-  type d
+  type d = (string * float) list
   (** [d] is the state-specific data. *)
 
   val outcome : t -> d -> d
