@@ -39,16 +39,50 @@ let run () =
   print_endline "";
   print_endline
     "[OVERALL | 15] -> [Joe Biden: 66 votes, 12 electors] [Donald Trump: 48 \
-     votes, 3 electors]"
+     votes, 3 electors]";
+  print_endline ""
 
 let _ = run ()
 
-let rec extract_states (states : State.S.t list) =
-  match states with
-  | [] -> ()
-  | h :: t ->
-      let line = h.pref_can ^ " wins " ^ h.name ^ "." in
-      let () = print_endline line in
-      extract_states t
+(* Convert from a Candidate list to a string list *)
+let rec extract_cands (candidates : Candidate.C.t list) =
+  match candidates with
+  | [] -> []
+  | h :: t -> (h.name, 0) :: extract_cands t
 
-let _ = extract_states states
+let candidates_electors = extract_cands candidates
+
+let rec electors_to_string cands =
+  match cands with
+  | [] -> ""
+  | h :: t ->
+      "[" ^ fst h ^ ": "
+      ^ string_of_int (snd h)
+      ^ " electors] " ^ electors_to_string t
+
+let get_winner electors =
+  let winner = List.hd electors in
+  print_endline
+    ("Winner: " ^ fst winner ^ ", " ^ string_of_int (snd winner) ^ " electors.")
+
+let rec print_states (states : State.S.t list) electors =
+  match states with
+  | [] ->
+      print_endline ("Final: " ^ electors_to_string electors);
+      print_endline "";
+      get_winner electors
+  | h :: t ->
+      let line = h.pref_can ^ " wins " ^ h.name ^ ". \t" in
+      let new_vote = List.assoc h.pref_can electors + h.votes in
+      let new_counts =
+        (h.pref_can, new_vote) :: List.remove_assoc h.pref_can electors
+      in
+      let sorted_counts =
+        List.sort
+          (fun cand1 cand2 -> -1 * Stdlib.compare (snd cand1) (snd cand2))
+          new_counts
+      in
+      let () = print_endline (line ^ electors_to_string sorted_counts) in
+      print_states t sorted_counts
+
+let _ = print_states states candidates_electors
