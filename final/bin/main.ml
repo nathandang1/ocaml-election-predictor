@@ -29,21 +29,7 @@ module ExtractStates = GroupExtract (StateFile)
 let candidates : Candidate.C.t list = ExtractCandidates.from_lst candidate_files
 let states : State.S.t list = ExtractStates.from_lst state_files
 
-let run () =
-  print_endline "***** OCAML ELECTION PREDICTOR *****";
-  print_endline "";
-  print_endline
-    "[Cornell | 7] -> [Joe Biden: 22 votes] [Donald Trump: 12 votes]";
-  print_endline "[Harvard | 5] -> [Joe Biden: 22 votes] [Donald Trump: 8 votes]";
-  print_endline "[Yale | 3] -> [Joe Biden: 22 votes] [Donald Trump: 28 votes]";
-  print_endline "";
-  print_endline
-    "[OVERALL | 15] -> [Joe Biden: 66 votes, 12 electors] [Donald Trump: 48 \
-     votes, 3 electors]";
-  print_endline ""
-
-let _ = run ()
-
+<<<<<<< HEAD
 let rec prompt_and_print states acc = match states with 
 | [] -> acc
 | h :: t -> let () = print_endline ("what is the probability that Biden wins in " ^ h ^ "? (0.0 - 1.0)") in 
@@ -60,6 +46,8 @@ let rec candidate_two_probabilities probs acc = match probs with
 | [] -> acc
 | (a, b) :: t -> candidate_two_probabilities t ((a, 1. -. b) :: acc)
 
+=======
+>>>>>>> 6f018ab14933321c60c805870b5868d6bfa07364
 (* Convert from a Candidate list to a string list *)
 let rec extract_cands (candidates : Candidate.C.t list) =
   match candidates with
