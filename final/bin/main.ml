@@ -42,3 +42,13 @@ let run () =
      votes, 3 electors]"
 
 let _ = run ()
+
+let rec extract_states (states : State.S.t list) =
+  match states with
+  | [] -> ()
+  | h :: t ->
+      let line = h.pref_can ^ " wins " ^ h.name ^ "." in
+      let () = print_endline line in
+      extract_states t
+
+let _ = extract_states states
