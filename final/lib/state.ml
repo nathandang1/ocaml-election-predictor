@@ -13,10 +13,11 @@ module S = struct
 
   type d = (string * float) list
 
-  let outcome state (data : d) =
+  let outcome state (data : d) prior =
     let pref_can_curr = List.assoc state.pref_can data in
     let pref_can_new = pref_can_curr +. state.pref_percent in
-    (state.pref_can, pref_can_new) :: List.remove_assoc state.pref_can data
+    (state.pref_can, pref_can_new *. prior)
+    :: List.remove_assoc state.pref_can data
 
   let name state = state.name
   let population state = state.pop

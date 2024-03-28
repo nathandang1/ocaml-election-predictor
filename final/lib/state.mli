@@ -4,16 +4,15 @@ module S : sig
   (** [c] is a tuple of candidates for the election. *)
 
   type t = {
-    name : string;
-    (** [name] is the name of the state *)
-    votes : int;
-    (** [votes] is the number of electoral votes the state has *)
-    pop : int;
-    (** [pop] is the population of the state *)
+    name : string;  (** [name] is the name of the state *)
+    votes : int;  (** [votes] is the number of electoral votes the state has *)
+    pop : int;  (** [pop] is the population of the state *)
     pref_can : string;
-    (** [pref_can] is the name of the candidate that the state prefers currently *)
+        (** [pref_can] is the name of the candidate that the state prefers
+            currently *)
     pref_percent : float;
-    (** [pref_percent] is the net advantage [pref_can] has over the competition *)
+        (** [pref_percent] is the net advantage [pref_can] has over the
+            competition *)
   }
   (** [t] contains the basic instances of a State *)
   (* = {name: string; votes: int; pop: int ; pref_can : c ; percent_win :
@@ -22,9 +21,9 @@ module S : sig
   type d = (string * float) list
   (** [d] is the state-specific data. *)
 
-  val outcome : t -> d -> d
-  (** [outcome d] is each candidate's probability of winning given some data
-      [d]. *)
+  val outcome : t -> d -> float -> d
+  (** [outcome s d prior] is each candidate's probability of winning state [s]
+      given some data [d] and user-specified prior belief [prior].*)
 
   val name : t -> string
   (** [name_of state] is the name of the state [state]. *)
