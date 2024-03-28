@@ -72,6 +72,7 @@ let rec print_states (states : State.S.t list) electors =
       print_endline "";
       get_winner electors
   | h :: t ->
+      (* TODO: change computation of the "winner" here. *)
       let line = h.pref_can ^ " wins " ^ h.name ^ ". \t" in
       let new_vote = List.assoc h.pref_can electors + h.votes in
       let new_counts =
