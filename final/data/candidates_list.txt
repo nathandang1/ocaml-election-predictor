@@ -1,2 +1,2 @@
-candidates/brokedon.txt
-candidates/sleepyjoe.txt
+data/candidates/brokedon.txt
+data/candidates/sleepyjoe.txt

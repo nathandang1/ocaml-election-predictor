@@ -12,10 +12,10 @@ module CandidateFile = File.Make (Candidate.C)
 module StateFile = File.Make (State.S)
 
 let candidate_files : string list =
-  StringListFile.(extract (of_name "candidates_list.txt"))
+  StringListFile.(extract (of_name "data/candidates_list.txt"))
 
 let state_files : string list =
-  StringListFile.(extract (of_name "states_list.txt"))
+  StringListFile.(extract (of_name "data/states_list.txt"))
 
 module GroupExtract (F : File.F) = struct
   let rec from_lst = function
