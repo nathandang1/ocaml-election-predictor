@@ -25,12 +25,6 @@ module S : sig
   (** [outcome s d prior] is each candidate's probability of winning state [s]
       given some data [d] and user-specified prior belief [prior].*)
 
-  val name : t -> string
-  (** [name_of state] is the name of the state [state]. *)
-
-  val population : t -> int
-  (** [population_of state] is the population of the state [state]. *)
-
   val from_csv : bool
   (** [from_csv] indicates whether a state can be extracted from a .csv file,
       and is [false].*)
