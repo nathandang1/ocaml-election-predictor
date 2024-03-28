@@ -1,2 +1,2 @@
-data/candidates/brokedon.txt
-data/candidates/sleepyjoe.txt
+data/candidates/trump.txt
+data/candidates/biden.txt
