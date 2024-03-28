@@ -19,8 +19,6 @@ module S = struct
     (state.pref_can, pref_can_new *. prior)
     :: List.remove_assoc state.pref_can data
 
-  let name state = state.name
-  let population state = state.pop
   let from_csv = false
 
   let of_data data =
