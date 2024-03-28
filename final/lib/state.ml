@@ -1,7 +1,7 @@
+open Candidate
+
 module S = struct
-  type c =
-    | Biden
-    | Trump
+  type c = C.t * C.t
 
   type t = {
     name : string;
@@ -11,7 +11,7 @@ module S = struct
     pref_percent : float;
   }
 
-  type d = (c * float) list
+  type d = (C.t * float list) list
 
   let outcome state (data : d) =
     let biden_val = List.assoc Biden data in

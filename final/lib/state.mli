@@ -1,7 +1,7 @@
 (** An S is a state-level electoral subdivision of an electoral map. *)
 module S : sig
   type c
-  (** [c] is a variant of possible candidates *)
+  (** [c] is a tuple of candidates for the election. *)
 
   type t
   (** [t] contains the basic instances of a State *)
