@@ -10,6 +10,6 @@ let run () =
   print_endline "";
   print_endline
     "[OVERALL | 15] -> [Joe Biden: 66 votes, 12 electors] [Donald Trump: 48 \
-     votes, 3 elector]"
+     votes, 3 electors]"
 
 let _ = run ()
