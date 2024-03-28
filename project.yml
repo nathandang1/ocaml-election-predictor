@@ -23,4 +23,8 @@ git-repo: "https://github.coecis.cornell.edu/ayk36/cs3110-final"
 # If you have no demo screencast, replace the url string with an empty string ""
 demo-video-url: ""
 # Write a short, attention-grabbing description of your project.
-desc: 
+desc: The OCaml Election Outcome Simulator is an interactive program that gives
+users the ability to predict the outcome of any election. Users can upload
+their own data, such as data on previous elections as well as candidate popularity, 
+as well as simulate their own fantasy elections in a fantasy world. With the power
+of machine learning and data analysis, anything is possible!
