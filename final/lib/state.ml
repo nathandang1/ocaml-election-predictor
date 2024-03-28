@@ -1,7 +1,7 @@
 open Candidate
 
 module S = struct
-  type c = C.t * C.t
+  type c = (string * C.t) list
 
   type t = {
     name : string;
