@@ -29,37 +29,6 @@ module ExtractStates = GroupExtract (StateFile)
 let candidates : Candidate.C.t list = ExtractCandidates.from_lst candidate_files
 let states : State.S.t list = ExtractStates.from_lst state_files
 
-let rec prompt_and_print (states_list : State.S.t list) acc =
-  match states_list with
-  | [] -> acc
-  | h :: t -> (
-      let () =
-        print_endline
-          ("what is the probability that Biden wins in " ^ h.name
-         ^ "? (0.0 - 1.0)")
-      in
-      let the_input = read_line () in
-      match float_of_string_opt the_input with
-      | None ->
-          let () = print_endline "please enter a valid probability" in
-          prompt_and_print states_list acc
-      | Some x ->
-          if x < 0.0 || x > 1.0 then
-            let () = print_endline "please enter a valid probability" in
-            prompt_and_print states_list acc
-          else
-            let tup = (h, x) in
-            prompt_and_print t (tup :: acc))
-
-let biden_probabilities = prompt_and_print states []
-
-let rec candidate_two_probabilities probs acc =
-  match probs with
-  | [] -> acc
-  | (a, b) :: t -> candidate_two_probabilities t ((a, 1. -. b) :: acc)
-
-let trump_probabilities = candidate_two_probabilities biden_probabilities []
-
 (* Convert from a Candidate list to a string list *)
 let rec extract_cands (candidates : Candidate.C.t list) =
   match candidates with
@@ -103,3 +72,35 @@ let rec print_states (states : State.S.t list) electors =
       print_states t sorted_counts
 
 let _ = print_states states candidates_electors
+
+let rec prompt_priors (states_list : State.S.t list) acc =
+  match states_list with
+  | [] -> acc
+  | h :: t -> (
+      let () =
+        print_endline
+          ("What is the probability that Biden wins in " ^ h.name
+         ^ "? (0.0 - 1.0)")
+      in
+      let the_input = read_line () in
+      match float_of_string_opt the_input with
+      | None ->
+          let () = print_endline "Please enter a valid probability." in
+          prompt_priors states_list acc
+      | Some x ->
+          if x < 0.0 || x > 1.0 then
+            let () = print_endline "Please enter a valid probability." in
+            prompt_priors states_list acc
+          else
+            let tup = (h, x) in
+            prompt_priors t (tup :: acc))
+
+let biden_probabilities = prompt_priors states []
+
+let rec candidate_two_probabilities probs acc =
+  match probs with
+  | [] -> acc
+  | (a, b) :: t -> candidate_two_probabilities t ((a, 1. -. b) :: acc)
+
+let trump_probabilities = candidate_two_probabilities biden_probabilities []
+let biden_probabilities = List.rev biden_probabilities
