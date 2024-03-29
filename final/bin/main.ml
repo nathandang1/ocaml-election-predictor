@@ -55,13 +55,15 @@ let get_winner electors =
     [state_prior] containing the state and the prior value. *)
 let calc_state_results (state_prior : State.S.t * float) cand =
   let data = [ ("Donald Trump", 0.5); ("Joe Biden", 0.5) ] in
+  let state = fst state_prior in
   let prior = snd state_prior in
-  let new_val_cand = List.assoc cand data *. prior in
-  let new_val_other = List.assoc cand data *. (1. -. prior) in
 
+  let new_data = State.S.outcome state data cand prior in
+  let other_cand = List.hd (List.remove_assoc cand new_data) in
+  let new_val_cand = List.assoc cand new_data in
+  let new_val_other = snd other_cand in
   (* Should have a separate case for = (WIP) *)
-  if new_val_cand >= new_val_other then cand
-  else fst (List.hd (List.remove_assoc cand data))
+  if new_val_cand >= new_val_other then cand else fst other_cand
 
 let rec print_states (states_with_priors : (State.S.t * float) list) cand
     electors =
