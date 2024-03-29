@@ -112,7 +112,7 @@ end
 module CSVFile = File.Make (CSV)
 
 (** [read_csv path] reads the csv found at [path]. *)
-let read_csv path = CSVFile.extract path
+let read_csv path = CSVFile.extract (CSVFile.of_name path)
 
 (** [calc_state_results state_prior c electors] calculates which candidate is
     more likely to win in the state, given some tuple [state_prior] containing
