@@ -11,8 +11,7 @@ end
 module CSVFile = File.Make (CSV)
 
 (** [read_csv path] reads the csv found at [path]. *)
-let read_csv path = CSVFile.extract (CSVFile.of_name path)
-
+let read_csv path = Csv.transpose (CSVFile.extract (CSVFile.of_name path))
 (* FILE READING CODE *)
 
 module ExtractableStringList = struct
@@ -65,13 +64,33 @@ let get_winner electors =
   print_endline
     ("Winner: " ^ fst winner ^ ", " ^ string_of_int (snd winner) ^ " electors.")
 
+(* Get association list data *)
+let csv_parse_relevant file =
+  let lst = read_csv file in
+  let relevant = List.tl lst in
+  List.fold_left
+    (fun acc cand ->
+      (List.hd cand, float_of_string (List.hd (List.tl cand))) :: acc)
+    [] relevant
+
+let get_right_data state_name =
+  let map_states =
+    [
+      ("New Jersey", "nj_poll.csv");
+      ("North Carolina", "nc_poll.csv");
+      ("Pennsylvania", "pa_poll.csv");
+    ]
+  in
+  let file_name = "data/polling/" ^ List.assoc state_name map_states in
+  csv_parse_relevant file_name
+
 (** [calc_state_results state_prior c] calculates a Naive Bayes probability of
     which candidate is more likely to win in the state, given some tuple
     [state_prior] containing the state and the prior value. *)
 let calc_state_results (state_prior : State.S.t * float) cand =
-  let data = [ ("Donald Trump", 0.5); ("Joe Biden", 0.5) ] in
   let state = fst state_prior in
   let prior = snd state_prior in
+  let data = get_right_data state.name in
 
   let new_data = State.S.outcome state data cand prior in
   let other_cand = List.hd (List.remove_assoc cand new_data) in
