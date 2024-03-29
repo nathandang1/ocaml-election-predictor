@@ -11,7 +11,8 @@ end
 module CSVFile = File.Make (CSV)
 
 (** [read_csv path] reads the csv found at [path]. *)
-let read_csv path = CSVFile.extract path
+let read_csv path = CSVFile.extract (CSVFile.of_name path)
+
 (* FILE READING CODE *)
 
 module ExtractableStringList = struct
