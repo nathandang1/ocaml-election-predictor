@@ -102,9 +102,17 @@ let cand_probabilities = prompt_priors states [] (List.hd candidates).name
    [] *)
 let cand_probabilities = List.rev cand_probabilities
 
-(** Temporary function to read csv polling data for WIP. Will refactor into the
-    File module. *)
-let read_csv_temp path = path |> Csv.load |> Csv.transpose
+module CSV = struct
+  type t = Csv.t
+
+  let from_csv = true
+  let of_data (data : string list list) : Csv.t = data
+end
+
+module CSVFile = File.Make (CSV)
+
+(** [read_csv path] reads the csv found at [path]. *)
+let read_csv path = CSVFile.extract path
 
 (** [calc_state_results state_prior c electors] calculates which candidate is
     more likely to win in the state, given some tuple [state_prior] containing
