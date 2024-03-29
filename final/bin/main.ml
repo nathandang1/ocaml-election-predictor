@@ -1,5 +1,19 @@
 open Final
 
+(* FILE READING CODE *)
+module CSV = struct
+  type t = Csv.t
+
+  let from_csv = true
+  let of_data (data : string list list) : Csv.t = data
+end
+
+module CSVFile = File.Make (CSV)
+
+(** [read_csv path] reads the csv found at [path]. *)
+let read_csv path = CSVFile.extract path
+(* FILE READING CODE *)
+
 module ExtractableStringList = struct
   type t = string list
 
@@ -120,17 +134,4 @@ let cand_probabilities = prompt_priors states [] first_cand
    let biden_probabilities = candidate_two_probabilities trump_probabilities
    [] *)
 let cand_probabilities = List.rev cand_probabilities
-
-module CSV = struct
-  type t = Csv.t
-
-  let from_csv = true
-  let of_data (data : string list list) : Csv.t = data
-end
-
-module CSVFile = File.Make (CSV)
-
-(** [read_csv path] reads the csv found at [path]. *)
-let read_csv path = CSVFile.extract path
-
 let _ = print_states cand_probabilities first_cand candidates_electors
