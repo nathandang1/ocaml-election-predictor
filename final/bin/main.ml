@@ -1,5 +1,20 @@
 open Final
 
+(* FILE READING CODE *)
+module CSV = struct
+  type t = Csv.t
+
+  let from_csv = true
+  let of_data (data : string list list) : Csv.t = data
+end
+
+module CSVFile = File.Make (CSV)
+
+(** [read_csv path] reads the csv found at [path]. *)
+let read_csv path = CSVFile.extract (CSVFile.of_name path)
+
+(* FILE READING CODE *)
+
 module ExtractableStringList = struct
   type t = string list
 
@@ -50,26 +65,44 @@ let get_winner electors =
   print_endline
     ("Winner: " ^ fst winner ^ ", " ^ string_of_int (snd winner) ^ " electors.")
 
-let rec print_states (states : State.S.t list) electors =
-  match states with
+(** [calc_state_results state_prior c] calculates a Naive Bayes probability of
+    which candidate is more likely to win in the state, given some tuple
+    [state_prior] containing the state and the prior value. *)
+let calc_state_results (state_prior : State.S.t * float) cand =
+  let data = [ ("Donald Trump", 0.5); ("Joe Biden", 0.5) ] in
+  let state = fst state_prior in
+  let prior = snd state_prior in
+
+  let new_data = State.S.outcome state data cand prior in
+  let other_cand = List.hd (List.remove_assoc cand new_data) in
+  let new_val_cand = List.assoc cand new_data in
+  let new_val_other = snd other_cand in
+  (* Should have a separate case for = (WIP) *)
+  if new_val_cand >= new_val_other then cand else fst other_cand
+
+let rec print_states (states_with_priors : (State.S.t * float) list) cand
+    electors =
+  match states_with_priors with
   | [] ->
       print_endline ("Final: " ^ electors_to_string electors);
       print_endline "";
       get_winner electors
   | h :: t ->
-      (* TODO: change computation of the "winner" here. *)
-      let line = h.pref_can ^ " wins " ^ h.name ^ ". \t" in
-      let new_vote = List.assoc h.pref_can electors + h.votes in
+      let pred_winner = calc_state_results h cand in
+      let state = fst h in
+      let win_line = pred_winner ^ " wins " ^ state.name ^ ". \t" in
+      (* Compute the winner in the state *)
+      let new_vote = List.assoc pred_winner electors + state.votes in
       let new_counts =
-        (h.pref_can, new_vote) :: List.remove_assoc h.pref_can electors
+        (pred_winner, new_vote) :: List.remove_assoc pred_winner electors
       in
       let sorted_counts =
         List.sort
           (fun cand1 cand2 -> -1 * Stdlib.compare (snd cand1) (snd cand2))
           new_counts
       in
-      let () = print_endline (line ^ electors_to_string sorted_counts) in
-      print_states t sorted_counts
+      let () = print_endline (win_line ^ electors_to_string sorted_counts) in
+      print_states t cand sorted_counts
 
 let rec prompt_priors (states_list : State.S.t list) acc cand =
   match states_list with
@@ -93,7 +126,8 @@ let rec prompt_priors (states_list : State.S.t list) acc cand =
             let tup = (h, x) in
             prompt_priors t (tup :: acc) cand)
 
-let cand_probabilities = prompt_priors states [] (List.hd candidates).name
+let first_cand = (List.hd candidates).name
+let cand_probabilities = prompt_priors states [] first_cand
 
 (* let rec candidate_two_probabilities probs acc = match probs with | [] -> acc
    | (a, b) :: t -> candidate_two_probabilities t ((a, 1. -. b) :: acc)
@@ -101,44 +135,4 @@ let cand_probabilities = prompt_priors states [] (List.hd candidates).name
    let biden_probabilities = candidate_two_probabilities trump_probabilities
    [] *)
 let cand_probabilities = List.rev cand_probabilities
-
-module CSV = struct
-  type t = Csv.t
-
-  let from_csv = true
-  let of_data (data : string list list) : Csv.t = data
-end
-
-module CSVFile = File.Make (CSV)
-
-(** [read_csv path] reads the csv found at [path]. *)
-let read_csv path = CSVFile.extract (CSVFile.of_name path)
-
-(** [calc_state_results state_prior c electors] calculates which candidate is
-    more likely to win in the state, given some tuple [state_prior] containing
-    the state and the prior value. *)
-let rec calc_state_results (state_prior : State.S.t * float) cand electors =
-  let data = [ ("Donald Trump", 0.5); ("Joe Biden", 0.5) ] in
-  let state = fst state_prior in
-  let prior = snd state_prior in
-  let new_val_cand = List.assoc cand data *. prior in
-  let new_val_other = List.assoc cand data *. (1. -. prior) in
-
-  (* Should have a separate case for = (WIP) *)
-  if new_val_cand >= new_val_other then
-    let new_vote = List.assoc cand electors + state.votes in
-    let new_counts = (cand, new_vote) :: List.remove_assoc cand electors in
-    List.sort
-      (fun cand1 cand2 -> -1 * Stdlib.compare (snd cand1) (snd cand2))
-      new_counts
-  else
-    let other_cand = fst (List.hd (List.remove_assoc cand electors)) in
-    let new_vote = List.assoc other_cand electors + state.votes in
-    let new_counts =
-      (other_cand, new_vote) :: List.remove_assoc other_cand electors
-    in
-    List.sort
-      (fun cand1 cand2 -> -1 * Stdlib.compare (snd cand1) (snd cand2))
-      new_counts
-
-let _ = print_states states candidates_electors
+let _ = print_states cand_probabilities first_cand candidates_electors

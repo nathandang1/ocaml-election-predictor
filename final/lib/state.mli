@@ -21,9 +21,10 @@ module S : sig
   type d = (string * float) list
   (** [d] is the state-specific data. *)
 
-  val outcome : t -> d -> float -> d
-  (** [outcome s d prior] is each candidate's probability of winning state [s]
-      given some data [d] and user-specified prior belief [prior].*)
+  val outcome : t -> d -> string -> float -> d
+  (** [outcome s d cand prior] is each candidate's probability of winning state
+      [s] given some data [d] and user-specified prior belief [prior] applied to
+      candidate [cand].*)
 
   val from_csv : bool
   (** [from_csv] indicates whether a state can be extracted from a .csv file,
