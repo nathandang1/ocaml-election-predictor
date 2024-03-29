@@ -71,36 +71,66 @@ let rec print_states (states : State.S.t list) electors =
       let () = print_endline (line ^ electors_to_string sorted_counts) in
       print_states t sorted_counts
 
-let _ = print_states states candidates_electors
-
-let rec prompt_priors (states_list : State.S.t list) acc =
+let rec prompt_priors (states_list : State.S.t list) acc cand =
   match states_list with
   | [] -> acc
   | h :: t -> (
       let () =
         print_endline
-          ("What is the probability that Biden wins in " ^ h.name
-         ^ "? (0.0 - 1.0)")
+          ("What is the probability that " ^ cand ^ " wins in " ^ h.name
+         ^ "? (Enter a probability from 0.0 - 1.0)")
       in
       let the_input = read_line () in
       match float_of_string_opt the_input with
       | None ->
           let () = print_endline "Please enter a valid probability." in
-          prompt_priors states_list acc
+          prompt_priors states_list acc cand
       | Some x ->
           if x < 0.0 || x > 1.0 then
             let () = print_endline "Please enter a valid probability." in
-            prompt_priors states_list acc
+            prompt_priors states_list acc cand
           else
             let tup = (h, x) in
-            prompt_priors t (tup :: acc))
+            prompt_priors t (tup :: acc) cand)
 
-let biden_probabilities = prompt_priors states []
+let cand_probabilities = prompt_priors states [] (List.hd candidates).name
 
-let rec candidate_two_probabilities probs acc =
-  match probs with
-  | [] -> acc
-  | (a, b) :: t -> candidate_two_probabilities t ((a, 1. -. b) :: acc)
+(* let rec candidate_two_probabilities probs acc = match probs with | [] -> acc
+   | (a, b) :: t -> candidate_two_probabilities t ((a, 1. -. b) :: acc)
 
-let trump_probabilities = candidate_two_probabilities biden_probabilities []
-let biden_probabilities = List.rev biden_probabilities
+   let biden_probabilities = candidate_two_probabilities trump_probabilities
+   [] *)
+let cand_probabilities = List.rev cand_probabilities
+
+(** Temporary function to read csv polling data for WIP. Will refactor into the
+    File module. *)
+let read_csv_temp path = path |> Csv.load |> Csv.transpose
+
+(** [calc_state_results state_prior c electors] calculates which candidate is
+    more likely to win in the state, given some tuple [state_prior] containing
+    the state and the prior value. *)
+let rec calc_state_results (state_prior : State.S.t * float) cand electors =
+  let data = [ ("Donald Trump", 0.5); ("Joe Biden", 0.5) ] in
+  let state = fst state_prior in
+  let prior = snd state_prior in
+  let new_val_cand = List.assoc cand data *. prior in
+  let new_val_other = List.assoc cand data *. (1. -. prior) in
+
+  (* Should have a separate case for = (WIP) *)
+  if new_val_cand >= new_val_other then
+    let new_vote = List.assoc cand electors + state.votes in
+    let new_counts = (cand, new_vote) :: List.remove_assoc cand electors in
+    List.sort
+      (fun cand1 cand2 -> -1 * Stdlib.compare (snd cand1) (snd cand2))
+      new_counts
+  else
+    let other_cand = fst (List.hd (List.remove_assoc cand electors)) in
+    let new_vote = List.assoc other_cand electors + state.votes in
+    let new_counts =
+      (other_cand, new_vote) :: List.remove_assoc other_cand electors
+    in
+    List.sort
+      (fun cand1 cand2 -> -1 * Stdlib.compare (snd cand1) (snd cand2))
+      new_counts
+
+let _ = print_states states candidates_electors
