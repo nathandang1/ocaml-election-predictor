@@ -7,3 +7,7 @@ $ opam install batteries csv
 As usual, build the system by entering the following command from the root of final/ :
 
 $ dune build
+
+To run, enter the following command from the root of final/ :
+
+$ dune exec bin/main.exe
