@@ -19,6 +19,15 @@ type t = {
     to the length of [df.data] and the number of bindings in [df.labels] should
     be equal to the length of any list nested in [df.data]. *)
 
+let labels df = List.map (fun (x, _) -> x) (StringMap.bindings df.labels)
+let indices df = List.map (fun (x, _) -> x) (StringMap.bindings df.indices)
+let data df = df.data
+
+let get_col df lbl =
+  List.nth (Csv.transpose df.data) (StringMap.find lbl df.labels)
+
+let get_row df idx = List.nth df.data (StringMap.find idx df.indices)
+
 exception InvalidCSV
 
 let of_csv (csv : Csv.t) =
@@ -44,16 +53,10 @@ let of_csv (csv : Csv.t) =
           let rec nats n = if n = 0 then [ 0 ] else n :: nats (n - 1) in
           List.fold_left
             (fun map idx -> StringMap.add (string_of_int idx) idx map)
-            StringMap.empty (nats num_of_rows)
+            StringMap.empty
+            (nats (num_of_rows - 1))
         in
         let data = t in
         { labels; indices; data }
 
-let labels df = List.map (fun (x, _) -> x) (StringMap.bindings df.labels)
-let indices df = List.map (fun (x, _) -> x) (StringMap.bindings df.indices)
-let data df = df.data
-
-let get_col df lbl =
-  List.nth (Csv.transpose df.data) (StringMap.find lbl df.labels)
-
-let get_row df idx = List.nth df.data (StringMap.find idx df.indices)
+let to_csv df : Csv.t = labels df :: df.data
