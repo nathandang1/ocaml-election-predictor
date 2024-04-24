@@ -12,6 +12,8 @@ type d = (string * float) list
 
 let outcome state (data : d) cand prior : d =
   let pref_can_new = List.assoc state.pref_can data +. state.pref_percent in
+  (* incorporate "preferred candidate" info - will change this into other
+     features *)
   let new_data =
     (state.pref_can, pref_can_new) :: List.remove_assoc state.pref_can data
   in

@@ -22,8 +22,8 @@ module ExtractableStringList = struct
 end
 
 module StringListFile = File.Make (ExtractableStringList)
-module CandidateFile = File.Make (Candidate.C)
-module StateFile = File.Make (State.S)
+module CandidateFile = File.Make (Candidate)
+module StateFile = File.Make (State)
 
 let candidate_files : string list =
   StringListFile.(extract (of_name "data/candidates_list.txt"))
@@ -40,11 +40,11 @@ end
 module ExtractCandidates = GroupExtract (CandidateFile)
 module ExtractStates = GroupExtract (StateFile)
 
-let candidates : Candidate.C.t list = ExtractCandidates.from_lst candidate_files
-let states : State.S.t list = ExtractStates.from_lst state_files
+let candidates : Candidate.t list = ExtractCandidates.from_lst candidate_files
+let states : State.t list = ExtractStates.from_lst state_files
 
 (* Convert from a Candidate list to a string list *)
-let rec extract_cands (candidates : Candidate.C.t list) =
+let rec extract_cands (candidates : Candidate.t list) =
   match candidates with
   | [] -> []
   | h :: t -> (h.name, 0) :: extract_cands t
@@ -87,20 +87,20 @@ let get_right_data state_name =
 (** [calc_state_results state_prior c] calculates a Naive Bayes probability of
     which candidate is more likely to win in the state, given some tuple
     [state_prior] containing the state and the prior value. *)
-let calc_state_results (state_prior : State.S.t * float) cand =
+let calc_state_results (state_prior : State.t * float) cand =
   let state = fst state_prior in
   let prior = snd state_prior in
   let data = get_right_data state.name in
 
-  let new_data = State.S.outcome state data cand prior in
+  let new_data = State.outcome state data cand prior in
   let other_cand = List.hd (List.remove_assoc cand new_data) in
   let new_val_cand = List.assoc cand new_data in
   let new_val_other = snd other_cand in
   (* Should have a separate case for = (WIP) *)
   if new_val_cand >= new_val_other then cand else fst other_cand
 
-let rec print_states (states_with_priors : (State.S.t * float) list) cand
-    electors =
+let rec print_states (states_with_priors : (State.t * float) list) cand electors
+    =
   match states_with_priors with
   | [] ->
       print_endline ("Final: " ^ electors_to_string electors);
@@ -123,7 +123,7 @@ let rec print_states (states_with_priors : (State.S.t * float) list) cand
       let () = print_endline (win_line ^ electors_to_string sorted_counts) in
       print_states t cand sorted_counts
 
-let rec prompt_priors (states_list : State.S.t list) acc cand =
+let rec prompt_priors (states_list : State.t list) acc cand =
   match states_list with
   | [] -> acc
   | h :: t -> (
