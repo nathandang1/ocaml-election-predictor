@@ -94,3 +94,56 @@ let states_and_polls =
   List.fold_left
     (fun map (state : State.t) -> StateMap.add state (get_polling state) map)
     StateMap.empty states
+
+(* USER INPUT DATA *)
+
+module StateCandidateMap = Map.Make (struct
+  type t = State.t * Candidate.t
+
+  let compare ((s1 : State.t), (c1 : Candidate.t))
+      ((s2 : State.t), (c2 : Candidate.t)) =
+    match Stdlib.compare s1.name s2.name with
+    | 0 -> Stdlib.compare c1.name c2.name
+    | c -> c
+end)
+
+module UserInput = struct
+  type t = float StateCandidateMap.t
+
+  let of_csv (csv : Csv.t) =
+    let csv_t = Csv.transpose csv in
+    let labels =
+      List.tl (List.hd csv) |> List.mapi (fun pos lbl -> (lbl, pos))
+    in
+    let index =
+      List.tl (List.hd csv_t) |> List.mapi (fun pos lbl -> (lbl, pos))
+    in
+    let csv_arr = Array.map Array.of_list (Array.of_list csv) in
+    let (map : t ref) = ref StateCandidateMap.empty in
+    try
+      for i = 0 to List.length index - 1 do
+        let state =
+          List.find
+            (fun (x : State.t) -> x.name = fst (List.nth index i))
+            states
+        in
+        for j = 0 to List.length labels - 1 do
+          let candidate =
+            List.find
+              (fun (x : Candidate.t) -> x.name = fst (List.nth labels j))
+              candidates
+          in
+
+          map :=
+            StateCandidateMap.add (state, candidate)
+              (float_of_string csv_arr.(i + 1).(j + 1))
+              !map
+        done
+      done;
+      !map
+    with _ -> raise InvalidData
+end
+
+module UserInputFile = Data.Make (UserInput)
+
+let priors = UserInputFile.(of_path "user_input.csv" |> extract)
