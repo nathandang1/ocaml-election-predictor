@@ -11,6 +11,7 @@ type t = {
   pref_percent : float;
       (** [pref_percent] is the net advantage [pref_can] has over the
           competition *)
+  abbr : string;  (** [abbr] is an abbreviation of the state's name. *)
 }
 (** [t] contains the basic instances of a State *)
 (* = {name: string; votes: int; pop: int ; pref_can : c ; percent_win :

@@ -6,6 +6,7 @@ type t = {
   pop : int;
   pref_can : string;
   pref_percent : float;
+  abbr : string;
 }
 
 type d = (string * float) list
@@ -33,5 +34,6 @@ let of_data data =
         pop = int_of_string p;
         pref_can = c;
         pref_percent = float_of_string c_per;
+        abbr = "";
       }
   | _ -> failwith "invalid data"
