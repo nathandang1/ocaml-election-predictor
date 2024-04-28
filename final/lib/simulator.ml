@@ -81,10 +81,10 @@ module PollingFile = Data.Make (Polling)
 
 (* STATE & POLLING DATA*)
 
-module StringMap = Map.Make (struct
-  type t = string
+module StateMap = Map.Make (struct
+  type t = State.t
 
-  let compare = Stdlib.compare
+  let compare (a : t) (b : t) = Stdlib.compare a.name b.name
 end)
 
 let get_polling (state : State.t) =
@@ -92,6 +92,5 @@ let get_polling (state : State.t) =
 
 let states_and_polls =
   List.fold_left
-    (fun map (state : State.t) ->
-      StringMap.add state.name (state, get_polling state) map)
-    StringMap.empty states
+    (fun map (state : State.t) -> StateMap.add state (get_polling state) map)
+    StateMap.empty states
