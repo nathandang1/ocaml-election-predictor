@@ -1,3 +1,0 @@
-data/states/nj.txt
-data/states/north_carolina.txt
-data/states/pennsylvania.txt
