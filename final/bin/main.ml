@@ -153,7 +153,12 @@ let first_cand = (List.hd candidates).name
 
    let biden_probabilities = candidate_two_probabilities trump_probabilities
    [] *)
+<<<<<<< Updated upstream
 (* let cand_probabilities = List.rev cand_probabilities *)
 (* let _ = print_states cand_probabilities first_cand candidates_electors *)
 
 let _ = Models.run ()
+=======
+let cand_probabilities = List.rev cand_probabilities
+let _ = print_states cand_probabilities first_cand candidates_electors
+>>>>>>> Stashed changes
