@@ -1,11 +1,11 @@
-﻿things happening,Weight
-abortion rulings,0.63
-racial rulings,1.98
-educational rulings,2.18
-healthcare policy,1.07
-immigration policy,1.65
-tax policy,1.53
-environmental policy,1.26
-trade policy,0.81
-foreign policy,0.95
-gun control policy,1.67
+﻿things happening,Weight,Donald Trump,Joe Biden
+abortion rulings,0.61,0.73,0.27
+racial rulings,0.36,0.26,0.74
+educational rulings,0.83,0.52,0.48
+healthcare policy,0.49,0.37,0.63
+immigration policy,0.71,0.48,0.52
+tax policy,0.25,0.71,0.29
+environmental policy,0.16,0.11,0.89
+trade policy,0.02,0.98,0.02
+foreign policy,0.91,0.08,0.92
+gun control policy,0.99,0.17,0.83
