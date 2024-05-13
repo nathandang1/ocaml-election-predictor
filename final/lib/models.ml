@@ -1,4 +1,3 @@
-(* Import Owl Library *)
 open Owl
 
 (* Function to load your data - replace with your actual data loading methods *)

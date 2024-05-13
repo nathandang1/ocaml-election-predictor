@@ -22,3 +22,9 @@ with _ -> raise (ImproperList "Please ensure that your list is a string list
 that is structured in [string; string; string_of_float; 
 string_of_int; string_of_int] form ")
 
+let get_name state = raise(Failure "Not implemented")
+let get_preferred_candidate state = raise(Failure "Not implemented")
+let get_preferred_margin state = raise(Failure "Not implemented")
+let get_num_votes state = raise(Failure "Not implemented")
+let get_population state = raise(Failure "Not implemented")
+let export_state_to_csv state = raise(Failure "Not implemented")

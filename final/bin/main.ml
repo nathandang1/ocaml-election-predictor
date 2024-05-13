@@ -153,12 +153,18 @@ let first_cand = (List.hd candidates).name
 
    let biden_probabilities = candidate_two_probabilities trump_probabilities
    [] *)
-<<<<<<< Updated upstream
 (* let cand_probabilities = List.rev cand_probabilities *)
 (* let _ = print_states cand_probabilities first_cand candidates_electors *)
 
-let _ = Models.run ()
-=======
-let cand_probabilities = List.rev cand_probabilities
-let _ = print_states cand_probabilities first_cand candidates_electors
->>>>>>> Stashed changes
+(* let _ = Models.run () *)
+let meta = Csv.load "data/metadata/metadata.csv"
+let meta_labels = List.hd meta
+let issues = List.tl meta
+
+let print_string_list_list lst =
+  List.iter (fun sublist -> List.iter (fun s -> print_endline s) sublist) lst
+
+let () = print_string_list_list issues
+let issues_weights = List.init (List.length issues) (fun _ -> 1.)
+let issues_weights = List.map (fun x -> x *. Random.float 1.0) issues_weights
+let () = List.iter (fun i -> Printf.printf "%.*f\n" 3 i) issues_weights
