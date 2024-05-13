@@ -157,14 +157,45 @@ let first_cand = (List.hd candidates).name
 (* let _ = print_states cand_probabilities first_cand candidates_electors *)
 
 (* let _ = Models.run () *)
+
+(* New code for regularizer *)
 let meta = Csv.load "data/metadata/metadata.csv"
 let meta_labels = List.hd meta
 let issues = List.tl meta
 
+(** [ones n] creates a float list of [n] ones. *)
+let ones n = List.init n (fun _ -> 1.)
+
+let issues_weights =
+  List.map (fun x -> x *. Random.float 1.0) (ones (List.length issues))
+
+(** [dot_product lst1 lst2] computes the element-wise product of [lst1] and
+    [lst2]. *)
+let rec product list1 list2 =
+  match list1 with
+  | [] -> []
+  | h1 :: t1 -> (
+      match list2 with
+      | [] -> []
+      | h2 :: t2 -> (h1 *. h2) :: product t1 t2)
+
+(* print functions *)
 let print_string_list_list lst =
   List.iter (fun sublist -> List.iter (fun s -> print_endline s) sublist) lst
 
-let () = print_string_list_list issues
-let issues_weights = List.init (List.length issues) (fun _ -> 1.)
-let issues_weights = List.map (fun x -> x *. Random.float 1.0) issues_weights
-let () = List.iter (fun i -> Printf.printf "%.*f\n" 3 i) issues_weights
+let print_string_list lst = List.iter (fun s -> print_string (s ^ " ")) lst
+let print_float_list lst = List.iter (fun x -> Printf.printf "%.*f\n" 3 x) lst
+
+(* other stuff *)
+let transp = Csv.transpose issues
+
+let trump_values =
+  List.map (fun s -> float_of_string s) (List.hd (List.tl transp))
+
+let biden_values =
+  List.map (fun s -> float_of_string s) (List.hd (List.tl (List.tl transp)))
+
+(* let () = print_float_list trump_values *)
+(* Adds up to 5 *)
+let () = print_float (List.fold_left (fun acc a -> a +. acc) 0. trump_values)
+(* let () = print_float_list issues_weights *)
