@@ -159,6 +159,7 @@ let first_cand = (List.hd candidates).name
 (* let _ = Models.run () *)
 
 (* New code for regularizer *)
+let () = Random.self_init ()
 let meta = Csv.load "data/metadata/metadata.csv"
 let meta_labels = List.hd meta
 let issues = List.tl meta
@@ -171,13 +172,13 @@ let issues_weights =
 
 (** [dot_product lst1 lst2] computes the element-wise product of [lst1] and
     [lst2]. *)
-let rec product list1 list2 =
+let rec element_product list1 list2 =
   match list1 with
   | [] -> []
   | h1 :: t1 -> (
       match list2 with
       | [] -> []
-      | h2 :: t2 -> (h1 *. h2) :: product t1 t2)
+      | h2 :: t2 -> (h1 *. h2) :: element_product t1 t2)
 
 (* print functions *)
 let print_string_list_list lst =
@@ -195,7 +196,16 @@ let trump_values =
 let biden_values =
   List.map (fun s -> float_of_string s) (List.hd (List.tl (List.tl transp)))
 
-(* let () = print_float_list trump_values *)
+let trump_issues = element_product trump_values issues_weights
+let biden_issues = element_product biden_values issues_weights
+
 (* Adds up to 5 *)
-let () = print_float (List.fold_left (fun acc a -> a +. acc) 0. trump_values)
+(* let () = print_float (List.fold_left (fun acc a -> a +. acc) 0.
+   trump_values) *)
 (* let () = print_float_list issues_weights *)
+let () = print_float_list trump_issues
+let () = print_endline ""
+let () = print_float_list biden_issues
+let () = print_float (List.fold_left (fun acc a -> a +. acc) 0. trump_issues)
+let () = print_endline ""
+let () = print_float (List.fold_left (fun acc a -> a +. acc) 0. biden_issues)
