@@ -5,12 +5,11 @@ open Owl
 let load_data () =
   (* Simulate some data *)
   let x = Mat.uniform 100 10 in
+  (* let x = Mat.create 100 1 1. in *)
   (* 100 samples, 10 features each *)
   (* Generate binary labels, 1 or 0 based on a 0.5 threshold *)
   (* let y = Mat.map (fun z -> if z < 0.5 then 0. else 1.) (Mat.uniform 100 1)
      in (x, y) *)
-  let y = Mat.zeros 100 1 in
-
   let zeros = Mat.zeros 50 1 in
   let ones = Mat.create 50 1 1. in
   (* y = [0..(x50)...1..(x50)..] *)
@@ -51,6 +50,8 @@ let logistic_regression x y =
   done;
 
   (w, !b)
+
+(* let weak_learner x y = *)
 
 (* Main function *)
 let run () =
