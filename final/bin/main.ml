@@ -146,16 +146,18 @@ let rec prompt_priors (states_list : State.t list) acc cand =
             prompt_priors t (tup :: acc) cand)
 
 let first_cand = (List.hd candidates).name
-(* let cand_probabilities = prompt_priors states [] first_cand *)
+let cand_probabilities = prompt_priors states [] first_cand
 
-(* let rec candidate_two_probabilities probs acc = match probs with | [] -> acc
-   | (a, b) :: t -> candidate_two_probabilities t ((a, 1. -. b) :: acc)
+let rec candidate_two_probabilities probs acc =
+  match probs with
+  | [] -> acc
+  | (a, b) :: t -> candidate_two_probabilities t ((a, 1. -. b) :: acc)
 
-   let biden_probabilities = candidate_two_probabilities trump_probabilities
+(* let biden_probabilities = candidate_two_probabilities trump_probabilities
    [] *)
-(* let cand_probabilities = List.rev cand_probabilities *)
-(* let _ = print_states cand_probabilities first_cand candidates_electors *)
+let cand_probabilities = List.rev cand_probabilities
+let _ = print_states cand_probabilities first_cand candidates_electors
 
 (* let _ = Models.run () *)
 
-let () = Regularizer.print_issues_and_totals ()
+(* let () = Regularizer.print_issues_and_totals () *)

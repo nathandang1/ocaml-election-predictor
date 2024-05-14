@@ -1,5 +1,3 @@
-poll,Joe Biden,Donald Trump
-last_election,0.5734,0.414
-2020,0.5223,0.4502
-2020_poll,0.4850,0.4721
-2020_party,0.5204,0.4004
+candidate,last_election
+Joe Biden,0.5734
+Donald Trump,0.414
