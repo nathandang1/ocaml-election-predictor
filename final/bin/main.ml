@@ -185,10 +185,11 @@ let print_string_list_list lst =
   List.iter (fun sublist -> List.iter (fun s -> print_endline s) sublist) lst
 
 let print_string_list lst = List.iter (fun s -> print_string (s ^ " ")) lst
-let print_float_list lst = List.iter (fun x -> Printf.printf "%.*f\n" 3 x) lst
+let print_float_list lst = List.iter (fun x -> Printf.printf "%.*f\n" 4 x) lst
 
 (* other stuff *)
 let transp = Csv.transpose issues
+let issues_titles = List.hd transp
 
 let trump_values =
   List.map (fun s -> float_of_string s) (List.hd (List.tl transp))
@@ -196,16 +197,35 @@ let trump_values =
 let biden_values =
   List.map (fun s -> float_of_string s) (List.hd (List.tl (List.tl transp)))
 
-let trump_issues = element_product trump_values issues_weights
-let biden_issues = element_product biden_values issues_weights
+(** [sum_float_list lst] computes the sum of [lst]. *)
+let sum_float_list lst = List.fold_left (fun acc a -> a +. acc) 0. lst
 
-(* Adds up to 5 *)
-(* let () = print_float (List.fold_left (fun acc a -> a +. acc) 0.
-   trump_values) *)
-(* let () = print_float_list issues_weights *)
-let () = print_float_list trump_issues
-let () = print_endline ""
-let () = print_float_list biden_issues
-let () = print_float (List.fold_left (fun acc a -> a +. acc) 0. trump_issues)
-let () = print_endline ""
-let () = print_float (List.fold_left (fun acc a -> a +. acc) 0. biden_issues)
+(** [softmax lst] applies the softmax function - (e^z_i)/sum_over_i(e^z_i) - to
+    [lst] element-wise. *)
+let softmax lst =
+  let exp_lst = List.map exp lst in
+  let exp_sum = sum_float_list exp_lst in
+  List.map (fun e -> e /. exp_sum) exp_lst
+
+(* Applying softmax to the randomly generated weights standardizes the weight
+   sum to 1 and simulates emphasizing the more "important" issues. *)
+let issues_weights = softmax issues_weights
+let trump_weights = element_product trump_values issues_weights
+let biden_weights = element_product biden_values issues_weights
+let trump_sum = sum_float_list trump_weights
+let biden_sum = sum_float_list biden_weights
+
+(* Print stuff - sanity check *)
+let () = print_float_list issues_weights
+
+let () =
+  print_float trump_sum;
+  print_endline ""
+
+let () =
+  print_float biden_sum;
+  print_endline ""
+
+(* More computations *)
+let diff = 200. *. abs_float (trump_sum -. biden_sum) /. (trump_sum +. biden_sum)
+let () = print_float diff
