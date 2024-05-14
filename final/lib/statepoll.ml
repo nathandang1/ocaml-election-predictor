@@ -29,10 +29,10 @@ let get_preferred_margin st = st.preferred_margin
 let get_num_votes st = st.num_votes
 let get_population st = st.population
 
-let change_preferred_candidate st can = st.preferred_candidate <- can 
-let change_preferred_margin st marg = st.preferred_margin <- marg 
-let change_num_votes st vot = st.num_votes <- vot
-let change_population st pop = st.population <- pop 
+let set_preferred_candidate st can = st.preferred_candidate <- can 
+let set_preferred_margin st marg = st.preferred_margin <- marg 
+let set_num_votes st vot = st.num_votes <- vot
+let set_population st pop = st.population <- pop 
 
 let export_state_to_csv st = 
   let attributes = ["Name of State"; "Preferred Candidate Name"; 
