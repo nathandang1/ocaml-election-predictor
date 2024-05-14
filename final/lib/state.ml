@@ -27,13 +27,13 @@ let from_csv = false
 
 let of_data data =
   match List.hd data with
-  | nm :: vts :: p :: c :: c_per :: _ ->
+  | nm :: vts :: p :: c :: c_per :: abbrev :: _ ->
       {
         name = nm;
         votes = int_of_string vts;
         pop = int_of_string p;
         pref_can = c;
         pref_percent = float_of_string c_per;
-        abbr = "";
+        abbr = abbrev;
       }
   | _ -> failwith "invalid data"

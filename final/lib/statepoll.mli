@@ -1,6 +1,12 @@
 (** module that will represent the individual polling data of a state *)
 
-type state
+type state = {
+    name : string; 
+    mutable preferred_candidate : Candidate.t; 
+    mutable preferred_margin : float; 
+    mutable num_votes : int; 
+    mutable population : int; 
+    }
 (** [state] is an abstract type that will represent a state. *)
 
 exception ImproperList of string

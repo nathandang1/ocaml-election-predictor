@@ -2,7 +2,7 @@
     extracted from either a .txt or a .csv file. *)
 module type ExtractableType = sig
   type t
-  (** [t] represenets the type that can be constructed using data from a file. *)
+  (** [t] represents the type that can be constructed using data from a file. *)
 
   val from_csv : bool
   (** [from_csv] indicates whether [t] can be constructed from a .csv file. If
