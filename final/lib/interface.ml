@@ -81,7 +81,7 @@ let add_state (cands, states, polls) =
       (new_state :: states)
   in
   let nation = country all_states in
-  Countrypoll.save_data_locally nation
+  Countrypoll.save_data_locally nation "test.csv"
 
 let remove_state (_, states, _) =
   ANSITerminal.print_string [ ANSITerminal.Bold ] "REMOVING STATES: \n";
@@ -95,7 +95,7 @@ let remove_state (_, states, _) =
     List.filter (fun (s : State.t) -> s.abbr <> state_abbr) states
   in
   let nation = country other_states in
-  Countrypoll.save_data_locally nation
+  Countrypoll.save_data_locally nation "test.csv"
 
 let state_poll () =
   ANSITerminal.erase Screen;
@@ -113,13 +113,13 @@ let state_poll () =
   let state_path = "data/metadata/states.csv" in
   let poll_path = "data/polling" in
   let current_data = Extractor.data (cand_path, state_path, poll_path) in
-  let _ =
+  let () =
     match read_line () with
     | "1" -> add_poll current_data
     | "2" -> remove_poll current_data
     | "3" -> add_state current_data
     | "4" -> remove_state current_data
-    | _ -> failwith "FIXME"
+    | _ -> ()
   in
   ();
   Menu
