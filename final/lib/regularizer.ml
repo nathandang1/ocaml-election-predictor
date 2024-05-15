@@ -117,5 +117,10 @@ let print_totals_only () =
   ()
 
 (* More computations *)
+<<<<<<< Updated upstream
 let diff val1 val2 = 200. *. (val1 -. val2) /. (val1 +. val2)
 (* let () = print_float diff *)
+=======
+let diff = 200. *. abs_float (trump_sum -. biden_sum) /. (trump_sum +. biden_sum)
+(* let () = print_float diff *)
+>>>>>>> Stashed changes

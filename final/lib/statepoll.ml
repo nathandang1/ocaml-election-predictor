@@ -17,7 +17,7 @@ let create_state lst = try match lst with
     population = int_of_string pop 
   }
   (** TODO: Make this message better*)
-| _ -> raise (ImproperList "Please reference specification")
+| _ -> raise (ImproperList "Please reference specification for length")
 with _ -> raise (ImproperList "Please ensure that your list is a string list
 that is structured in [string; string; string_of_float; 
 string_of_int; string_of_int] form ")

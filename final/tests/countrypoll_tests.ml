@@ -33,17 +33,13 @@ let state4 = {
     Statepoll.num_votes = 10;
     Statepoll.population = 10000000;
 }
-
 let state_list_1 = [state1; state2]
 let state_list_2 = [state3; state4]
 let country1 = Countrypoll.create_country state_list_1 true "NY and FL" 
 let country2 = Countrypoll.create_country state_list_2 false "CA and PA"
 let country1_dupe = Countrypoll.create_country state_list_1 true "NY and FL" 
 let country1_dupe2 = Countrypoll.create_country state_list_1 true "NY and FL" 
-(**let empty_tests_col = "test suite for Column.empty" >::: [
-  "only test needed" >:: (fun _ -> assert_equal (Column.empty) ("", []))
-]*)
-
+let country1_rev = Countrypoll.create_country (List.rev state_list_1) true "NY and FL"
 let test_equals = "test suite for Countrypoll.equals" >::: [
   "reflexive test" >:: (fun _ -> assert_equal (Countrypoll.equals country1 country1) true); 
   "symmetric test" >:: (fun _ -> assert_equal (Countrypoll.equals country1 country1_dupe) 
@@ -52,18 +48,28 @@ let test_equals = "test suite for Countrypoll.equals" >::: [
   ((Countrypoll.equals country1 country1_dupe) 
   && (Countrypoll.equals country1_dupe country1_dupe2) 
   && (Countrypoll.equals country1 country1_dupe2)) true); 
-  "false test" >:: (fun _ -> assert_equal (Countrypoll.equals country1 country2) false)
+  "false test" >:: (fun _ -> assert_equal (Countrypoll.equals country1 country2) false); 
+  "corner case: the same list of states ordered differently are still equal" >::
+  (fun _ -> assert_equal (Countrypoll.equals country1 country1_rev) true)
 ]
-
+let test_contains = "test suite for Countrypoll.contains" >::: [
+  "true test" >:: (fun _ -> assert_equal (Countrypoll.contains_state country1 state1) true); 
+  "false test" >:: (fun _ -> assert_equal (Countrypoll.contains_state country1 state3) false)
+]
 let getter_tests = "test suite for Countrypoll getter methods" >::: [
   "get_name" >:: (fun _ -> assert_equal (Countrypoll.get_name country1) "NY and FL"); 
   "get_states" >:: (fun _ -> assert_equal (Countrypoll.get_states country1) state_list_1); 
-  "electoral_college_enabled" >:: (fun _ -> 
+  "electoral_college_enabled (true)" >:: (fun _ -> 
     assert_equal (Countrypoll.electoral_college_enabled country1) true); 
+  "electoral_college_enabled (false)" >:: (fun _ ->
+    assert_equal (Countrypoll.electoral_college_enabled country2) false); 
   "get_population" >:: (fun _ -> 
     assert_equal (Countrypoll.get_population country1) 196810000); 
+  "get_electoral_votes (Some case)" >:: (fun _ -> 
+    assert_equal (Countrypoll.get_electoral_votes country1) (Some 42)); 
+  "get_electoral_votes (None case)" >:: (fun _ -> 
+    assert_equal (Countrypoll.get_electoral_votes country2) None)
 ]
-
 let mutability_tests = "test suite for Countrypoll mutability features" >::: [
   "changing the state populations affect the total population" >:: (fun _ ->
     let () = 

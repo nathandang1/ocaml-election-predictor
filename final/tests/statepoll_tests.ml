@@ -1,12 +1,9 @@
 open Final
 open OUnit2
-
 let candidate1 =
   { Candidate.name = "Biden"; Candidate.party = "Democratic" }
-
 let candidate2 =
   { Candidate.name = "Trump"; Candidate.party = "Republican" }
-
 let state = {
     Statepoll.name = "New York";
     Statepoll.preferred_candidate = candidate1;
@@ -14,44 +11,78 @@ let state = {
     Statepoll.num_votes = 28;
     Statepoll.population = 196800000;
 }
-
-let statepoll_tests =
-  (*Test suite*)
-  "statepoll_tests"
-  >::: [
-         ( "Test the get_name function from statepoll." >:: fun _ -> 
-          assert_equal (Statepoll.get_name state) "New York" );
-         ( "Test the get_preferred_candidate_name function from statepoll."
-         >:: fun _ ->
-           assert_equal (Statepoll.get_preferred_candidate_name state) "Biden"
-         );
-         ( "Test the get_preferred_candidate_party function from statepoll."
-         >:: fun _ ->
-           assert_equal
-             (Statepoll.get_preferred_candidate_party state)
-             "Democratic" );
-         ( "Test the get_preferred_margin function from statepoll." >:: fun _ ->
-           assert_equal (Statepoll.get_preferred_margin state) 3.2 );
-         ( "Test the get_num_votes function from statepoll." >:: fun _ ->
-           assert_equal (Statepoll.get_num_votes state) 28 );
-         ( "Test the get_population function from statepoll." >:: fun _ ->
-           assert_equal (Statepoll.get_population state) 196800000 );
-         ( "Test the set_preferred function from statepoll." >:: fun _ ->
-           let () = (Statepoll.set_preferred_candidate state) candidate2 in
-           assert_equal (Statepoll.get_preferred_candidate_name state) "Trump"
-         );
-         ( "Test the set_preferred function from statepoll." >:: fun _ ->
-              let () = (Statepoll.set_preferred_candidate state) candidate2 in
-              assert_equal (Statepoll.get_preferred_candidate_party state) "Republican"
-            );
-            ( "Test the set_num_votes function from statepoll." >:: fun _ ->
-              let () = (Statepoll.set_num_votes state) 40 in
-              assert_equal (Statepoll.get_num_votes state) 40
-            );
-            ( "Test the set_population function from statepoll." >:: fun _ ->
-              let () = (Statepoll.set_population state) 4023245 in
-              assert_equal (Statepoll.get_population state) 4023245
-            );
-       ]
-
+(** Getter Method Tests*)
+let state_attributes = ["New York"; "Biden"; "Democratic"; "3.2"; "28"; "196800000"]
+let create_test = [
+  "valid creation" >:: (fun _ -> assert_equal (Statepoll.create_state state_attributes) state);
+  "error is thrown (length of list is faulty)" >:: (fun _ -> 
+    assert_raises 
+  (Statepoll.ImproperList "Please reference specification for length")
+  (fun () -> Statepoll.create_state ("hi" :: ["New York"; "Biden"; "Democratic"; "3.2"; "28"; "196800000"]))); 
+  "error is thrown (one of the attributes is wrong)" >:: (fun _ -> 
+    assert_raises 
+    (Statepoll.ImproperList "Please ensure that your list is a string list
+    that is structured in [string; string; string_of_float; 
+    string_of_int; string_of_int] form ")
+    (fun () -> Statepoll.create_state (["New York"; "Biden"; "Democratic"; "Hi"; "28"; "196800000"])); 
+  )
+]
+let state_copy = state
+let state_copy_2 = state_copy 
+let state2 = {
+  Statepoll.name = "California";
+  Statepoll.preferred_candidate = candidate2;
+  Statepoll.preferred_margin = 3.2;
+  Statepoll.num_votes = 28;
+  Statepoll.population = 196800000;
+}
+let test_equals = [ 
+  "reflexive test" >:: (fun _ -> assert_equal (Statepoll.equals state state) true); 
+  "symmetric test" >:: (fun _ -> assert_equal (Statepoll.equals state state_copy) 
+  (Statepoll.equals state_copy state)); 
+  "transitive test" >:: (fun _ -> assert_equal ((Statepoll.equals state state_copy) 
+  && (Statepoll.equals state_copy state_copy_2))
+  (Statepoll.equals state state_copy_2)); 
+  "false test" >:: (fun _ -> assert_equal (Statepoll.equals state state2) false)
+]
+let getter_method_tests = [
+  "get_name" >:: (fun _ -> assert_equal (Statepoll.get_name state) "New York"); 
+  "get_preferred_candidate_name" >:: (fun _ -> assert_equal (Statepoll.get_preferred_candidate_name state) "Biden"); 
+  "get_preferred_candidate_party" >:: (fun _ -> assert_equal (Statepoll.get_preferred_candidate_party state) "Democratic"); 
+  "get_preferred-margin" >:: (fun _ -> assert_equal (Statepoll.get_preferred_margin state) 3.2); 
+  "get_num_votes" >:: (fun _ -> assert_equal (Statepoll.get_num_votes state) 28); 
+  "get_population" >:: (fun _ -> assert_equal (Statepoll.get_population state) 196800000)
+]
+let setter_method_tests = [
+  "set_preferred_candidate" >:: (fun _ -> 
+    let () = Statepoll.set_preferred_candidate state candidate2 
+  in
+    let () = assert_equal (Statepoll.get_preferred_candidate_name state) "Trump"
+in 
+  assert_equal (Statepoll.get_preferred_candidate_party state) "Republican"); 
+  "set_preferred_margin" >:: (fun _ -> 
+    let original_margin = Statepoll.get_preferred_margin state
+  in 
+    let () = Statepoll.set_preferred_margin state (original_margin +. 1.0 )
+  in 
+    assert_equal (Statepoll.get_preferred_margin state = original_margin ) false); 
+  "set_num_votes" >:: (fun _ -> 
+    let original_votes = Statepoll.get_num_votes state
+  in 
+    let () = Statepoll.set_num_votes state (original_votes + 1) 
+  in 
+    assert_equal ((Statepoll.get_num_votes state) = original_votes) false); 
+  "set_population" >:: (fun _ ->
+    let original_population = Statepoll.get_population state
+  in 
+  let () = Statepoll.set_population state (original_population + 1) 
+  in
+  assert_equal ((Statepoll.get_population state) = original_population) false)
+]
+let statepoll_tests = "full test suite" >::: List.flatten [
+  create_test; 
+  test_equals; 
+  getter_method_tests; 
+  setter_method_tests
+  ]
 let run_statepoll_tests = run_test_tt_main statepoll_tests

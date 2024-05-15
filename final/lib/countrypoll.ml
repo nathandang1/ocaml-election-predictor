@@ -5,7 +5,9 @@ type country = {
   mutable states : state list; 
   name : string ; 
 }
-
+(** helpers *)
+let sort_helper_comparator (a : state) (b : state) = String.compare a.name b.name
+let sort_states states = List.sort (sort_helper_comparator) states
 let rec equals_helper_2 states1 states2 acc = match states1 with 
 | [] -> false
 | h :: t -> 
@@ -13,32 +15,59 @@ let rec equals_helper_2 states1 states2 acc = match states1 with
     equals_helper_2 t (List.tl states2) (acc + 1) 
 else 
   true 
-
 let equals_helper states1 states2 = 
   if 
     List.length states1 <> List.length states2 
   then false
 else 
-  equals_helper_2 states1 states2 0
-
-let equals cnt1 cnt2 = equals_helper cnt1.states cnt2.states 
+  equals_helper_2 (sort_states states1) (sort_states states2) 0
 
 let rec count_pop (lst : state list) acc = match lst with 
-| [] -> acc
-| h :: t -> count_pop t (acc + h.population)
+  | [] -> acc
+  | h :: t -> count_pop t (acc + h.population)
+
+let rec count_electoral_votes (lst : state list) acc = match lst with 
+  | [] -> acc
+  | h :: t -> count_electoral_votes t (acc + h.num_votes)
+
+let rec contains_state_helper states st = match states with 
+  | [] -> false
+  | h :: t -> if Statepoll.equals st h then true else contains_state_helper t st
+let rec remove_state_helper states st acc = match states with
+  | [] -> acc
+  | h :: t -> 
+    if Statepoll.equals st h 
+      then remove_state_helper t st acc 
+  else
+    remove_state_helper t st (h :: acc)
+
+let rec data_helper lst acc = match lst with 
+  | [] -> acc
+  | h :: t -> 
+    let csv_sub = Csv.transpose (Statepoll.export_state_to_csv h) in 
+    let csv_arr = Csv.to_array csv_sub in 
+    let of_interest = csv_arr.(1) in 
+    let list_conv = Array.to_list of_interest in 
+    data_helper t (list_conv :: acc)
+  
+(** implementations *)
+let equals cnt1 cnt2 = equals_helper cnt1.states cnt2.states 
 
 let get_population cnt = count_pop cnt.states 0 
 
+let get_electoral_votes cnt = 
+  if cnt.electoral_college then 
+    let votes = count_electoral_votes cnt.states 0 
+in 
+    Some (votes)
+else
+  None 
 let create_country lst boo nam = 
 {electoral_college = boo; states = lst; name = nam}
 
 let get_name cnt = cnt.name 
 
 let get_states cnt = cnt.states
-
-let rec contains_state_helper states st = match states with 
-| [] -> false
-| h :: t -> if Statepoll.equals st h then true else contains_state_helper t st
 
 let contains_state cnt st = contains_state_helper cnt.states st 
 
@@ -47,14 +76,6 @@ let add_state cnt st =
     then () 
 else 
     cnt.states <- (st :: cnt.states)
-
-let rec remove_state_helper states st acc = match states with
-| [] -> acc
-| h :: t -> 
-  if Statepoll.equals st h 
-    then remove_state_helper t st acc 
-else
-  remove_state_helper t st (h :: acc)
 
 let remove_state cnt st = 
   if ((contains_state cnt st) <> true) 
@@ -70,14 +91,6 @@ let attributes = ["Name of State"; "Preferred Candidate Name";
   "Preferred Candidate Party"; 
   "Preferred Candidate Margin of Preference"; 
   "Number of Votes"; "Population Size"] 
-let rec data_helper lst acc = match lst with 
-| [] -> acc
-| h :: t -> 
-  let csv_sub = Csv.transpose (Statepoll.export_state_to_csv h) in 
-  let csv_arr = Csv.to_array csv_sub in 
-  let of_interest = csv_arr.(1) in 
-  let list_conv = Array.to_list of_interest in 
-  data_helper t (list_conv :: acc)
 
 let export_data cnt = 
   let state_data = data_helper cnt.states [] in 
