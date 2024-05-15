@@ -16,4 +16,5 @@ let test_candidate =
          ( "party test" >:: fun _ ->
            assert_equal (Candidate.party candidate1) "Republican" );
        ]
-       let run_candidate_test = run_test_tt_main test_candidate
+
+let run_candidate_test = run_test_tt_main test_candidate
