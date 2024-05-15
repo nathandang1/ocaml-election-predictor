@@ -5,7 +5,6 @@ type t = {
   pop : int;
   pref_can : string;
   pref_percent : float;
-  abbr : string;
 }
 
 type d = (string * float) list
@@ -21,18 +20,3 @@ let outcome state (data : d) cand prior : d =
   let other_cand = fst (List.hd (List.remove_assoc cand new_data)) in
   let other_cand_curr = List.assoc other_cand new_data *. (1. -. prior) in
   [ (cand, cand_curr); (other_cand, other_cand_curr) ]
-
-let from_csv = false
-
-let of_data data =
-  match List.hd data with
-  | nm :: vts :: p :: c :: c_per :: abbrev :: _ ->
-      {
-        name = nm;
-        votes = int_of_string vts;
-        pop = int_of_string p;
-        pref_can = c;
-        pref_percent = float_of_string c_per;
-        abbr = abbrev;
-      }
-  | _ -> failwith "invalid data"
