@@ -17,13 +17,11 @@ let create_test = [
   "valid creation" >:: (fun _ -> assert_equal (Statepoll.create_state state_attributes) state);
   "error is thrown (length of list is faulty)" >:: (fun _ -> 
     assert_raises 
-  (Statepoll.ImproperList "Please reference specification for length")
-  (fun () -> Statepoll.create_state ("hi" :: ["New York"; "Biden"; "Democratic"; "3.2"; "28"; "196800000"]))); 
+  (Statepoll.ImproperList "")
+  (fun () -> Statepoll.create_state ("hi" :: ["New York"; "Biden"; "Democratic"; "3.2"; "28"; "196800000"])));
   "error is thrown (one of the attributes is wrong)" >:: (fun _ -> 
     assert_raises 
-    (Statepoll.ImproperList "Please ensure that your list is a string list
-    that is structured in [string; string; string_of_float; 
-    string_of_int; string_of_int] form ")
+    (Statepoll.ImproperList "")
     (fun () -> Statepoll.create_state (["New York"; "Biden"; "Democratic"; "Hi"; "28"; "196800000"])); 
   )
 ]

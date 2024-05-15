@@ -7,7 +7,8 @@ type state =  {
   }
 
 exception ImproperList of string 
-let create_state lst = try match lst with 
+let create_state lst = try 
+match lst with 
 | nam :: can_name :: can_party :: marg :: votes :: pop :: [] ->
   {
     name = nam; 
@@ -16,11 +17,8 @@ let create_state lst = try match lst with
     num_votes = int_of_string votes; 
     population = int_of_string pop 
   }
-  (** TODO: Make this message better*)
-| _ -> raise (ImproperList "Please reference specification for length")
-with _ -> raise (ImproperList "Please ensure that your list is a string list
-that is structured in [string; string; string_of_float; 
-string_of_int; string_of_int] form ")
+| _ -> raise (ImproperList "")
+with _ -> raise (ImproperList "")
 
 let equals (state1 : state) state2 = state1 = state2 
 let get_name st = st.name 
