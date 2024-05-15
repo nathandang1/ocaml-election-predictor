@@ -4,7 +4,6 @@ type country = {
   electoral_college : bool; 
   mutable states : state list; 
   name : string ; 
-  mutable population : int
 }
 
 let rec equals_helper_2 states1 states2 acc = match states1 with 
@@ -28,15 +27,14 @@ let rec count_pop (lst : state list) acc = match lst with
 | [] -> acc
 | h :: t -> count_pop t (acc + h.population)
 
+let get_population cnt = count_pop cnt.states 0 
+
 let create_country lst boo nam = 
-  let pop = count_pop lst 0 in 
-{electoral_college = boo; states = lst; name = nam; population = pop}
+{electoral_college = boo; states = lst; name = nam}
 
 let get_name cnt = cnt.name 
 
 let get_states cnt = cnt.states
-
-let get_population cnt = cnt.population
 
 let rec contains_state_helper states st = match states with 
 | [] -> false
@@ -48,9 +46,7 @@ let add_state cnt st =
   if contains_state cnt st 
     then () 
 else 
-  let () = cnt.population <- (cnt.population + st.population) 
-in 
-  cnt.states <- (st :: cnt.states)
+    cnt.states <- (st :: cnt.states)
 
 let rec remove_state_helper states st acc = match states with
 | [] -> acc
