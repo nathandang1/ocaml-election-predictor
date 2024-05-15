@@ -50,8 +50,6 @@ let logistic_regression x y =
 
   (w, !b)
 
-(* let weak_learner x y = *)
-
 (* Main function *)
 let run () =
   let x, y = load_data () in
@@ -60,14 +58,11 @@ let run () =
   Mat.print weights;
   Printf.printf "Learned bias: %f\n" bias
 
-(* let outcome state (data : d) cand prior : d = let pref_can_new = List.assoc
-   state.pref_can data +. state.pref_percent in (* incorporate "preferred
-   candidate" info - will change this into other features *) let new_data =
-   (state.pref_can, pref_can_new) :: List.remove_assoc state.pref_can data in
-   let cand_curr = List.assoc cand new_data *. prior in let other_cand = fst
-   (List.hd (List.remove_assoc cand new_data)) in let other_cand_curr =
-   List.assoc other_cand new_data *. (1. -. prior) in [ (cand, cand_curr);
-   (other_cand, other_cand_curr) ] *)
+(** [geometric_mean lst] computes the geometric mean of [lst]. *)
+let geometric_mean lst =
+  let product = List.fold_left ( *. ) 1. lst in
+  if List.length lst > 0 then exp (log product /. float_of_int (List.length lst))
+  else 1.
 
 (** [naive_bayes_randomized data] takes in
     [[year; state; republican votes; democrat votes; winner] ...] *)
@@ -83,24 +78,24 @@ let naive_bayes_randomized state_data =
       state_data
   in
 
-  let dem_rep_product =
-    List.fold_left
-      (fun acc lst -> acc *. float_of_string (List.nth lst 2))
-      1. dem_wins
+  let dem_rep_percentages =
+    List.map (fun lst -> float_of_string (List.nth lst 2)) dem_wins
   in
-  let dem_dem_product =
-    List.fold_left
-      (fun acc lst -> acc *. float_of_string (List.nth lst 3))
-      1. dem_wins
+  let dem_dem_percentages =
+    List.map (fun lst -> float_of_string (List.nth lst 3)) dem_wins
   in
-  let rep_rep_product =
-    List.fold_left
-      (fun acc lst -> acc *. float_of_string (List.nth lst 2))
-      1. rep_wins
+  let rep_rep_percentages =
+    List.map (fun lst -> float_of_string (List.nth lst 2)) rep_wins
   in
-  let rep_dem_product =
-    List.fold_left
-      (fun acc lst -> acc *. float_of_string (List.nth lst 3))
-      1. rep_wins
+  let rep_dem_percentages =
+    List.map (fun lst -> float_of_string (List.nth lst 3)) rep_wins
   in
-  [ dem_rep_product; dem_dem_product; rep_rep_product; rep_dem_product ]
+
+  let likelihood_dem =
+    geometric_mean dem_dem_percentages *. geometric_mean rep_dem_percentages
+  in
+  let likelihood_rep =
+    geometric_mean dem_rep_percentages *. geometric_mean rep_rep_percentages
+  in
+
+  (likelihood_dem, likelihood_rep)
