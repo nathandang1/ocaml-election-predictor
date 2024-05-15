@@ -28,10 +28,74 @@ let menu () =
   | "2" -> Simulator
   | _ -> Menu
 
-let add_poll () = failwith ""
-let remove_poll () = failwith ""
-let add_state () = failwith ""
-let remove_state () = failwith ""
+let rec print_states = function
+  | (state : State.t) :: tl ->
+      ANSITerminal.print_string [] ("[" ^ state.abbr ^ "] " ^ state.name ^ "\n");
+      print_states tl
+  | [] -> ()
+
+let country states =
+  let statepoll_states =
+    List.map
+      (fun (state : State.t) ->
+        Statepoll.create_state
+          [
+            state.name;
+            state.pref_can;
+            "" (* PLACEHOLDER *);
+            string_of_float state.pref_percent;
+            string_of_int state.votes;
+            string_of_int state.pop;
+          ])
+      states
+  in
+  Countrypoll.create_country statepoll_states true "USA"
+
+let add_poll (cands, states, polls) = failwith "unimplemented"
+let remove_poll (cands, states, polls) = failwith "unimplemented"
+
+let add_state (cands, states, polls) =
+  ANSITerminal.print_string [ ANSITerminal.Bold ] "ADDING STATES: \n";
+  print_states states;
+  print_endline "";
+  ANSITerminal.print_string []
+    "Please specify the state you would like to add: \n";
+  let () = ANSITerminal.print_string [] "NAME:   " in
+  let name = read_line () in
+  let () = ANSITerminal.print_string [] "ABBR:   " in
+  let abbr = read_line () in
+  let () = ANSITerminal.print_string [] "VOTES:   " in
+  let votes = int_of_string (read_line ()) in
+  let () = ANSITerminal.print_string [] "POPULATION:   " in
+  let pop = int_of_string (read_line ()) in
+  let () = ANSITerminal.print_string [] "PREFERRED CANDIDATE:   " in
+  let pref_can = read_line () in
+  let () = ANSITerminal.print_string [] "PREFERRED PERCENT:   " in
+  let pref_percent = float_of_string (read_line ()) in
+  let new_state : State.t =
+    { name; abbr; votes; pop; pref_can; pref_percent }
+  in
+  let all_states =
+    List.sort_uniq
+      (fun (s0 : State.t) (s1 : State.t) -> Stdlib.compare s0.name s1.name)
+      (new_state :: states)
+  in
+  let nation = country all_states in
+  Countrypoll.save_data_locally nation
+
+let remove_state (_, states, _) =
+  ANSITerminal.print_string [ ANSITerminal.Bold ] "REMOVING STATES: \n";
+  print_states states;
+  print_endline "";
+  ANSITerminal.print_string []
+    "Please specify the state you would like to remove: \n";
+  ANSITerminal.print_string [] "ABBR:   ";
+  let state_abbr = read_line () in
+  let other_states =
+    List.filter (fun (s : State.t) -> s.abbr <> state_abbr) states
+  in
+  let nation = country other_states in
+  Countrypoll.save_data_locally nation
 
 let state_poll () =
   ANSITerminal.erase Screen;
@@ -45,6 +109,19 @@ let state_poll () =
   print_endline "";
   ANSITerminal.print_string [] "[4] Remove State \n";
   print_endline "";
+  let cand_path = "data/metadata/candidates.csv" in
+  let state_path = "data/metadata/states.csv" in
+  let poll_path = "data/polling" in
+  let current_data = Extractor.data (cand_path, state_path, poll_path) in
+  let () =
+    match read_line () with
+    | "1" -> add_poll current_data
+    | "2" -> remove_poll current_data
+    | "3" -> add_state current_data
+    | "4" -> remove_state current_data
+    | _ -> ()
+  in
+  ();
   Menu
 
 let uniform_model () =
@@ -62,8 +139,7 @@ let uniform_model () =
   let state_path = "data/metadata/states.csv" in
   let poll_path = "data/polling" in
   match Extractor.data (cand_path, state_path, poll_path) with
-  | cand_path, state_path, poll_path ->
-      Results (cand_path, state_path, poll_path)
+  | cands, states, polls -> Results (cands, states, polls)
 
 let simulator () =
   ANSITerminal.erase Screen;
