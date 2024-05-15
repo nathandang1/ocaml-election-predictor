@@ -22,6 +22,7 @@ with _ -> raise (ImproperList "Please ensure that your list is a string list
 that is structured in [string; string; string_of_float; 
 string_of_int; string_of_int] form ")
 
+let equals (state1 : state) state2 = state1 = state2 
 let get_name st = st.name 
 let get_preferred_candidate_name st = st.preferred_candidate.name
 let get_preferred_candidate_party st = st.preferred_candidate.party 

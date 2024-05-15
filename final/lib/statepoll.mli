@@ -66,3 +66,9 @@ val export_state_to_csv : state -> Csv.t
 
 val save_data_locally : state -> unit 
 (** [save_data_locally state] saves the data csv of [state] to the local computer*)
+
+(** Other *)
+
+val equals : state -> state -> bool
+(** [equals state1 state2] returns whether state1 and state2 are equal 
+    based off the name of the state*)
