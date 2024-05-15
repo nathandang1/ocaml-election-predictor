@@ -1,8 +1,12 @@
-type country
-(** [country] is an abstract type that will represent a country. *)
-
 type state = Statepoll.state
 (** [state] is an abstract type that will represent a state. *)
+
+type country = {
+electoral_college : bool; 
+  mutable states : state list; 
+  name : string ; 
+}
+(** [country] is an abstract type that will represent a country. *)
 
 val create_country : (state list) -> bool -> string -> country 
 (** [create_country a b c] creates a country with states [a], electoral college enabling [b] and name [c]*)
@@ -12,6 +16,9 @@ val get_name : country -> string
 
 val get_states : country -> state list 
 (** [get_states a] returns the states of country [a]*)
+
+val get_state_names : country -> string list
+(** [get_state_names a] returns a list of all states in country [a]*)
 
 val get_population : country -> int
 (** [get_population a] returns the population of country [a]*)

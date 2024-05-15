@@ -35,12 +35,20 @@ let state4 = {
 }
 let state_list_1 = [state1; state2]
 let state_list_2 = [state3; state4]
-let country1 = Countrypoll.create_country state_list_1 true "NY and FL" 
+let country1 = {
+  Countrypoll.electoral_college = true; 
+  Countrypoll.name = "NY and FL"; 
+  Countrypoll.states = state_list_1
+}
+let test_create = [
+  "only test" >:: (fun _ -> assert_equal (Countrypoll.create_country state_list_1 true "NY and FL") country1)
+]
+(** after this passes, we can use the creation method for the rest of the countries! *)
 let country2 = Countrypoll.create_country state_list_2 false "CA and PA"
 let country1_dupe = Countrypoll.create_country state_list_1 true "NY and FL" 
 let country1_dupe2 = Countrypoll.create_country state_list_1 true "NY and FL" 
 let country1_rev = Countrypoll.create_country (List.rev state_list_1) true "NY and FL"
-let test_equals = "test suite for Countrypoll.equals" >::: [
+let test_equals = [
   "reflexive test" >:: (fun _ -> assert_equal (Countrypoll.equals country1 country1) true); 
   "symmetric test" >:: (fun _ -> assert_equal (Countrypoll.equals country1 country1_dupe) 
   (Countrypoll.equals country1 country2)); 
@@ -52,11 +60,11 @@ let test_equals = "test suite for Countrypoll.equals" >::: [
   "corner case: the same list of states ordered differently are still equal" >::
   (fun _ -> assert_equal (Countrypoll.equals country1 country1_rev) true)
 ]
-let test_contains = "test suite for Countrypoll.contains" >::: [
+let test_contains = [
   "true test" >:: (fun _ -> assert_equal (Countrypoll.contains_state country1 state1) true); 
   "false test" >:: (fun _ -> assert_equal (Countrypoll.contains_state country1 state3) false)
 ]
-let getter_tests = "test suite for Countrypoll getter methods" >::: [
+let getter_tests = [
   "get_name" >:: (fun _ -> assert_equal (Countrypoll.get_name country1) "NY and FL"); 
   "get_states" >:: (fun _ -> assert_equal (Countrypoll.get_states country1) state_list_1); 
   "electoral_college_enabled (true)" >:: (fun _ -> 
@@ -70,7 +78,7 @@ let getter_tests = "test suite for Countrypoll getter methods" >::: [
   "get_electoral_votes (None case)" >:: (fun _ -> 
     assert_equal (Countrypoll.get_electoral_votes country2) None)
 ]
-let mutability_tests = "test suite for Countrypoll mutability features" >::: [
+let mutability_tests = [
   "changing the state populations affect the total population" >:: (fun _ ->
     let () = 
     List.iter (fun (x : Statepoll.state)-> x.population <- x.population + 1) 
@@ -81,11 +89,22 @@ let mutability_tests = "test suite for Countrypoll mutability features" >::: [
     let () = 
     Countrypoll.remove_state country1 state1 in 
     assert_equal (Countrypoll.get_population country1) 10001); 
-  "removing a state means the get state function changes" >:: (fun _ -> 
+  "removing a state means the list returned by the get_state function changes" >:: (fun _ -> 
     assert_equal (Countrypoll.get_states country1) [state2]); 
   "adding a state affects the total population" >:: (fun _ -> 
     let () = Countrypoll.add_state country1 state3 in 
     assert_equal (Countrypoll.get_population country1) 102938490101); 
-  "adding a state means the get state function changes" >:: (fun _ ->
+  "adding a state means the list returned by the get_state function changes" >:: (fun _ ->
     assert_equal (Countrypoll.get_states country1) [state2; state3])
 ]
+
+let corner_case_tests = [
+    
+]
+let countrypoll_tests = "full test suite" >::: List.flatten [
+  test_equals; 
+  test_contains; 
+  getter_tests; 
+  mutability_tests;
+  ]
+let run_countrypoll_tests = run_test_tt_main countrypoll_tests

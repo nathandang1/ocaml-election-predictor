@@ -49,6 +49,10 @@ let rec data_helper lst acc = match lst with
     let of_interest = csv_arr.(1) in 
     let list_conv = Array.to_list of_interest in 
     data_helper t (list_conv :: acc)
+
+let rec get_names_helper lst acc = match lst with 
+| [] -> acc
+| h :: t -> get_names_helper t ((Statepoll.get_name h) :: acc)
   
 (** implementations *)
 let equals cnt1 cnt2 = equals_helper cnt1.states cnt2.states 
@@ -69,6 +73,12 @@ let get_name cnt = cnt.name
 
 let get_states cnt = cnt.states
 
+let get_state_names cnt = 
+  let states = get_states cnt 
+in 
+  let state_names = get_names_helper states []
+in 
+  List.sort (String.compare) state_names
 let contains_state cnt st = contains_state_helper cnt.states st 
 
 let add_state cnt st = 
