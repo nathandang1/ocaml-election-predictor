@@ -4,6 +4,16 @@ let geometric_mean lst =
   if List.length lst > 0 then exp (log product /. float_of_int (List.length lst))
   else 1.
 
+let get_reg_total iterations =
+  let percent_total = ref 0. in
+  for i = 0 to iterations do
+    let result = Regularizer.do_computations () in
+    let trump_sum = fst (snd result) in
+    let biden_sum = snd (snd result) in
+    percent_total := !percent_total +. Regularizer.diff trump_sum biden_sum
+  done;
+  !percent_total
+
 (** [naive_bayes_randomized data] takes in
     [[year; state; republican votes; democrat votes; winner] ...] *)
 let naive_bayes_randomized state_data =
@@ -47,7 +57,15 @@ let naive_bayes_randomized state_data =
     +. (rep_frac *. geometric_mean rep_rep_percentages)
   in
 
-  (likelihood_dem, likelihood_rep)
+  (* Intuition: if net percent change (get_reg_total 10) < 0, reg_factor < 1. If
+     net percent change > 0, reg_factor > 1. Only have to change one
+     computation. *)
+  let net_change = get_reg_total 10 in
+  (* let () = print_float net_change in let () = print_endline "" in *)
+  let total_likelihood = likelihood_dem +. likelihood_rep in
+  let multiply_factor = (100. +. net_change) /. 100. in
+  ( likelihood_dem /. total_likelihood,
+    multiply_factor *. likelihood_rep /. total_likelihood )
 
 (* Acknowledgement: The following code for the logistic regression algorithm was
    written with the guidance of ChatGPT. *)
