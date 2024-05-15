@@ -1,2 +1,0 @@
-data/candidates/trump.txt
-data/candidates/biden.txt
