@@ -1,6 +1,6 @@
 (library
  (inline_tests)
  (name final)
- (libraries csv batteries ANSITerminal)
+ (libraries csv batteries ANSITerminal owl)
  (preprocess
   (pps ppx_inline_test)))

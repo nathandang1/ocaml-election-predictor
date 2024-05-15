@@ -16,7 +16,7 @@ val export_data : country -> Csv.t
 
 val save_data_locally : country -> unit 
 
-val remove_state : country -> string -> unit 
+val remove_state : country -> state -> unit 
 
 val add_state : country -> state -> unit
 

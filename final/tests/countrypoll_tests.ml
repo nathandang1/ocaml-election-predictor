@@ -64,7 +64,7 @@ let getter_tests = "test suite for Countrypoll getter methods" >::: [
     assert_equal (Countrypoll.get_population country1) 196810000); 
 ]
 
-let mutability_tests "test suite for Countrypoll mutability features" >::: [
+let mutability_tests = "test suite for Countrypoll mutability features" >::: [
   "changing the state populations affect the total population" >:: (fun _ ->
     let () = 
     List.iter (fun (x : Statepoll.state)-> x.population <- x.population + 1) 
@@ -82,8 +82,4 @@ let mutability_tests "test suite for Countrypoll mutability features" >::: [
     assert_equal (Countrypoll.get_population country1) 102938490101); 
   "adding a state means the get state function changes" >:: (fun _ ->
     assert_equal (Countrypoll.get_states country1) [state2; state3])
-]
-
-let setter_tests = "test suite for Countrypoll setter methods" >::: [
-
 ]
