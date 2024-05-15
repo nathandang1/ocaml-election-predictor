@@ -14,11 +14,18 @@ let () =
     trump_total := !trump_total +. trump_sum;
     biden_total := !biden_total +. biden_sum;
     percent_total := !percent_total +. Regularizer.diff trump_sum biden_sum;
-    let () = print_float (Regularizer.diff trump_sum biden_sum) in
-    let () = print_endline "" in
+    (* let () = print_float (Regularizer.diff trump_sum biden_sum) in let () =
+       print_endline "" in *)
     ()
   done
 
 (* let () = print_float !trump_total let () = print_endline "" let () =
    print_float !biden_total *)
 let () = print_float !percent_total
+let () = print_endline "\n"
+
+let output =
+  Models.naive_bayes_randomized
+    (List.tl (Csv.load "data/data-extraction/state-data/ohio.csv"))
+
+let () = List.iter (fun x -> Printf.printf "%.*f\n" 4 x) output

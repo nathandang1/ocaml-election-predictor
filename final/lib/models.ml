@@ -59,3 +59,48 @@ let run () =
   Printf.printf "Learned weights:\n";
   Mat.print weights;
   Printf.printf "Learned bias: %f\n" bias
+
+(* let outcome state (data : d) cand prior : d = let pref_can_new = List.assoc
+   state.pref_can data +. state.pref_percent in (* incorporate "preferred
+   candidate" info - will change this into other features *) let new_data =
+   (state.pref_can, pref_can_new) :: List.remove_assoc state.pref_can data in
+   let cand_curr = List.assoc cand new_data *. prior in let other_cand = fst
+   (List.hd (List.remove_assoc cand new_data)) in let other_cand_curr =
+   List.assoc other_cand new_data *. (1. -. prior) in [ (cand, cand_curr);
+   (other_cand, other_cand_curr) ] *)
+
+(** [naive_bayes_randomized data] takes in
+    [[year; state; republican votes; democrat votes; winner] ...] *)
+let naive_bayes_randomized state_data =
+  let dem_wins =
+    List.filter
+      (fun lst -> List.nth lst (List.length lst - 1) = "dem")
+      state_data
+  in
+  let rep_wins =
+    List.filter
+      (fun lst -> List.nth lst (List.length lst - 1) = "rep")
+      state_data
+  in
+
+  let dem_rep_product =
+    List.fold_left
+      (fun acc lst -> acc *. float_of_string (List.nth lst 2))
+      1. dem_wins
+  in
+  let dem_dem_product =
+    List.fold_left
+      (fun acc lst -> acc *. float_of_string (List.nth lst 3))
+      1. dem_wins
+  in
+  let rep_rep_product =
+    List.fold_left
+      (fun acc lst -> acc *. float_of_string (List.nth lst 2))
+      1. rep_wins
+  in
+  let rep_dem_product =
+    List.fold_left
+      (fun acc lst -> acc *. float_of_string (List.nth lst 3))
+      1. rep_wins
+  in
+  [ dem_rep_product; dem_dem_product; rep_rep_product; rep_dem_product ]

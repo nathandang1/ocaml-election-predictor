@@ -22,6 +22,11 @@ val softmax : float list -> float list
 (** [softmax lst] applies the softmax function - (e^z_i)/sum_over_i(e^z_i) - to
     [lst] element-wise. *)
 
-    val concatenate_lists : 'a list -> 'b list -> ('a * 'b) list
-    (** [concatenate_lists lst1 lst2] concatenates the value of [lst1] and [lst2] into a list of tuples with each element being a concatenation of elements from [lst1] and [lst2] *)
+val concatenate_lists : 'a list -> 'b list -> ('a * 'b) list
+(** [concatenate_lists lst1 lst2] concatenates the value of [lst1] and [lst2] into a list of tuples with each element being a concatenation of elements from [lst1] and [lst2] *)
 
+val do_computations : unit -> (string * float) list * (float * float)
+
+val print_totals_only : unit -> unit
+
+val diff : float -> float -> float
