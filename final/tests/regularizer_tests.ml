@@ -30,4 +30,4 @@ let test_regularizer =
              [ (1.5, 0.5); (3.2, 2.2); (4.3, 5.4) ] );
        ]
 
-let run_regulizer_test = run_test_tt_main test_regularizer
+let run_regularizer_test = run_test_tt_main test_regularizer

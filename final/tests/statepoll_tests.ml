@@ -11,7 +11,7 @@ let state = {
     Statepoll.num_votes = 28;
     Statepoll.population = 196800000;
 }
-(** Getter Method Tests*)
+(* Getter Method Tests*)
 let state_attributes = ["New York"; "Biden"; "Democratic"; "3.2"; "28"; "196800000"]
 let create_test = [
   "valid creation" >:: (fun _ -> assert_equal (Statepoll.create_state state_attributes) state);
