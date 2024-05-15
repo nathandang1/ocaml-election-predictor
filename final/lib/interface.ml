@@ -113,13 +113,13 @@ let state_poll () =
   let state_path = "data/metadata/states.csv" in
   let poll_path = "data/polling" in
   let current_data = Extractor.data (cand_path, state_path, poll_path) in
-  let () =
+  let _ =
     match read_line () with
     | "1" -> add_poll current_data
     | "2" -> remove_poll current_data
     | "3" -> add_state current_data
     | "4" -> remove_state current_data
-    | _ -> ()
+    | _ -> failwith "FIXME"
   in
   ();
   Menu

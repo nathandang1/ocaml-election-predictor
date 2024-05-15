@@ -26,7 +26,7 @@ let () = print_endline "\n"
 
 let output =
   Models.naive_bayes_randomized
-    (List.tl (Csv.load "data/data-extraction/state-data/pennsylvania.csv"))
+    (List.tl (Csv.load "data/data-extraction/state-data/wisconsin.csv"))
 
 let () = Printf.printf "%.*f\n" 4 (fst output)
 let () = Printf.printf "%.*f\n" 4 (snd output)

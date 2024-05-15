@@ -31,11 +31,20 @@ let naive_bayes_randomized state_data =
     List.map (fun lst -> float_of_string (List.nth lst 3)) rep_wins
   in
 
+  let dem_frac =
+    float_of_int (List.length dem_wins) /. float_of_int (List.length state_data)
+  in
+  let rep_frac =
+    float_of_int (List.length rep_wins) /. float_of_int (List.length state_data)
+  in
+
   let likelihood_dem =
-    geometric_mean dem_dem_percentages *. geometric_mean rep_dem_percentages
+    (dem_frac *. geometric_mean dem_dem_percentages)
+    +. (rep_frac *. geometric_mean rep_dem_percentages)
   in
   let likelihood_rep =
-    geometric_mean dem_rep_percentages *. geometric_mean rep_rep_percentages
+    (dem_frac *. geometric_mean dem_rep_percentages)
+    +. (rep_frac *. geometric_mean rep_rep_percentages)
   in
 
   (likelihood_dem, likelihood_rep)
@@ -74,7 +83,7 @@ let rec gradient_descent theta xs ys alpha num_iters =
     let theta = List.mapi (fun j t -> t -. (alpha *. List.nth grad j)) theta in
     gradient_descent theta xs ys alpha (num_iters - 1)
 
-let data = List.tl (Csv.load "bin/florida.csv")
+let data = List.tl (Csv.load "data/data-extraction/state-data/florida.csv")
 
 let logistic_regression data alpha iters =
   let features =
