@@ -50,8 +50,8 @@ in
 in 
   Csv.transpose data 
 
-let save_data_locally st = 
+let save_data_locally st filename = 
   let csv = export_state_to_csv st in 
-  let file_name = st.name ^ "_data.csv" in 
+  let file_name = filename ^ ".csv" in 
   let () = print_endline ("Data saved at: " ^ file_name) in 
   Csv.save file_name csv 

@@ -64,8 +64,9 @@ val set_population : state -> int -> unit
 val export_state_to_csv : state -> Csv.t
 (** [export_state_to_csv state] exports the data of state [state] to a local csv*)
 
-val save_data_locally : state -> unit 
-(** [save_data_locally state] saves the data csv of [state] to the local computer*)
+val save_data_locally : state -> string -> unit 
+(** [save_data_locally state b] saves the data csv of [state] to the local computer
+    at filepath string [b]*)
 
 (** Other *)
 

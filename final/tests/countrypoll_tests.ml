@@ -76,8 +76,10 @@ let getter_tests = [
   "get_electoral_votes (Some case)" >:: (fun _ -> 
     assert_equal (Countrypoll.get_electoral_votes country1) (Some 42)); 
   "get_electoral_votes (None case)" >:: (fun _ -> 
-    assert_equal (Countrypoll.get_electoral_votes country2) None)
-]
+    assert_equal (Countrypoll.get_electoral_votes country2) None); 
+  "get_state_names" >:: (fun _ -> 
+    assert_equal (Countrypoll.get_state_names country1) ["Florida", "New York"])
+  ]
 let mutability_tests = [
   "changing the state populations affect the total population" >:: (fun _ ->
     let () = 
@@ -87,19 +89,26 @@ let mutability_tests = [
     assert_equal (Countrypoll.get_population country1) 196810002); 
   "removing a state affects the total population" >:: (fun _ -> 
     let () = 
-    Countrypoll.remove_state country1 state1 in 
+    Countrypoll.remove_state country1 state1 
+  in 
     assert_equal (Countrypoll.get_population country1) 10001); 
   "removing a state means the list returned by the get_state function changes" >:: (fun _ -> 
     assert_equal (Countrypoll.get_states country1) [state2]); 
   "adding a state affects the total population" >:: (fun _ -> 
-    let () = Countrypoll.add_state country1 state3 in 
+    let () = Countrypoll.add_state country1 state3 
+  in 
     assert_equal (Countrypoll.get_population country1) 102938490101); 
   "adding a state means the list returned by the get_state function changes" >:: (fun _ ->
-    assert_equal (Countrypoll.get_states country1) [state2; state3])
-]
-
-let corner_case_tests = [
-    
+    assert_equal (Countrypoll.get_states country1) [state2; state3]); 
+  "removing a state that isn't in the country does nothing" >:: (fun _ ->
+    let original_states_length = List.length (Countrypoll.get_states country2) 
+  in 
+    let () = Countrypoll.remove_state country2 state1 
+  in 
+    let new_states_length = List.length (Countrypoll.get_states country2)
+  in 
+    assert_equal new_states_length original_states_length
+    ) 
 ]
 let countrypoll_tests = "full test suite" >::: List.flatten [
   test_equals; 

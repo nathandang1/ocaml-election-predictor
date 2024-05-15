@@ -2,9 +2,9 @@ type state = Statepoll.state
 (** [state] is an abstract type that will represent a state. *)
 
 type country = {
-electoral_college : bool; 
-  mutable states : state list; 
-  name : string ; 
+    electoral_college : bool; 
+    mutable states : state list; 
+    name : string ; 
 }
 (** [country] is an abstract type that will represent a country. *)
 
@@ -33,8 +33,9 @@ val electoral_college_enabled : country -> bool
 val export_data : country -> Csv.t 
 (** [export_data a] produces a CSV for country [a]*)
 
-val save_data_locally : country -> unit 
-(** [save_data_locally a] saves the CSV associated with country [a] to the local machine*)
+val save_data_locally : country -> string -> unit 
+(** [save_data_locally a b] saves the CSV associated with country [a] to the local machine
+    at filename string [b]*)
 
 val remove_state : country -> state -> unit 
 (** [remove_state a b] removes state [b] from country [a], given that [b] is a state in [a]*)

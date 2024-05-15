@@ -107,8 +107,8 @@ let export_data cnt =
   let csv_data = attributes :: state_data in 
   Csv.transpose csv_data 
   
-let save_data_locally cnt = 
+let save_data_locally cnt filename = 
   let csv = export_data cnt in 
-  let file_name = cnt.name ^ "_data.csv" in 
+  let file_name = filename ^ ".csv" in 
   let () = print_endline ("Data saved at: " ^ file_name) in 
   Csv.save file_name csv 
