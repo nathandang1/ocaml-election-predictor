@@ -49,26 +49,39 @@ let print_string_list lst = List.iter (fun s -> print_string (s ^ " ")) lst
 let print_float_list lst = List.iter (fun x -> Printf.printf "%.*f\n" 4 x) lst
 
 (* Perform computations *)
-let transp = Csv.transpose issues
-let issues_titles = List.hd transp
+let do_computations () =
+  let () = Random.self_init () in
 
-let trump_values =
-  List.map (fun s -> float_of_string s) (List.hd (List.tl transp))
+  let transp = Csv.transpose issues in
+  let issues_titles = List.hd transp in
 
-let biden_values =
-  List.map (fun s -> float_of_string s) (List.hd (List.tl (List.tl transp)))
+  let trump_values =
+    List.map (fun s -> float_of_string s) (List.hd (List.tl transp))
+  in
+  let biden_values =
+    List.map (fun s -> float_of_string s) (List.hd (List.tl (List.tl transp)))
+  in
+  (* Applying softmax to the randomly generated weights standardizes the weight
+     sum to 1 and simulates emphasizing the more "important" issues. *)
+  let new_issues_weights = softmax (issues_weights issues) in
+  let trump_weights = element_product trump_values new_issues_weights in
+  let biden_weights = element_product biden_values new_issues_weights in
+  let trump_sum = sum_float_list trump_weights in
+  let biden_sum = sum_float_list biden_weights in
+  let issues_titles_weights =
+    concatenate_lists issues_titles new_issues_weights
+  in
 
-(* Applying softmax to the randomly generated weights standardizes the weight
-   sum to 1 and simulates emphasizing the more "important" issues. *)
-let new_issues_weights = softmax (issues_weights issues)
-let trump_weights = element_product trump_values new_issues_weights
-let biden_weights = element_product biden_values new_issues_weights
-let trump_sum = sum_float_list trump_weights
-let biden_sum = sum_float_list biden_weights
-let issues_titles_weights = concatenate_lists issues_titles new_issues_weights
+  (issues_titles_weights, (trump_sum, biden_sum))
 
-(* Print stuff - sanity check *)
+(* Print results *)
 let print_issues_and_totals () =
+  let result = do_computations () in
+
+  let issues_titles_weights = fst result in
+  let trump_sum = fst (snd result) in
+  let biden_sum = snd (snd result) in
+
   let () =
     List.iter
       (fun (title, value) ->
@@ -83,10 +96,26 @@ let print_issues_and_totals () =
     print_endline "";
     print_string "Biden weight: ";
     print_float biden_sum;
-    print_endline ""
+    print_endline "\n"
+  in
+  ()
+
+let print_totals_only () =
+  let result = do_computations () in
+
+  let trump_sum = fst (snd result) in
+  let biden_sum = snd (snd result) in
+
+  let () =
+    print_string "Trump weight: ";
+    print_float trump_sum;
+    print_endline "";
+    print_string "Biden weight: ";
+    print_float biden_sum;
+    print_endline "\n"
   in
   ()
 
 (* More computations *)
-let diff = 200. *. abs_float (trump_sum -. biden_sum) /. (trump_sum +. biden_sum)
+let diff val1 val2 = 200. *. (val1 -. val2) /. (val1 +. val2)
 (* let () = print_float diff *)
