@@ -49,6 +49,8 @@ let naive_bayes_randomized state_data =
 
   (likelihood_dem, likelihood_rep)
 
+(* Acknowledgement: The following code for the logistic regression algorithm was
+   written with the guidance of ChatGPT. *)
 (* logistic regression *)
 (* Sigmoid function *)
 let sigmoid z = 1. /. (1. +. exp (-.z))
@@ -82,8 +84,6 @@ let rec gradient_descent theta xs ys alpha num_iters =
     let grad = gradient theta xs ys in
     let theta = List.mapi (fun j t -> t -. (alpha *. List.nth grad j)) theta in
     gradient_descent theta xs ys alpha (num_iters - 1)
-
-let data = List.tl (Csv.load "data/data-extraction/state-data/florida.csv")
 
 let logistic_regression data alpha iters =
   let features =
