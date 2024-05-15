@@ -14,7 +14,8 @@ val issues_weights : 'a list -> float list
 
 val element_product : float list -> float list -> float list
 (** [element_product lst1 lst2] computes the element-wise product of [lst1] and
-    [lst2]. *)
+    [lst2]. Requires lst1 and lst2 have the same length *)
+    
 val sum_float_list : float list -> float
 (** [sum_float_list lst] computes the sum of [lst]. *)
 

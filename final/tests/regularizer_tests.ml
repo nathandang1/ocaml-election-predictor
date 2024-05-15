@@ -8,6 +8,55 @@ let lst3 = [ "climate"; "abortion"; "voting"; "race" ]
 let all_elements_between_zero_and_one lst =
   List.for_all (fun x -> x >= 0. && x <= 1.) lst
 
+let test_opens =
+  try
+    let _ = Regularizer.open_metadata "test.csv" in
+    ()
+  with
+  | _ -> assert_failure "Expected no exception, but an exception was thrown."
+let test_open = [
+  ("ensures function does not throw an exception" >:: fun _ -> test_opens)
+]
+
+let test_ones = [
+  ("ones creation") >:: fun _ ->
+    assert_equal (Regularizer.ones 2) [ 1.; 1.];
+]
+
+let test_issues_weights = [
+  ("creates without issues" >:: fun _ -> 
+    assert_equal(all_elements_between_zero_and_one 
+    (Regularizer.issues_weights lst3)) true)
+]
+
+let list_negatives = [-1.0; -2.0; -3.0]
+let list_mixed = [-1.0; 2.0; -3.0]
+
+let test_element_product = [
+  ( "element_product test (positives x positives)" >:: fun _ ->
+    assert_equal
+      (Regularizer.element_product lst1 lst2)
+      [ 0.75; 7.04; 23.22 ] ); 
+  ( "element_product test (negatives x negatives)" >:: fun _ ->
+    assert_equal
+      (Regularizer.element_product list_negatives list_negatives)
+      [ 1.0; 4.0; 9.0 ] ); 
+  (" element_product test (negatives x positives)" >:: fun _ ->
+    assert_equal 
+    (Regularizer.element_product lst1 list_negatives)
+    [ -1.5; 6.4; -12.9 ])
+]
+
+let test_sum_float_list = [
+  ( "sum_float_list test (all positive)" >:: fun _ ->
+    assert_equal (Regularizer.sum_float_list lst1) 9.0 ); 
+  ( "sum_float_list test (all negative)" >:: fun _ ->
+      assert_equal (Regularizer.sum_float_list list_negatives) (-6.0)); 
+  ( "sum_float_list test (mixed values)" >:: fun _ ->
+      assert_equal (Regularizer.sum_float_list list_mixed) (-2.0))
+]
+
+
 let test_regularizer =
   "test suite for regularizer.ml"
   >::: [
