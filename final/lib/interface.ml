@@ -28,7 +28,24 @@ let menu () =
   | "2" -> Simulator
   | _ -> Menu
 
-let state_poll () = failwith ""
+let add_poll () = failwith ""
+let remove_poll () = failwith ""
+let add_state () = failwith ""
+let remove_state () = failwith ""
+
+let state_poll () =
+  ANSITerminal.erase Screen;
+  ANSITerminal.print_string [ ANSITerminal.Bold ] "POLLING DATA \n";
+  print_endline "";
+  ANSITerminal.print_string [] "[1] Add Poll \n";
+  print_endline "";
+  ANSITerminal.print_string [] "[2] Remove Poll \n";
+  print_endline "";
+  ANSITerminal.print_string [] "[3] Add State \n";
+  print_endline "";
+  ANSITerminal.print_string [] "[4] Remove State \n";
+  print_endline "";
+  Menu
 
 let uniform_model () =
   ANSITerminal.erase Screen;
@@ -61,6 +78,21 @@ let simulator () =
   | "2" -> failwith ""
   | _ -> Simulator
 
+let rec print_outcomes = function
+  | ((state : State.t), (winner : Candidate.t)) :: tl ->
+      ANSITerminal.print_string []
+        (state.name ^ " -> " ^ winner.name ^ " [" ^ string_of_int state.votes
+       ^ "] \n");
+      print_outcomes tl
+  | [] -> ()
+
+let rec print_electors = function
+  | ((candidate : Candidate.t), num_of_electors) :: tl ->
+      ANSITerminal.print_string []
+        (candidate.name ^ " : " ^ string_of_int num_of_electors ^ " electors \n");
+      print_electors tl
+  | [] -> ()
+
 let results (candidates, state, polling) =
   let state_odds = Model.run_all (candidates, state, polling) in
   let outcomes = Simulator.simulate_all state_odds in
@@ -68,16 +100,23 @@ let results (candidates, state, polling) =
   let winner : Candidate.t = fst (List.hd electors) in
   let votes = snd (List.hd electors) in
   ANSITerminal.erase Screen;
+  ANSITerminal.print_string [ ANSITerminal.Bold ] "RESULTS \n";
+  print_endline "";
+  print_outcomes outcomes;
+  print_endline "";
+  print_electors electors;
+  print_endline "";
   print_endline
     (winner.name ^ " has won the election with " ^ string_of_int votes
    ^ " votes.");
+  print_endline "";
   Quit
 
 let rec transition = function
   | Quit -> ()
   | Title -> transition (title ())
   | Menu -> transition (menu ())
-  | StatePoll -> state_poll ()
+  | StatePoll -> transition (state_poll ())
   | Simulator -> transition (simulator ())
   | Results (candidates, state, polling) ->
       transition (results (candidates, state, polling))
