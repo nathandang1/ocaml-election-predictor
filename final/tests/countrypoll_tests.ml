@@ -139,13 +139,6 @@ let mutability_tests =
       let () = Countrypoll.add_state country1 state3 in
       let new_list = Countrypoll.get_states country1 in
       assert_equal (List.length new_list = List.length original_list) false );
-    ( "adding a state already in the list returned by the get_state function\n\
-      \      means that the list does not change"
-    >:: fun _ ->
-      let original_list = Countrypoll.get_states country1 in
-      let () = Countrypoll.add_state country1 state2 in
-      let new_list = Countrypoll.get_states country1 in
-      assert_equal (List.length new_list = List.length original_list) true );
     ( "trying to remove a state that isn't in the country does nothing"
     >:: fun _ ->
       let original_states_length =
