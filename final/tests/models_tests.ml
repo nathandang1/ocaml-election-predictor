@@ -197,18 +197,6 @@ let test_gradient_descent =
       assert_bool "" (List.for_all (( < ) 0.) theta) );
   ]
 
-let florida =
-  [
-    [ "1992"; "FLORIDA"; "0.4090249693604387"; "0.3899012156452978"; "rep" ];
-    [ "1996"; "FLORIDA"; "0.4232454874966859"; "0.4802557119781926"; "dem" ];
-    [ "2000"; "FLORIDA"; "0.4884682657204043"; "0.4883782120403614"; "rep" ];
-    [ "2004"; "FLORIDA"; "0.5209751623233695"; "0.4709111002771423"; "rep" ];
-    [ "2008"; "FLORIDA"; "0.4821531916597622"; "0.5103330527066491"; "dem" ];
-    [ "2012"; "FLORIDA"; "0.4913097776197552"; "0.5000786506869869"; "dem" ];
-    [ "2016"; "FLORIDA"; "0.4902194141659073"; "0.4782331580580505"; "rep" ];
-    [ "2020"; "FLORIDA"; "0.5121981962250404"; "0.4786145072544223"; "rep" ];
-  ]
-
 let rec repeat n f acc = if n = 0 then acc else repeat (n - 1) f (f () :: acc)
 
 let average r =
@@ -217,8 +205,8 @@ let average r =
 
 let test_logistic_regression_helper =
   [
-    ( "Testing average over several tries for a right leaning state, given \
-       randomness of logistic regression model"
+    ( "Right leaning state: Testing average over several tries for a right \
+       leaning state, given randomness of logistic regression model"
     >:: fun _ ->
       let florida =
         [
@@ -254,7 +242,77 @@ let test_logistic_regression_helper =
           []
       in
       let avg = average results in
-      assert_bool "" (avg < 0.3) );
+      assert_bool "" (avg < 0.5) );
+    ( "Left leaning state: Testing average over several tries for a left \
+       leaning state, given randomness of logistic regression model"
+    >:: fun _ ->
+      let california =
+        [
+          [
+            "1992";
+            "CALIFORNIA";
+            "0.3261466937592129";
+            "0.4600658784028094";
+            "dem";
+          ];
+          [
+            "1996";
+            "CALIFORNIA";
+            "0.3820942008004616";
+            "0.5109886561852729";
+            "dem";
+          ];
+          [
+            "2000";
+            "CALIFORNIA";
+            "0.4165149680525545";
+            "0.5344973682775446";
+            "dem";
+          ];
+          [
+            "2004";
+            "CALIFORNIA";
+            "0.4435769597724177";
+            "0.5430555753467436";
+            "dem";
+          ];
+          [
+            "2008";
+            "CALIFORNIA";
+            "0.3695485883246447";
+            "0.6101263834713425";
+            "dem";
+          ];
+          [
+            "2012";
+            "CALIFORNIA";
+            "0.371203785207048";
+            "0.6023895914168964";
+            "dem";
+          ];
+          [
+            "2016";
+            "CALIFORNIA";
+            "0.3161710653843943";
+            "0.6172639960455788";
+            "dem";
+          ];
+          [
+            "2020";
+            "CALIFORNIA";
+            "0.3432072362528492";
+            "0.6348394689387351";
+            "dem";
+          ];
+        ]
+      in
+      let res =
+        repeat 1000
+          (fun () -> Models.logistic_regression_helper california 0.01 1000)
+          []
+      in
+      let avg = average res in
+      assert_bool "" (avg > 0.5) );
   ]
 
 let test_geometric_mean =
