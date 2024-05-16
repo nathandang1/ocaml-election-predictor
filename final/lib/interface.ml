@@ -306,7 +306,9 @@ let logistic_model () =
   ANSITerminal.print_string [ ANSITerminal.Bold ] "LOGISTIC MODEL \n";
   print_endline "";
   ANSITerminal.print_string []
-    "Logistic regression is a classic machine learning model. \n";
+    "Logistic regression is a classic machine learning model used for \
+     classification. In this simulation the LR model gives strong weightage to \
+     the preferences expressed by states through past election data. \n";
   print_endline "";
   ANSITerminal.print_string [] "< Enable Randomization [Y/n]? > \n";
   print_endline "";
