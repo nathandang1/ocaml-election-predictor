@@ -4,7 +4,7 @@ type screen =
   | Menu
   | StatePoll
   | Simulator
-  | Results of Candidate.t list * State.t list * Model.model
+  | Results of Candidate.t list * State.t list * Model.model * bool
 
 let title () =
   ANSITerminal.erase Screen;
@@ -111,7 +111,6 @@ let state_poll () =
   print_endline "";
   let cand_path = "data/metadata/candidates.csv" in
   let state_path = "data/metadata/states.csv" in
-  let poll_path = "data/polling" in
   let current_data = Extractor.data (cand_path, state_path) in
   let () =
     match read_line () with
@@ -132,13 +131,13 @@ let uniform_model () =
     "The uniform model assumes that all candidates are equally likely to win \
      the election. It conducts a simulation based on that assumption. \n";
   print_endline "";
-  ANSITerminal.print_string [] "<Press ENTER to Run> \n";
+  ANSITerminal.print_string [] "< Enable Randomization [Y/n]? > \n";
   print_endline "";
-  ignore (read_line ());
+  let randomized = read_line () = "Y" in
   let cand_path = "data/metadata/candidates.csv" in
   let state_path = "data/metadata/states.csv" in
   match Extractor.data (cand_path, state_path) with
-  | cands, states -> Results (cands, states, Uniform)
+  | cands, states -> Results (cands, states, Uniform, randomized)
 
 let naive_bayes () =
   ANSITerminal.erase Screen;
@@ -147,13 +146,13 @@ let naive_bayes () =
   ANSITerminal.print_string []
     "The Naive Bayes model is the Naive Bayes model. \n";
   print_endline "";
-  ANSITerminal.print_string [] "<Press ENTER to Run> \n";
+  ANSITerminal.print_string [] "< Enable Randomization [Y/n]? }> \n";
   print_endline "";
-  ignore (read_line ());
+  let randomized = read_line () = "Y" in
   let cand_path = "data/metadata/candidates.csv" in
   let state_path = "data/metadata/states.csv" in
   match Extractor.data (cand_path, state_path) with
-  | cands, states -> Results (cands, states, Bayes)
+  | cands, states -> Results (cands, states, Bayes, randomized)
 
 let simulator () =
   ANSITerminal.erase Screen;
@@ -183,9 +182,9 @@ let rec print_electors = function
       print_electors tl
   | [] -> ()
 
-let results (candidates, state) model =
+let results (candidates, state) model randomized =
   let state_odds = Model.run_all (candidates, state) model in
-  let outcomes = Simulator.simulate_all state_odds in
+  let outcomes = Simulator.simulate_all state_odds randomized in
   let electors = Simulator.votes outcomes in
   let winner : Candidate.t = fst (List.hd electors) in
   let votes = snd (List.hd electors) in
@@ -208,5 +207,5 @@ let rec transition = function
   | Menu -> transition (menu ())
   | StatePoll -> transition (state_poll ())
   | Simulator -> transition (simulator ())
-  | Results (candidates, state, model) ->
-      transition (results (candidates, state) model)
+  | Results (candidates, state, model, randomized) ->
+      transition (results (candidates, state) model randomized)
