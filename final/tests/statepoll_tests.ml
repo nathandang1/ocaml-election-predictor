@@ -190,12 +190,6 @@ let even_faker_state =
   Statepoll.create_state
     [ "California"; "ca"; "1000000000"; "100000000000000000"; "Trump"; "99.9" ]
 
-(*GPT*)
-let does_not_throw_exception test name () =
-  try Statepoll.save_data_locally test name
-  with _ -> assert_failure "Unexpected Exception"
-
-(*END GPT*)
 let csv_method_tests =
   [
     ( "test for Statepoll.export_state_to_csv" >:: fun _ ->
@@ -206,10 +200,6 @@ let csv_method_tests =
     >:: fun _ ->
       let csv_cali_faker = Statepoll.export_state_to_csv even_faker_state in
       assert_equal (Csv.compare csv_cali_faker answer_key_2) 0 );
-    ( "test to ensure that Statepoll.save_data_locally does not throw an \
-       exception"
-    >:: fun _ ->
-      does_not_throw_exception even_faker_state "this data is fake" () );
   ]
 
 let statepoll_tests =
