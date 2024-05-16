@@ -352,6 +352,48 @@ let test_get_reg_total =
     >:: fun _ -> assert_equal (Models.get_reg_total 0) 0.0 );
   ]
 
+let test_naive_bayes =
+  [
+    ( "Testing Naive Bayes for Sample Input data for a fake state in which \
+       democratic candidate consistently dominates the republican candidate \
+       (as evidence by the entire label column being dem), and where the \
+       probabilities are not 1 or 0."
+    >:: fun _ ->
+      let data =
+        [
+          [ "1992"; "A"; "0.3261466937592129"; "0.4600658784028094"; "dem" ];
+          [ "1996"; "A"; "0.3820942008004616"; "0.5109886561852729"; "dem" ];
+          [ "2000"; "A"; "0.4165149680525545"; "0.5344973682775446"; "dem" ];
+          [ "2004"; "A"; "0.4435769597724177"; "0.5430555753467436"; "dem" ];
+          [ "2008"; "A"; "0.3695485883246447"; "0.6101263834713425"; "dem" ];
+          [ "2012"; "A"; "0.371203785207048"; "0.6023895914168964"; "dem" ];
+          [ "2016"; "A"; "0.3161710653843943"; "0.6172639960455788"; "dem" ];
+          [ "2020"; "A"; "0.3432072362528492"; "0.6348394689387351"; "dem" ];
+        ]
+      in
+      let results = Models.naive_bayes_randomized data 0 in
+      assert_bool "" (fst results > snd results) );
+    ( "Testing Naive Bayes for Sample Input data for a fake state in which \
+       republican candidate consistently dominates the democrat candidate (as \
+       evidence by the entire label column being rep), and where the \
+       probabilities are not 1 or 0."
+    >:: fun _ ->
+      let data =
+        [
+          [ "1992"; "B"; "0.3945749808515083"; "0.3028711132430195"; "rep" ];
+          [ "1996"; "B"; "0.5080125817399221"; "0.33267113649532326"; "rep" ];
+          [ "2000"; "B"; "0.5862095531587057"; "0.27666339823504693"; "rep" ];
+          [ "2004"; "B"; "0.6106532991253942"; "0.35516861912104364"; "rep" ];
+          [ "2008"; "B"; "0.5942451953880631"; "0.37889373599389325"; "rep" ];
+          [ "2012"; "B"; "0.5480157739729447"; "0.40812659112464433"; "rep" ];
+          [ "2016"; "B"; "0.5128151207753728"; "0.36550871290111986"; "rep" ];
+          [ "2020"; "B"; "0.5283314327038078"; "0.42771952271020497"; "rep" ];
+        ]
+      in
+      let results = Models.naive_bayes_randomized data 0 in
+      assert_bool "" (snd results > fst results) );
+  ]
+
 let test_models =
   "test suite for models.ml"
   >::: List.flatten
@@ -363,6 +405,7 @@ let test_models =
            test_logistic_regression_helper;
            test_geometric_mean;
            test_get_reg_total;
+           test_naive_bayes;
          ]
 
 let run_models_test () = run_test_tt_main test_models
