@@ -9,14 +9,17 @@ let uniform_model candidates =
     candidates
 
 let bayes_model (state : State.t) =
-  match
-    Models.naive_bayes_randomized
-      (List.tl
-         (Csv.load
-            ("data/data-extraction/state-data/"
-            ^ String.lowercase_ascii state.name
-            ^ ".csv")))
-  with
+  let local =
+    Local.shadow
+      ("data/local/data-extraction/state-data/"
+      ^ String.lowercase_ascii state.name
+      ^ ".csv")
+      ("data/data-extraction/state-data/"
+      ^ String.lowercase_ascii state.name
+      ^ ".csv")
+  in
+  let path = Local.path local in
+  match Models.naive_bayes_randomized (List.tl (Csv.load path)) with
   | dem, rep ->
       [
         (Candidate.create ("Joe Biden", "Democrat"), dem);
@@ -24,13 +27,17 @@ let bayes_model (state : State.t) =
       ]
 
 let logistic_model (state : State.t) =
-  let data =
-    List.tl
-      (Csv.load
-         ("data/data-extraction/state-data/"
-         ^ String.lowercase_ascii state.name
-         ^ ".csv"))
+  let local =
+    Local.shadow
+      ("data/local/data-extraction/state-data/"
+      ^ String.lowercase_ascii state.name
+      ^ ".csv")
+      ("data/data-extraction/state-data/"
+      ^ String.lowercase_ascii state.name
+      ^ ".csv")
   in
+  let path = Local.path local in
+  let data = List.tl (Csv.load path) in
   match Models.logistic_regression data with
   | dem, rep ->
       [

@@ -87,7 +87,7 @@ let add_poll (_, states) =
   in
   print_endline "";
   ANSITerminal.print_string [] "Please specify the data for this poll: \n";
-  let year = read_int_rec "YEAR :" |> string_of_int in
+  let year = read_int_rec "YEAR: " |> string_of_int in
   let () = ANSITerminal.print_string [] "STATE: " in
   let state = read_line () in
   let rep_percentage =
@@ -100,10 +100,19 @@ let add_poll (_, states) =
   let winner = read_line () in
   let local =
     Local.shadow
-      ("data/local/data-extraction/state-data/" ^ selected_state.name ^ ".csv")
-      ("data/data-extraction/state-data/" ^ selected_state.name ^ ".csv")
+      ("data/local/data-extraction/state-data/"
+      ^ String.lowercase_ascii selected_state.name
+      ^ ".csv")
+      ("data/data-extraction/state-data/"
+      ^ String.lowercase_ascii selected_state.name
+      ^ ".csv")
   in
   let path = Local.path local in
+  let true_local =
+    "data/local/data-extraction/state-data/"
+    ^ String.lowercase_ascii selected_state.name
+    ^ ".csv"
+  in
   try
     let data = Csv.load path in
     let new_data =
@@ -111,12 +120,12 @@ let add_poll (_, states) =
       :: [ year; state; rep_percentage; dem_percentage; winner ]
       :: List.tl data
     in
-    Csv.save path new_data
+    Csv.save true_local new_data
   with _ ->
     let new_data =
       [ poll_cols; [ year; state; rep_percentage; dem_percentage; winner ] ]
     in
-    Csv.save path new_data
+    Csv.save true_local new_data
 
 let remove_poll (_, states) =
   ANSITerminal.erase Screen;
@@ -135,8 +144,12 @@ let remove_poll (_, states) =
     (String.uppercase_ascii selected_state.name ^ ": \n");
   let local =
     Local.shadow
-      ("data/local/data-extraction/state-data/" ^ selected_state.name ^ ".csv")
-      ("data/data-extraction/state-data/" ^ selected_state.name ^ ".csv")
+      ("data/local/data-extraction/state-data/"
+      ^ String.lowercase_ascii selected_state.name
+      ^ ".csv")
+      ("data/data-extraction/state-data/"
+      ^ String.lowercase_ascii selected_state.name
+      ^ ".csv")
   in
   let path = Local.path local in
   let data = Csv.load path in
@@ -147,7 +160,12 @@ let remove_poll (_, states) =
   let () = ANSITerminal.print_string [] "REMOVED POLL: " in
   let removed_poll = read_line () in
   let new_data = List.filter (fun row -> List.hd row <> removed_poll) data in
-  Csv.save path new_data
+  let true_local =
+    "data/local/data-extraction/state-data/"
+    ^ String.lowercase_ascii selected_state.name
+    ^ ".csv"
+  in
+  Csv.save true_local new_data
 
 let add_state (_, states) =
   ANSITerminal.erase Screen;
