@@ -345,7 +345,7 @@ let naive_bayes () =
   let randomized = read_line () = "Y" in
   let () = print_endline "" in
   let randomness =
-    read_int_rec_range (0, 20) "< Randomness Score? [0 - 20]? > "
+    read_int_rec_range (0, 50) "< Randomness Score? [0 - 50]? > "
   in
   let cand_path = Local.path cand_local in
   let state_path = Local.path state_local in
@@ -404,8 +404,10 @@ let results (candidates, state) model randomized =
   let state_odds = Model.run_all (candidates, state) model in
   let outcomes = Simulator.simulate_all state_odds randomized in
   let electors = Simulator.votes outcomes in
+  let tied = snd (List.hd electors) = snd (List.hd (List.tl electors)) in
   let winner : Candidate.t = fst (List.hd electors) in
   let votes = snd (List.hd electors) in
+
   ANSITerminal.erase Screen;
   ANSITerminal.print_string [ ANSITerminal.Bold ] "RESULTS \n";
   print_endline "";
@@ -413,9 +415,14 @@ let results (candidates, state) model randomized =
   print_endline "";
   print_electors electors;
   print_endline "";
-  print_endline
-    (winner.name ^ " has won the election with " ^ string_of_int votes
-   ^ " electors.");
+  if tied then
+    print_endline
+      ("The election is tied. Both candidates have " ^ string_of_int votes
+     ^ " electors.")
+  else
+    print_endline
+      (winner.name ^ " has won the election with " ^ string_of_int votes
+     ^ " electors.");
   print_endline "";
   Quit
 
