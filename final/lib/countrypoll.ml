@@ -97,10 +97,13 @@ in
 
 let electoral_college_enabled cnt = cnt.electoral_college
 
-let attributes = ["Name of State"; "Preferred Candidate Name"; 
-  "Preferred Candidate Party"; 
-  "Preferred Candidate Margin of Preference"; 
-  "Number of Votes"; "Population Size"] 
+let attributes = [
+  "name"; 
+  "abbr"; 
+  "votes"; 
+  "pop"; 
+  "pref_can"; "pref_percent"
+  ] 
 
 let export_data cnt = 
   let state_data = data_helper cnt.states [] in 

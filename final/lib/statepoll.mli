@@ -2,7 +2,8 @@
 
 type state = {
     name : string; 
-    mutable preferred_candidate : Candidate.t; 
+    abbreviation : string; 
+    mutable preferred_candidate : string; 
     mutable preferred_margin : float; 
     mutable num_votes : int; 
     mutable population : int; 
@@ -32,9 +33,8 @@ val get_preferred_candidate_name : state -> string
 (** [get_preferred_candidate_name state] returns the name of the preferred candidate of state
     [state]*)
 
-val get_preferred_candidate_party : state -> string
-(** [get_preferred_candidate_name state] returns the party of the preferred candidate of state
-    [state]*)
+val get_abbreviation : state -> string
+(** [get_abbreviation state] returns the abbreviation state [state]*)
 
 val get_preferred_margin : state -> float
 (** [get_preferred_margin state] returns the margin that the preferred candidate
@@ -49,7 +49,7 @@ val get_population : state -> int
 
 (** Setter Methods *)
 
-val set_preferred_candidate : state -> Candidate.t -> unit  
+val set_preferred_candidate : state -> string -> unit  
 (** [set_preferred_candidate state candidate] sets the preferred candidate of [state] to [candidate]*)
 
 val set_preferred_margin : state -> float -> unit

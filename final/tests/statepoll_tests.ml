@@ -1,18 +1,15 @@
 open Final
 open OUnit2
-let candidate1 =
-  { Candidate.name = "Biden"; Candidate.party = "Democratic" }
-let candidate2 =
-  { Candidate.name = "Trump"; Candidate.party = "Republican" }
 let state = {
     Statepoll.name = "New York";
-    Statepoll.preferred_candidate = candidate1;
+    Statepoll.abbreviation = "ny"; 
+    Statepoll.preferred_candidate = "Biden";
     Statepoll.preferred_margin = 3.2;
     Statepoll.num_votes = 28;
     Statepoll.population = 196800000;
 }
 (* Getter Method Tests*)
-let state_attributes = ["New York"; "Biden"; "Democratic"; "3.2"; "28"; "196800000"]
+let state_attributes = ["New York"; "ny"; "28"; "Biden"; "3.2"]
 let create_test = [
   "valid creation" >:: (fun _ -> assert_equal (Statepoll.create_state state_attributes) state);
   "error is thrown (length of list is faulty)" >:: (fun _ -> 
@@ -22,14 +19,15 @@ let create_test = [
   "error is thrown (one of the attributes is wrong)" >:: (fun _ -> 
     assert_raises 
     (Statepoll.ImproperList "")
-    (fun () -> Statepoll.create_state (["New York"; "Biden"; "Democratic"; "Hi"; "28"; "196800000"])); 
+    (fun () -> Statepoll.create_state (["New York"; "ny"; "Hi"; "Biden"; "whats good Rowan"])); 
   )
 ]
 let state_copy = state
 let state_copy_2 = state_copy 
 let state2 = {
   Statepoll.name = "California";
-  Statepoll.preferred_candidate = candidate2;
+  Statepoll.abbreviation = "ca"; 
+  Statepoll.preferred_candidate = "Trump";
   Statepoll.preferred_margin = 3.2;
   Statepoll.num_votes = 28;
   Statepoll.population = 196800000;
@@ -45,19 +43,17 @@ let test_equals = [
 ]
 let getter_method_tests = [
   "get_name" >:: (fun _ -> assert_equal (Statepoll.get_name state) "New York"); 
-  "get_preferred_candidate_name" >:: (fun _ -> assert_equal (Statepoll.get_preferred_candidate_name state) "Biden"); 
-  "get_preferred_candidate_party" >:: (fun _ -> assert_equal (Statepoll.get_preferred_candidate_party state) "Democratic"); 
+  "get_preferred_candidate_name" >:: (fun _ -> assert_equal (Statepoll.get_preferred_candidate_name state) "NY"); 
+  "get_abbreviation" >:: (fun _ -> assert_equal (Statepoll.get_abbreviation state) "Democratic"); 
   "get_preferred-margin" >:: (fun _ -> assert_equal (Statepoll.get_preferred_margin state) 3.2); 
   "get_num_votes" >:: (fun _ -> assert_equal (Statepoll.get_num_votes state) 28); 
   "get_population" >:: (fun _ -> assert_equal (Statepoll.get_population state) 196800000)
 ]
 let setter_method_tests = [
   "set_preferred_candidate" >:: (fun _ -> 
-    let () = Statepoll.set_preferred_candidate state candidate2 
+    let () = Statepoll.set_preferred_candidate state "Trump" 
   in
-    let () = assert_equal (Statepoll.get_preferred_candidate_name state) "Trump"
-in 
-  assert_equal (Statepoll.get_preferred_candidate_party state) "Republican"); 
+    assert_equal (Statepoll.get_preferred_candidate_name state) "Trump"); 
   "set_preferred_margin" >:: (fun _ -> 
     let original_margin = Statepoll.get_preferred_margin state
   in 
