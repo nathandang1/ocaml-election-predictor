@@ -24,6 +24,7 @@ let state4_attributes =
 let state4 = Statepoll.create_state state4_attributes
 let state_list_1 = [ state1; state2 ]
 let state_list_2 = [ state3; state4 ]
+let state_list_3 = [state1; state2; state3]
 
 let country1 =
   {
@@ -45,6 +46,7 @@ let test_create =
 let country2 = Countrypoll.create_country state_list_2 false "CA and PA"
 let country1_dupe = Countrypoll.create_country state_list_1 true "NY and FL"
 let country1_dupe2 = Countrypoll.create_country state_list_1 true "NY and FL"
+let country3 = Countrypoll.create_country state_list_3 true "Bing Bong"
 
 let country1_rev =
   Countrypoll.create_country (List.rev state_list_1) true "NY and FL"
@@ -65,7 +67,10 @@ let test_equals =
         true );
     ( "false test" >:: fun _ ->
       assert_equal (Countrypoll.equals country1 country2) false );
-    ( "corner case: the same list of states ordered differently are still equal"
+    ("corner case: two countries with different number of states are not equal" >::
+    fun _ -> 
+      assert_equal (Countrypoll.equals country1 country3) false); 
+    ("corner case: the same list of states ordered differently are still equal"
     >:: fun _ -> assert_equal (Countrypoll.equals country1 country1_rev) true );
   ]
 
@@ -159,15 +164,8 @@ let mutability_tests =
       assert_equal new_states_length original_states_length );
   ]
 
-let rec print_csv lst =
-  match lst with
-  | [] -> print_endline ""
-  | h :: t ->
-      print_endline h;
-      print_csv t
 
 let good_csv = Csv.load "test.csv"
-let () = print_csv (List.nth good_csv 1)
 let bad_csv_1 = Csv.load "test_bad.csv"
 let bad_csv_2 = Csv.load "test_bad_2.csv"
 let empty_csv = Csv.load "empty_country.csv"
@@ -222,6 +220,27 @@ let test_create_from_csv2 =
     );
   ]
 
+let export_to_csv_tests = 
+  [
+    ("calling export_data on test_country_from_csv should be equal to the original CSV"
+    >:: fun _ ->
+      assert_equal (Csv.compare
+      (Countrypoll.export_data test_country_from_csv)
+      good_csv) 0 ); 
+  ]
+(*GPT*)
+let does_not_throw_exception test name () =
+  try
+    Countrypoll.save_data_locally test name;
+  with
+    | _ -> assert_failure "Unexpected Exception"
+(*END GPT*)
+let export_to_machine_tests = 
+  [
+    ("trying to export does not throw an exception" >::
+    fun _ -> does_not_throw_exception test_country "hello" ())
+  ]
+
 let countrypoll_tests =
   "full test suite"
   >::: List.flatten
@@ -232,6 +251,8 @@ let countrypoll_tests =
            mutability_tests;
            test_create_from_csv;
            test_create_from_csv2;
+           export_to_csv_tests; 
+           export_to_machine_tests
          ]
 
 let run_countrypoll_tests = run_test_tt_main countrypoll_tests

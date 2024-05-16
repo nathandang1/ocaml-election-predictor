@@ -85,6 +85,8 @@ let create_test =
   ]
 
 let state_copy = state
+let state_attributes_caps = [ "NEW YORK"; "ny"; "28"; "196800000"; "Biden"; "3.2" ]
+let state_all_caps = Statepoll.create_state state_attributes_caps
 let state_copy_2 = state_copy
 let state2_attributes = ["California"; "ca"; "28"; "196800000"; "Trump"; "3.2"]
 
@@ -105,6 +107,9 @@ let test_equals =
         (Statepoll.equals state state_copy_2) );
     ( "false test" >:: fun _ ->
       assert_equal (Statepoll.equals state state2) false );
+    ( "same letters, different cases are treated different" >::
+    fun _ -> 
+      assert_equal (Statepoll.equals state state_all_caps) false); 
   ]
 
 let getter_method_tests =
@@ -149,15 +154,23 @@ let fake_state = Statepoll.create_state ["California";"ca";"10";"10";"Biden";"2.
 
 let answer_key_2 = Csv.load "fake_state_2.csv"
 let even_faker_state = Statepoll.create_state["California";"ca";"1000000000";"100000000000000000";"Trump";"99.9"]
+
+(*GPT*)
+let does_not_throw_exception test name () =
+  try
+    Statepoll.save_data_locally test name;
+  with
+    | _ -> assert_failure "Unexpected Exception"
+(*END GPT*)
 let csv_method_tests = [
   ( "test for Statepoll.export_state_to_csv" >:: fun _ ->
     let csv_cali_fake = Statepoll.export_state_to_csv fake_state in
     assert_equal (Csv.compare csv_cali_fake answer_key) 0 );
-  ( "test for Statepoll.export_state_to_csv, bigger numbers">:: fun _ ->
+  ( "test for Statepoll.export_state_to_csv, bigger numbers to ensure scalability">:: fun _ ->
     let csv_cali_faker = Statepoll.export_state_to_csv even_faker_state in
     assert_equal (Csv.compare csv_cali_faker answer_key_2) 0 ); 
   ( "test to ensure that Statepoll.save_data_locally does not throw an exception" >::
-  fun _ -> Statepoll.save_data_locally even_faker_state "this data is fake")
+  fun _ -> does_not_throw_exception even_faker_state "this data is fake" ())
 ]
 
 
