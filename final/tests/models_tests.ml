@@ -197,9 +197,26 @@ let test_gradient_descent =
       assert_bool "" (List.for_all (( < ) 0.) theta) );
   ]
 
+let test_geometric_mean =
+  [
+    ( "" >:: fun _ ->
+      assert_equal 1. (Models.geometric_mean (List.init 5 (fun _ -> 1.))) );
+    ("" >:: fun _ -> assert_equal 4. (Models.geometric_mean [ 2.; 4.; 8. ]));
+    ("" >:: fun _ -> assert_equal 0. (Models.geometric_mean [ 1.; 2.; 0.; 3. ]));
+    ("" >:: fun _ -> assert_equal 1. (Models.geometric_mean []));
+    ( "" >:: fun _ ->
+      assert_equal 4. (Models.geometric_mean [ 4.0000000001; 3.9999999999 ]) );
+  ]
+
 let test_models =
   "test suite for models.ml"
   >::: List.flatten
-         [ test_sigmoid; test_hypothesis; test_gradient; test_gradient_descent ]
+         [
+           test_sigmoid;
+           test_hypothesis;
+           test_gradient;
+           test_gradient_descent;
+           test_geometric_mean;
+         ]
 
 let run_models_test () = run_test_tt_main test_models
