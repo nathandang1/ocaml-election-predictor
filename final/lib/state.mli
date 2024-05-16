@@ -10,4 +10,4 @@ type t = {
 
 type d = (string * float) list
 
-val outcome : t -> d -> string -> float -> d
+(* val outcome : t -> d -> string -> float -> d *)
