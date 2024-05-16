@@ -9,7 +9,7 @@ val simulate_all :
   (State.t * (Candidate.t * float) list) list ->
   bool ->
   (State.t * Candidate.t) list
-(** [simulate states is_random] is a list with the simulated winners for all
+(** [simulate_all states is_random] is a list with the simulated winners for all
     states in [states] given the specified likelihoods of winning for each
     candidate. If [is_random] is true, then the simulator randomizes with
     weighted outputs.*)
