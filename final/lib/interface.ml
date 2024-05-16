@@ -293,13 +293,13 @@ let uniform_model () =
     "The uniform model assumes that all candidates are equally likely to win \
      the election. It conducts a simulation based on that assumption. \n";
   print_endline "";
-  ANSITerminal.print_string [] "< Enable Randomization [Y/n]? > \n";
+  ANSITerminal.print_string [] "< Press ENTER to Run > \n";
   print_endline "";
-  let randomized = read_line () = "Y" in
+  ignore (read_line ());
   let cand_path = "data/metadata/candidates.csv" in
   let state_path = "data/metadata/states.csv" in
   match Extractor.data (cand_path, state_path) with
-  | cands, states -> Results (cands, states, Uniform, randomized)
+  | cands, states -> Results (cands, states, Uniform, true)
 
 let naive_bayes () =
   ANSITerminal.erase Screen;
