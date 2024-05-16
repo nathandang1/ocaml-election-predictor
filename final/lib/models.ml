@@ -64,6 +64,7 @@ let naive_bayes_randomized state_data =
   ( likelihood_dem /. total_likelihood,
     multiply_factor *. likelihood_rep /. total_likelihood )
 
+(* Logistic Regression *)
 (* Acknowledgement: The following code for the logistic regression algorithm was
    written with the guidance of Github Copilot.*)
 (* Citation: 'Give ideas for how to implement logistic regression natively in
