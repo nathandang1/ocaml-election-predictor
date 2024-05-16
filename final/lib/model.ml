@@ -1,6 +1,6 @@
 type model =
   | Uniform
-  | Bayes
+  | Bayes of int
   | Logistic
 
 let uniform_model candidates =
@@ -42,7 +42,7 @@ let run ((candidates : Candidate.t list), (state : State.t)) model =
   let probabilities =
     match model with
     | Uniform -> uniform_model candidates
-    | Bayes -> bayes_model (state : State.t)
+    | Bayes _ -> bayes_model (state : State.t)
     | Logistic -> logistic_model (state : State.t)
   in
   (state, probabilities)

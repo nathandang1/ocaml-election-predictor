@@ -219,13 +219,15 @@ let naive_bayes () =
      likelihoods of each candidate winning the election. It conducts a \
      simulation based on that assumption. \n";
   print_endline "";
-  ANSITerminal.print_string [] "< Enable Randomization [Y/n]? > \n";
-  print_endline "";
+  let () = ANSITerminal.print_string [] "< Enable Randomization [Y/n]? > " in
   let randomized = read_line () = "Y" in
+  let () = print_endline "" in
+  let () = ANSITerminal.print_string [] "< Randomness Score? [0 - 20]? > " in
+  let randomness = int_of_string (read_line ()) in
   let cand_path = "data/metadata/candidates.csv" in
   let state_path = "data/metadata/states.csv" in
   match Extractor.data (cand_path, state_path) with
-  | cands, states -> Results (cands, states, Bayes, randomized)
+  | cands, states -> Results (cands, states, Bayes randomness, randomized)
 
 let logistic_model () =
   ANSITerminal.erase Screen;

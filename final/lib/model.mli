@@ -1,7 +1,9 @@
+(** [model] represents the model being used to calculate the probabilities for
+    each candidate. *)
 type model =
-  | Uniform
-  | Bayes
-  | Logistic
+  | Uniform  (** Uniform Random Model **)
+  | Bayes of int  (** Naive Bayes Model **)
+  | Logistic  (** Logistic Regression Model **)
 
 val run :
   Candidate.t list * State.t -> model -> State.t * (Candidate.t * float) list
