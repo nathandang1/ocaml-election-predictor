@@ -12,7 +12,7 @@ let state =
   }
 
 (* Getter Method Tests*)
-let state_attributes = [ "New York"; "ny"; "28"; "Biden"; "3.2" ]
+let state_attributes = [ "New York"; "ny"; "28"; "196800000"; "Biden"; "3.2" ]
 
 let create_test =
   [
@@ -64,9 +64,9 @@ let getter_method_tests =
   [
     ("get_name" >:: fun _ -> assert_equal (Statepoll.get_name state) "New York");
     ( "get_preferred_candidate_name" >:: fun _ ->
-      assert_equal (Statepoll.get_preferred_candidate_name state) "NY" );
+      assert_equal (Statepoll.get_preferred_candidate_name state) "Biden" );
     ( "get_abbreviation" >:: fun _ ->
-      assert_equal (Statepoll.get_abbreviation state) "Democratic" );
+      assert_equal (Statepoll.get_abbreviation state) "ny" );
     ( "get_preferred-margin" >:: fun _ ->
       assert_equal (Statepoll.get_preferred_margin state) 3.2 );
     ( "get_num_votes" >:: fun _ ->

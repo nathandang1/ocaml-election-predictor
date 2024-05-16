@@ -8,19 +8,19 @@ type country = {
 (** helpers *)
 let sort_helper_comparator (a : state) (b : state) = String.compare a.name b.name
 let sort_states states = List.sort (sort_helper_comparator) states
-let rec equals_helper_2 states1 states2 acc = match states1 with 
-| [] -> false
+let rec equals_helper_2 states1 states2 = match states1 with 
+| [] -> true
 | h :: t -> 
-  if Statepoll.equals h (List.nth states2 acc) then 
-    equals_helper_2 t (List.tl states2) (acc + 1) 
+  let state2_of_interest = List.hd states2 in 
+  if (Statepoll.equals state2_of_interest h) then equals_helper_2 t (List.tl states2)
+  else 
+    false 
+
+let equals_helper states1 states2 = if (List.length states1) = (List.length states2) 
+  then 
+  equals_helper_2 (sort_states states1) (sort_states states2)
 else 
-  true 
-let equals_helper states1 states2 = 
-  if 
-    List.length states1 <> List.length states2 
-  then false
-else 
-  equals_helper_2 (sort_states states1) (sort_states states2) 0
+  false 
 
 let rec count_pop (lst : state list) acc = match lst with 
   | [] -> acc
@@ -32,7 +32,7 @@ let rec count_electoral_votes (lst : state list) acc = match lst with
 
 let rec contains_state_helper states st = match states with 
   | [] -> false
-  | h :: t -> if Statepoll.equals st h then true else contains_state_helper t st
+  | h :: t -> if (Statepoll.equals st h) then true else contains_state_helper t st
 let rec remove_state_helper states st acc = match states with
   | [] -> acc
   | h :: t -> 
@@ -108,12 +108,12 @@ else
     cnt.states <- (st :: cnt.states)
 
 let remove_state cnt st = 
-  if ((contains_state cnt st) <> true) 
-    then ()
-else 
-  let new_list = remove_state_helper cnt.states st []
+  if ((contains_state cnt st)) then 
+    let state_list_new = remove_state_helper cnt.states st []
 in 
-  cnt.states <- (st :: new_list)
+  cnt.states <- state_list_new
+else 
+  ()
 
 let electoral_college_enabled cnt = cnt.electoral_college
 

@@ -56,7 +56,7 @@ let test_equals =
     ( "symmetric test" >:: fun _ ->
       assert_equal
         (Countrypoll.equals country1 country1_dupe)
-        (Countrypoll.equals country1 country2) );
+        (Countrypoll.equals country1_dupe country1) );
     ( "transitivity test" >:: fun _ ->
       assert_equal
         (Countrypoll.equals country1 country1_dupe
@@ -128,12 +128,20 @@ let mutability_tests =
       let () = Countrypoll.add_state country1 state3 in
       let new_population = Countrypoll.get_population country1 in
       assert_equal (new_population = original_popuation) false );
-    ( "adding a state means the list returned by the get_state function changes"
+    ( "adding a state means the list returned by the get_state function changes, 
+    given that the state is not in the country already"
     >:: fun _ ->
       let original_list = Countrypoll.get_states country1 in
-      let () = Countrypoll.add_state country1 state1 in
+      let () = Countrypoll.add_state country1 state3 in
       let new_list = Countrypoll.get_states country1 in
-      assert_equal (List.length new_list = List.length original_list) false );
+      assert_equal (List.length new_list = List.length original_list) false);
+      ( "adding a state already in the list returned by the get_state function
+      means that the list does not change"
+    >:: fun _ ->
+      let original_list = Countrypoll.get_states country1 in
+      let () = Countrypoll.add_state country1 state3 in
+      let new_list = Countrypoll.get_states country1 in
+      assert_equal (List.length new_list = List.length original_list) true);
     ( "trying to remove a state that isn't in the country does nothing"
     >:: fun _ ->
       let original_states_length =
