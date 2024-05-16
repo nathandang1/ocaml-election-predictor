@@ -222,7 +222,7 @@ let naive_bayes () =
   let () = ANSITerminal.print_string [] "< Enable Randomization [Y/n]? > " in
   let randomized = read_line () = "Y" in
   let () = print_endline "" in
-  let () = ANSITerminal.print_string [] "< Enable Randomization [Y/n]? > " in
+  let () = ANSITerminal.print_string [] "< Randomness Score? [0 - 20]? > " in
   let randomness = int_of_string (read_line ()) in
   let cand_path = "data/metadata/candidates.csv" in
   let state_path = "data/metadata/states.csv" in
