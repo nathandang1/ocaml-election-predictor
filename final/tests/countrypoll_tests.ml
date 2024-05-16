@@ -128,20 +128,20 @@ let mutability_tests =
       let () = Countrypoll.add_state country1 state3 in
       let new_population = Countrypoll.get_population country1 in
       assert_equal (new_population = original_popuation) false );
-    ( "adding a state means the list returned by the get_state function changes, 
-    given that the state is not in the country already"
+    ( "adding a state means the list returned by the get_state function changes, \n\
+      \    given that the state is not in the country already"
     >:: fun _ ->
       let original_list = Countrypoll.get_states country1 in
       let () = Countrypoll.add_state country1 state3 in
       let new_list = Countrypoll.get_states country1 in
-      assert_equal (List.length new_list = List.length original_list) false);
-      ( "adding a state already in the list returned by the get_state function
-      means that the list does not change"
+      assert_equal (List.length new_list = List.length original_list) false );
+    ( "adding a state already in the list returned by the get_state function\n\
+      \      means that the list does not change"
     >:: fun _ ->
       let original_list = Countrypoll.get_states country1 in
-      let () = Countrypoll.add_state country1 state3 in
+      let () = Countrypoll.add_state country1 state2 in
       let new_list = Countrypoll.get_states country1 in
-      assert_equal (List.length new_list = List.length original_list) true);
+      assert_equal (List.length new_list = List.length original_list) true );
     ( "trying to remove a state that isn't in the country does nothing"
     >:: fun _ ->
       let original_states_length =
@@ -158,9 +158,14 @@ let mutability_tests =
       let new_states_length = List.length (Countrypoll.get_states country2) in
       assert_equal new_states_length original_states_length );
   ]
-let rec print_csv lst = match lst with 
-| [] -> print_endline ""
-| h :: t -> print_endline h; print_csv t
+
+let rec print_csv lst =
+  match lst with
+  | [] -> print_endline ""
+  | h :: t ->
+      print_endline h;
+      print_csv t
+
 let good_csv = Csv.load "test.csv"
 let () = print_csv (List.nth good_csv 1)
 let bad_csv_1 = Csv.load "test_bad.csv"
@@ -169,14 +174,10 @@ let bad_csv_2 = Csv.load "test_bad_2.csv"
 let test_create_from_csv =
   [
     ( "exception thrown when column count is not 6" >:: fun _ ->
-      assert_raises
-        (Countrypoll.ImproperCSV
-           "") (fun () ->
+      assert_raises (Countrypoll.ImproperCSV "") (fun () ->
           Countrypoll.create_country_from_CSV bad_csv_1 "bad country" true) );
     ( "exception thrown when row is faulty" >:: fun _ ->
-      assert_raises
-        (Countrypoll.ImproperCSV
-           "") (fun () ->
+      assert_raises (Countrypoll.ImproperCSV "") (fun () ->
           Countrypoll.create_country_from_CSV bad_csv_2 "also bad" false) );
     ( "when a good csv is passed, the country created is valid \n\
       \  (this test checks attributes"
