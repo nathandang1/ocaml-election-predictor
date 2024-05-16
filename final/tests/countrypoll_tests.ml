@@ -6,17 +6,14 @@ let candidate1 =
 let candidate2 =
   { Candidate.name = "Joe Biden"; Candidate.party = "Democratic" }
 
-let state1_attributes = ["New York"; "Donald Trump"; "Republican"; 
-  "3.2"; "28"; "196800000"]
+let state1_attributes = ["New York"; "ny"; "28"; "196800000"; 
+"Trump"; "3.2"]
 let state1 = Statepoll.create_state state1_attributes
-let state2_attributes = ["Florida"; "Joe Biden"; "Democratic"; 
-"1.6"; "14"; "10000"]
+let state2_attributes = ["Florida"; "fl"; "14"; "10000"; "Biden"; "1.6"]
 let state2 = Statepoll.create_state state2_attributes
-let state3_attributes = ["California"; "Donald Trump"; "Republican"; 
-"10.0"; "50"; "102938480101"]
+let state3_attributes = ["California"; "ca"; "50"; "102938480101"; "Trump"; "10.0"]
 let state3 = Statepoll.create_state state3_attributes
-let state4_attributes = ["Pennsylvania"; "Joe Biden"; "Democratic"; 
-"4.6"; "10"; "10000000"]
+let state4_attributes = ["Pennsylvania"; "pa"; "10"; "10000000"; "Bden"; "4.6"]
 let state4 = Statepoll.create_state state4_attributes
 let state_list_1 = [state1; state2]
 let state_list_2 = [state3; state4]
@@ -137,9 +134,9 @@ in
     )
 ]
 
-let good_csv = Csv.load "test.csv"
-let bad_csv_1 = Csv.load "test_bad.csv"
-let bad_csv_2 = Csv.load "test_bad_2.csv"
+let good_csv = Csv.load "lib/tests/test.csv"
+let bad_csv_1 = Csv.load "lib/tests/test_bad.csv"
+let bad_csv_2 = Csv.load "lib/tests/test_bad_2.csv"
 let test_create_from_csv = [
   "exception thrown when column count is not 6" >:: (fun _ ->
     assert_raises 
@@ -160,7 +157,6 @@ let test_create_from_csv = [
     assert_equal (List.length (Countrypoll.get_states country)) 4
     ); 
 ]
-
 let alabama = Statepoll.create_state ["Alabama"; "al"; "9"; "5108468"; "Trump"; "0.18875664116805574"]
 let alaska = Statepoll.create_state ["Alaska"; "ak"; "3"; "733406"; "Trump"; "0.051270956337204764"]
 let arizona = Statepoll.create_state ["Arizona"; "az"; "11"; "7341344"; "Biden"; "0.1731993941811405"]
