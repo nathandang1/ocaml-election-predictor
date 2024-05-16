@@ -17,12 +17,17 @@ exception ImproperList of string
 
 val create_state : string list -> state
 (** [create_state lst] creates a state based off of information provided by
-    string list [lst] [lst] should be formatted so that there are only five
-    elements. The first element is the name of the state, the second, the
-    preferred candidate, the third the preferred margin, the fourth the number
-    of votes, and the fifth the population. Any lists that are formatted
-    otherwise will be rejected, whether it be the type of the data (when
-    ()_of_string is called) or the length of the list*)
+    string list [lst] 
+    [lst] should be formatted so that there are only six
+    elements. name,abbr,votes,pop,pref_can,pref_percent
+    The first element is the name of the state, the second the state's abbreviation, 
+    the third the number of votes the state has, the fourth the population of the state, 
+    the fifth the preferred candidate in the state, and the sixth the margin of preference
+    said candidate has over the opposition. Failure to format in this way will yield an ImproperList 
+    error. 
+    Additionally, the number of votes and the population must be positive integers greater than zero. 
+    The margin of preference should be greater than 0.0 and less than 100.0. Failure to abide by 
+    this specification will yield an ImproperList error.*)
 
 (** Getter Methods *)
 
@@ -61,14 +66,14 @@ val set_num_votes : state -> int -> unit
 val set_population : state -> int -> unit 
 (** [set_population state pop] changes the population of state [state] to [pop]*)
 
+(** Other *)
+
 val export_state_to_csv : state -> Csv.t
 (** [export_state_to_csv state] exports the data of state [state] to a local csv*)
 
 val save_data_locally : state -> string -> unit 
 (** [save_data_locally state b] saves the data csv of [state] to the local computer
     at filepath string [b]*)
-
-(** Other *)
 
 val equals : state -> state -> bool
 (** [equals state1 state2] returns whether state1 and state2 are equal 

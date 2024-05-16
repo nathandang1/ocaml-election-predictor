@@ -20,53 +20,64 @@ let create_test =
     ( "valid creation" >:: fun _ ->
       assert_equal (Statepoll.create_state state_attributes) state);
     ( "error is thrown (length of list is faulty)" >:: fun _ ->
-      assert_raises (Statepoll.ImproperList "") (fun () ->
+      assert_raises (Statepoll.ImproperList "List Length Specification Violated") 
+      (fun () ->
           Statepoll.create_state
             ("hi"
             :: [ "New York"; "Biden"; "Democratic"; "3.2"; "28"; "196800000" ]))
     );
     ( "error is thrown (non numeric number of votes)" >:: fun _ ->
-      assert_raises (Statepoll.ImproperList "") (fun () ->
+      assert_raises (Statepoll.ImproperList "Data Formatting Specification Violated") 
+      (fun () ->
           Statepoll.create_state
             [ "New York"; "ny"; "hello"; "196800000"; "Biden"; "3.2" ]) );
     ( "error is thrown (non numeric number of votes)" >:: fun _ ->
-      assert_raises (Statepoll.ImproperList "") (fun () ->
+      assert_raises (Statepoll.ImproperList "Data Formatting Specification Violated") 
+      (fun () ->
         Statepoll.create_state
           [ "New York"; "ny"; "28"; "heyo"; "Biden"; "3.2" ]) );
     ( "error is thrown (non numeric number of votes)" >:: fun _ ->
-        assert_raises (Statepoll.ImproperList "") (fun () ->
+        assert_raises (Statepoll.ImproperList "Data Formatting Specification Violated") 
+        (fun () ->
           Statepoll.create_state
             [ "New York"; "ny"; "28"; "100"; "Biden"; "blurb" ]) );
     ( "error is throw (population is negative)" >:: fun _ -> 
-      assert_raises (Statepoll.ImproperList "") (fun () -> 
+      assert_raises (Statepoll.ImproperList "Data Value Specfication Violated") 
+      (fun () -> 
         Statepoll.create_state
         [ "New York"; "ny"; "28"; "-196800000"; "Biden"; "3.2" ])); 
     ("error is throw (votes are negative)" >:: fun _ ->
-      assert_raises (Statepoll.ImproperList "") (fun () -> 
+      assert_raises (Statepoll.ImproperList "Data Value Specfication Violated") 
+      (fun () -> 
         Statepoll.create_state
         [ "New York"; "ny"; "-28"; "196800000"; "Biden"; "3.2" ])); 
     ("error is throw (margin of preference is negative)" >:: fun _ ->
-      assert_raises (Statepoll.ImproperList "") (fun () -> 
+      assert_raises (Statepoll.ImproperList "Data Value Specfication Violated") 
+      (fun () -> 
         Statepoll.create_state
           [ "New York"; "ny"; "28"; "196800000"; "Biden"; "-3.2" ])); 
     ( "error is throw (population is zero)" >:: fun _ -> 
-      assert_raises (Statepoll.ImproperList "") (fun () -> 
+      assert_raises (Statepoll.ImproperList "Data Value Specfication Violated") 
+      (fun () -> 
         Statepoll.create_state
           [ "New York"; "ny"; "28"; "0"; "Biden"; "3.2" ])); 
     ("error is throw (votes are zero)" >:: fun _ ->
-        assert_raises (Statepoll.ImproperList "") (fun () -> 
+        assert_raises (Statepoll.ImproperList "Data Value Specfication Violated") 
+        (fun () -> 
           Statepoll.create_state
             [ "New York"; "ny"; "0"; "196800000"; "Biden"; "3.2" ])); 
     ("error is throw (margin of preference is zero)" >:: fun _ ->
-        assert_raises (Statepoll.ImproperList "") (fun () -> 
+        assert_raises (Statepoll.ImproperList "Data Value Specfication Violated") (
+          fun () -> 
           Statepoll.create_state
             [ "New York"; "ny"; "28"; "196800000"; "Biden"; "0.0" ])); 
     ("error is throw (margin of preference is 100)" >:: fun _ ->
-        assert_raises (Statepoll.ImproperList "") (fun () -> 
+        assert_raises (Statepoll.ImproperList "Data Value Specfication Violated") 
+        (fun () -> 
           Statepoll.create_state
             [ "New York"; "ny"; "28"; "196800000"; "Biden"; "100.0" ]));
     ("error is throw (margin of preference is greater than 100)" >:: fun _ ->
-        assert_raises (Statepoll.ImproperList "") (fun () -> 
+        assert_raises (Statepoll.ImproperList "Data Value Specfication Violated") (fun () -> 
           Statepoll.create_state
             [ "New York"; "ny"; "28"; "196800000"; "Biden"; "1000.0" ]));
     ("whitespace name is trimmed" >:: fun _ ->  

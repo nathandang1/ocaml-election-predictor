@@ -219,14 +219,17 @@ let test_create_from_csv2 =
       assert_equal (Countrypoll.equals test_country test_country_from_csv) true
     );
   ]
-
+let () = Countrypoll.save_data_locally test_country_from_csv "fuck my life"
 let export_to_csv_tests = 
   [
-    ("calling export_data on test_country_from_csv should be equal to the original CSV"
+    ("calling export_data on test_country_from_csv csv it originated from"
     >:: fun _ ->
+      let () = print_endline (string_of_int (Csv.compare
+      (Countrypoll.export_data test_country_from_csv)
+      good_csv)) in 
       assert_equal (Csv.compare
       (Countrypoll.export_data test_country_from_csv)
-      good_csv) 0 ); 
+      good_csv) 0); 
   ]
 (*GPT*)
 let does_not_throw_exception test name () =

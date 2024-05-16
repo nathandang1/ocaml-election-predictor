@@ -16,7 +16,8 @@ exception ImproperCSV of string
 val create_country_from_CSV : Csv.t -> string -> bool -> country
 (** [create_country_from_CSV csv name electoral] creates a new country from csv [csv] with name
     [name] and electoral college toggle [electoral]
-    The CSV must have six columns and be formatted in how a state is formatted, otherwise ImproperCSV is thrown*)
+    The CSV must have six columns and be formatted in how a state is formatted, otherwise ImproperCSV is thrown
+    Additionally, an empty CSV file with only headers will also yield an ImproperCSV error*)
 
 val create_country : (state list) -> bool -> string -> country 
 (** [create_country a b c] creates a country with states [a], electoral college enabling [b] and name [c]*)

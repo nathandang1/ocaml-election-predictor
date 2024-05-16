@@ -44,7 +44,7 @@ let rec remove_state_helper states st acc = match states with
 let rec data_helper lst acc = match lst with 
   | [] -> acc
   | h :: t -> 
-    let csv_sub = Csv.transpose (Statepoll.export_state_to_csv h) in 
+    let csv_sub = (Statepoll.export_state_to_csv h) in 
     let csv_arr = Csv.to_array csv_sub in 
     let of_interest = csv_arr.(1) in 
     let list_conv = Array.to_list of_interest in 
@@ -78,7 +78,6 @@ else
   create_country states bool name
 with 
 | Statepoll.ImproperList x -> 
-  print_endline x; 
   raise (ImproperCSV (""))
 
 let get_population cnt = count_pop cnt.states 0 
@@ -132,7 +131,7 @@ let attributes = [
 let export_data cnt = 
   let state_data = data_helper cnt.states [] in 
   let csv_data = attributes :: state_data in 
-  Csv.transpose csv_data 
+  Csv.transpose (Csv.transpose csv_data)
   
 let save_data_locally cnt filename = 
   let csv = export_data cnt in 

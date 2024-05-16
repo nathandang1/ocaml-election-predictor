@@ -17,7 +17,7 @@ match lst with
   (float_of_string (String.trim pref_percent) <= 0.0) ||
   (float_of_string (String.trim pref_percent) >= 100.0)
     then 
-      raise (ImproperList "")
+      raise (ImproperList "Data Value Specfication Violated")
 else 
   {
     name = String.trim nam; 
@@ -27,8 +27,8 @@ else
     preferred_candidate = String.trim pref_can; 
     preferred_margin = float_of_string (String.trim pref_percent)
   }
-| _ -> raise (ImproperList "")
-with _ -> raise (ImproperList "")
+| _ -> raise (ImproperList "List Length Specification Violated")
+with _ -> raise (ImproperList "Data Formatting Specification Violated")
 
 let equals (state1 : state) state2 = state1.name = state2.name
 let get_name st = st.name 
