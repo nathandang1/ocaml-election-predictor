@@ -168,7 +168,7 @@ let add_state (_, states) =
       (new_state :: states)
   in
   let nation = country all_states in
-  Countrypoll.save_data_locally nation "data/metadata/states"
+  Countrypoll.save_data_locally nation "data/local/metadata/states"
 
 let remove_state (_, states) =
   ANSITerminal.erase Screen;
@@ -183,7 +183,7 @@ let remove_state (_, states) =
     List.filter (fun (s : State.t) -> s.abbr <> state_abbr) states
   in
   let nation = country other_states in
-  Countrypoll.save_data_locally nation "data/metadata/states"
+  Countrypoll.save_data_locally nation "data/local/metadata/states"
 
 let print_statepoll (s : Statepoll.state) =
   print_endline ("Name: " ^ Statepoll.get_name s);
@@ -255,7 +255,14 @@ let modify_state (_, states) =
   ignore (read_line ());
   let nation = country other_states in
   let () = Countrypoll.add_state nation modifying_state in
-  Countrypoll.save_data_locally nation "data/metadata/states"
+  Countrypoll.save_data_locally nation "data/local/metadata/states"
+
+let cand_local =
+  Local.shadow "data/local/metadata/candidates.csv"
+    "data/metadata/candidates.csv"
+
+let state_local =
+  Local.shadow "data/local/metadata/states.csv" "data/metadata/states.csv"
 
 let state_poll () =
   ANSITerminal.erase Screen;
@@ -271,8 +278,8 @@ let state_poll () =
   print_endline "";
   ANSITerminal.print_string [] "[5] Modify State \n";
   print_endline "";
-  let cand_path = "data/metadata/candidates.csv" in
-  let state_path = "data/metadata/states.csv" in
+  let cand_path = Local.path cand_local in
+  let state_path = Local.path state_local in
   let current_data = Extractor.data (cand_path, state_path) in
   let () =
     match read_line () with
@@ -296,8 +303,8 @@ let uniform_model () =
   ANSITerminal.print_string [] "< Press ENTER to Run > \n";
   print_endline "";
   ignore (read_line ());
-  let cand_path = "data/metadata/candidates.csv" in
-  let state_path = "data/metadata/states.csv" in
+  let cand_path = Local.path cand_local in
+  let state_path = Local.path state_local in
   match Extractor.data (cand_path, state_path) with
   | cands, states -> Results (cands, states, Uniform, true)
 
@@ -316,8 +323,8 @@ let naive_bayes () =
   let randomness =
     read_int_rec_range (0, 20) "< Randomness Score? [0 - 20]? > "
   in
-  let cand_path = "data/metadata/candidates.csv" in
-  let state_path = "data/metadata/states.csv" in
+  let cand_path = Local.path cand_local in
+  let state_path = Local.path state_local in
   match Extractor.data (cand_path, state_path) with
   | cands, states -> Results (cands, states, Bayes randomness, randomized)
 
@@ -333,8 +340,8 @@ let logistic_model () =
   ANSITerminal.print_string [] "< Enable Randomization [Y/n]? > \n";
   print_endline "";
   let randomized = read_line () = "Y" in
-  let cand_path = "data/metadata/candidates.csv" in
-  let state_path = "data/metadata/states.csv" in
+  let cand_path = Local.path cand_local in
+  let state_path = Local.path state_local in
   match Extractor.data (cand_path, state_path) with
   | cands, states -> Results (cands, states, Logistic, randomized)
 
