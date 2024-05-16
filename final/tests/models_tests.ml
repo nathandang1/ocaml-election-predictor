@@ -221,6 +221,33 @@ let test_gradient_descent =
           [ 6. ] 0.1 10000
       in
       assert_bool "" (List.for_all (( < ) 0.) theta) );
+    ( "Testing gradient_descent function exact evaluation for simple case, \
+       comparing output to by-hand computation."
+    >:: fun _ ->
+      let theta = [ 0.0; 0.0 ] in
+      let xs = [ [ 1.0; 2.0 ] ] in
+      let ys = [ 1.0 ] in
+      let alpha = 1. in
+      let num_iters = 1 in
+      let result = Models.gradient_descent theta xs ys alpha num_iters in
+      let expected = [ 0.5; 1.0 ] in
+      assert_equal (List.nth expected 0) (List.nth result 0);
+      assert_equal (List.nth expected 1) (List.nth result 1) );
+    ( "Testing gradient_descent function exact evaluation for a simple case \
+       with multiple x data inputs,\n\
+      \     a more complicated alpha, and 2 iterations. The calculation is \
+       done by hand using the gradient descent algorithm."
+    >:: fun _ ->
+      let theta = [ 0.0; 0.0 ] in
+      let xs = [ [ 2.0; 3.0 ]; [ 3.0; 4.0 ] ] in
+      let ys = [ 2.0; 3.0 ] in
+      let alpha = 0.5 in
+      let num_iters = 2 in
+      let result = Models.gradient_descent theta xs ys alpha num_iters in
+      assert_bool "First entry not in range"
+        (List.nth result 0 >= 4. && List.nth result 0 <= 5.);
+      assert_bool "Second entry not in range"
+        (List.nth result 1 >= 6. && List.nth result 1 <= 7.) );
   ]
 
 let rec repeat n f acc = if n = 0 then acc else repeat (n - 1) f (f () :: acc)
