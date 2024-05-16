@@ -107,7 +107,7 @@ let logistic_regression_helper data alpha iters =
   in
   let features_float_random =
     List.map
-      (fun lst -> List.map (fun x -> x +. (Random.float 2. -. 1.)) lst)
+      (fun lst -> List.map (fun x -> x +. (Random.float 1. -. 0.5)) lst)
       features_float
   in
   let labels =
