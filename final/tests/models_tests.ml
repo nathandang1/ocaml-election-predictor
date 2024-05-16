@@ -217,8 +217,8 @@ let average r =
 
 let test_logistic_regression_helper =
   [
-    ( "Testing average over several tries, given randomness of logistic \
-       regression model"
+    ( "Testing average over several tries for a right leaning state, given \
+       randomness of logistic regression model"
     >:: fun _ ->
       let florida =
         [
