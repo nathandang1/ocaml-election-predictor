@@ -7,7 +7,7 @@ type t = {
   pref_percent : float;
 }
 
-type d = (string * float) list
+(* type d = (string * float) list *)
 
 (* let outcome state (data : d) cand prior : d = let pref_can_new = List.assoc
    state.pref_can data +. state.pref_percent in (* incorporate "preferred

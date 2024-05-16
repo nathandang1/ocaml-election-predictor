@@ -8,6 +8,6 @@ type t = {
 }
 (** [t] contains the basic metadata of a state *)
 
-type d = (string * float) list
+(* type d = (string * float) list *)
 
 (* val outcome : t -> d -> string -> float -> d *)
