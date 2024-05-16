@@ -1,3 +1,17 @@
+commit 4669a31949042d9dd72d1e3633f3bbac0250386d
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 18:07:38 2024 -0400
+
+    Fix exception thrown when model is missing data
+    
+    - Fixed exception thrown when model is missing data
+
+commit 521359e55b3db825914bedd366034c7b4782a154
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 18:00:29 2024 -0400
+
+    add gitlog
+
 commit ec63ea64807a8f14a36bbc612b8273318c0fa922
 Author: Andrew <ayk36@cornell.edu>
 Date:   Thu May 16 17:56:47 2024 -0400
