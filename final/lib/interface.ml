@@ -51,26 +51,33 @@ let country states =
   in
   Countrypoll.create_country statepoll_states true "USA"
 
-let add_poll (cands, states) = failwith "unimplemented"
+let add_poll (cands, states) =
+  ANSITerminal.print_string [ ANSITerminal.Bold ] "ADDING POLL: \n";
+  print_states states;
+  print_endline "";
+  ANSITerminal.print_string []
+    "Please specify the state you would like to add: \n";
+  ()
+
 let remove_poll (cands, states) = failwith "unimplemented"
 
-let add_state (cands, states) =
+let add_state (_, states) =
   ANSITerminal.print_string [ ANSITerminal.Bold ] "ADDING STATES: \n";
   print_states states;
   print_endline "";
   ANSITerminal.print_string []
     "Please specify the state you would like to add: \n";
-  let () = ANSITerminal.print_string [] "NAME:   " in
+  let () = ANSITerminal.print_string [] "NAME: " in
   let name = read_line () in
-  let () = ANSITerminal.print_string [] "ABBR:   " in
+  let () = ANSITerminal.print_string [] "ABBR: " in
   let abbr = read_line () in
-  let () = ANSITerminal.print_string [] "VOTES:   " in
+  let () = ANSITerminal.print_string [] "VOTES: " in
   let votes = int_of_string (read_line ()) in
-  let () = ANSITerminal.print_string [] "POPULATION:   " in
+  let () = ANSITerminal.print_string [] "POPULATION: " in
   let pop = int_of_string (read_line ()) in
-  let () = ANSITerminal.print_string [] "PREFERRED CANDIDATE:   " in
+  let () = ANSITerminal.print_string [] "PREFERRED CANDIDATE: " in
   let pref_can = read_line () in
-  let () = ANSITerminal.print_string [] "PREFERRED PERCENT:   " in
+  let () = ANSITerminal.print_string [] "PREFERRED PERCENT: " in
   let pref_percent = float_of_string (read_line ()) in
   let new_state : State.t =
     { name; abbr; votes; pop; pref_can; pref_percent }
@@ -89,7 +96,7 @@ let remove_state (_, states) =
   print_endline "";
   ANSITerminal.print_string []
     "Please specify the state you would like to remove: \n";
-  ANSITerminal.print_string [] "ABBR:   ";
+  ANSITerminal.print_string [] "ABBR: ";
   let state_abbr = read_line () in
   let other_states =
     List.filter (fun (s : State.t) -> s.abbr <> state_abbr) states
