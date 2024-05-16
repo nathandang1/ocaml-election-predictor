@@ -1,9 +1,19 @@
 open Final
 open OUnit2
 
+(* We have elected to test the sigmoid function carefully, not just within the
+   context of coverage. The sigmoid function is integral to the logistic
+   regression decision boundary. If it is not working as expected, then
+   inference using Logisitc Regression fails. We wished to confirm that our
+   implementation aligned with the properties of the sigmoid function in ML,
+   where the [z] argment is usually written as [w'x], where ' denotes a
+   transpose. We wished to see that, despite a different method of
+   implementation, the behavior was ultimately the same. These test cases give
+   us confidence that the sigmoid function indeed works the way we expect for
+   standard and large negative and positive inputs, in addition to achieving
+   coverage of the relatively simple function.*)
 let test_sigmoid =
   [
-    (* Expected inputs*)
     ( "Testing sigmoid function with input 0, expecting exactly 0.5" >:: fun _ ->
       assert_bool "" (Models.sigmoid 0. = 0.5) );
     ( "Testing sigmoid function with input 1, expecting value greater than 0.5"
