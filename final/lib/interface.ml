@@ -51,13 +51,48 @@ let country states =
   in
   Countrypoll.create_country statepoll_states true "USA"
 
-let add_poll (cands, states) =
+let poll_cols =
+  [ "year"; "state"; "percent_votes_rep"; "percent_votes_dem"; "winner" ]
+
+let add_poll (_, states) =
   ANSITerminal.print_string [ ANSITerminal.Bold ] "ADDING POLL: \n";
   print_states states;
   print_endline "";
   ANSITerminal.print_string []
     "Please specify the state you would like to add: \n";
-  ()
+  let () = ANSITerminal.print_string [] "ABBR: " in
+  let abbr = read_line () in
+  let (selected_state : State.t) =
+    List.hd (List.filter (fun (s : State.t) -> s.abbr = abbr) states)
+  in
+  print_endline "";
+  ANSITerminal.print_string [] "Please specify the data for this poll: \n";
+  let () = ANSITerminal.print_string [] "YEAR: " in
+  let year = read_line () in
+  let () = ANSITerminal.print_string [] "STATE: " in
+  let state = read_line () in
+  let () = ANSITerminal.print_string [] "REPUBLICAN PERCENTAGE: " in
+  let rep_percentage = read_line () in
+  let () = ANSITerminal.print_string [] "DEMOCRAT PERCENTAGE: " in
+  let dem_percentage = read_line () in
+  let () = ANSITerminal.print_string [] "WINNER [rep/dem]: " in
+  let winner = read_line () in
+  let path =
+    "data/data-extraction/state-data/" ^ selected_state.name ^ ".csv"
+  in
+  try
+    let data = Csv.load path in
+    let new_data =
+      List.hd data
+      :: [ year; state; rep_percentage; dem_percentage; winner ]
+      :: List.tl data
+    in
+    Csv.save path new_data
+  with _ ->
+    let new_data =
+      [ poll_cols; [ year; state; rep_percentage; dem_percentage; winner ] ]
+    in
+    Csv.save path new_data
 
 let remove_poll (cands, states) = failwith "unimplemented"
 
