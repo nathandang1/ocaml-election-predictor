@@ -1,8 +1,5 @@
 let () = Random.self_init ()
 let open_metadata path = Csv.load path
-let meta () = open_metadata "data/metadata/metadata.csv"
-let meta_labels = List.hd (meta ())
-let issues = List.tl (meta ())
 
 (** [ones n] creates a float list of [n] ones. *)
 let ones n = List.init n (fun _ -> 1.)
@@ -51,6 +48,10 @@ let print_float_list lst = List.iter (fun x -> Printf.printf "%.*f\n" 4 x) lst
 (* Perform computations *)
 let do_computations () =
   let () = Random.self_init () in
+
+  let meta = open_metadata "data/metadata/metadata.csv" in
+  (* let meta_labels = List.hd meta in *)
+  let issues = List.tl meta in
 
   let transp = Csv.transpose issues in
   let issues_titles = List.hd transp in

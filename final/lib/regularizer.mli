@@ -2,9 +2,6 @@ val open_metadata : string -> Csv.t
 (**[open_metadata path] returns the Csv.t format of the csv file who's location
    is at [path]. *)
 
-val meta_labels : string list
-(**[meta_labels] is a list of strings of the labels from the csv file. *)
-
 val ones : int -> float list
 (** [ones n] creates a float list of [n] ones. *)
 
@@ -15,7 +12,7 @@ val issues_weights : 'a list -> float list
 val element_product : float list -> float list -> float list
 (** [element_product lst1 lst2] computes the element-wise product of [lst1] and
     [lst2]. Requires lst1 and lst2 have the same length *)
-    
+
 val sum_float_list : float list -> float
 (** [sum_float_list lst] computes the sum of [lst]. *)
 
@@ -24,10 +21,10 @@ val softmax : float list -> float list
     [lst] element-wise. *)
 
 val concatenate_lists : 'a list -> 'b list -> ('a * 'b) list
-(** [concatenate_lists lst1 lst2] concatenates the value of [lst1] and [lst2] into a list of tuples with each element being a concatenation of elements from [lst1] and [lst2] *)
+(** [concatenate_lists lst1 lst2] concatenates the value of [lst1] and [lst2]
+    into a list of tuples with each element being a concatenation of elements
+    from [lst1] and [lst2] *)
 
 val do_computations : unit -> (string * float) list * (float * float)
-
 val print_totals_only : unit -> unit
-
 val diff : float -> float -> float
