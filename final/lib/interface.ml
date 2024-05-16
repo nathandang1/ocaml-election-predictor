@@ -59,7 +59,7 @@ let add_poll (_, states) =
   print_states states;
   print_endline "";
   ANSITerminal.print_string []
-    "Please specify the state you would like to add: \n";
+    "Please specify the state for which you would like to add a poll: \n";
   let () = ANSITerminal.print_string [] "ABBR: " in
   let abbr = read_line () in
   let (selected_state : State.t) =
@@ -94,7 +94,32 @@ let add_poll (_, states) =
     in
     Csv.save path new_data
 
-let remove_poll (cands, states) = failwith "unimplemented"
+let remove_poll (_, states) =
+  ANSITerminal.print_string [ ANSITerminal.Bold ] "ADDING POLL: \n";
+  print_states states;
+  print_endline "";
+  ANSITerminal.print_string []
+    "Please specify the state for which you would like to remove a poll: \n";
+  let () = ANSITerminal.print_string [] "ABBR: " in
+  let abbr = read_line () in
+  let (selected_state : State.t) =
+    List.hd (List.filter (fun (s : State.t) -> s.abbr = abbr) states)
+  in
+  print_endline "";
+  ANSITerminal.print_string [ ANSITerminal.Bold ]
+    (String.uppercase_ascii selected_state.name ^ ": \n");
+  let path =
+    "data/data-extraction/state-data/" ^ selected_state.name ^ ".csv"
+  in
+  let data = Csv.load path in
+  let _ = List.map (fun x -> print_endline (List.hd x)) (List.tl data) in
+  print_endline "";
+  ANSITerminal.print_string []
+    "Please specify the poll you would like to remove: \n";
+  let () = ANSITerminal.print_string [] "REMOVED POLL: " in
+  let removed_poll = read_line () in
+  let new_data = List.filter (fun row -> List.hd row <> removed_poll) data in
+  Csv.save path new_data
 
 let add_state (_, states) =
   ANSITerminal.print_string [ ANSITerminal.Bold ] "ADDING STATES: \n";
