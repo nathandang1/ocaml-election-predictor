@@ -99,7 +99,7 @@ let add_poll (_, states) =
   let () = ANSITerminal.print_string [] "WINNER [rep, dem]: " in
   let winner = read_line () in
   let path =
-    "data/data-extraction/state-data/" ^ selected_state.name ^ ".csv"
+    "data/local/data-extraction/state-data/" ^ selected_state.name ^ ".csv"
   in
   try
     let data = Csv.load path in
@@ -131,7 +131,7 @@ let remove_poll (_, states) =
   ANSITerminal.print_string [ ANSITerminal.Bold ]
     (String.uppercase_ascii selected_state.name ^ ": \n");
   let path =
-    "data/data-extraction/state-data/" ^ selected_state.name ^ ".csv"
+    "data/local/data-extraction/state-data/" ^ selected_state.name ^ ".csv"
   in
   let data = Csv.load path in
   let _ = List.map (fun x -> print_endline (List.hd x)) (List.tl data) in
