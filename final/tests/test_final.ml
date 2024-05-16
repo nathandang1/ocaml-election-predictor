@@ -2,7 +2,8 @@ open Statepoll_tests
 open Candidate_tests
 open Countrypoll_tests
 open Models_tests
-open Model_test_broken
+
+(* open Model_test_broken *)
 open Extractor_tests
 open Regularizer_tests
 

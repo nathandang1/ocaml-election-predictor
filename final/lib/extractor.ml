@@ -29,8 +29,9 @@ module StateList = struct
       abbr = List.nth row (List.assoc "abbr" labels);
       votes = int_of_string (List.nth row (List.assoc "votes" labels));
       pop = int_of_string (List.nth row (List.assoc "pop" labels));
-      pref_can = "" (* placeholder *);
-      pref_percent = 0. (* placeholder *);
+      pref_can = List.nth row (List.assoc "pref_can" labels);
+      pref_percent =
+        float_of_string (List.nth row (List.assoc "pref_percent" labels));
     }
 
   let extract = LabelExtract.extract to_state

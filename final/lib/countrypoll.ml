@@ -136,5 +136,4 @@ let export_data cnt =
 let save_data_locally cnt filename = 
   let csv = export_data cnt in 
   let file_name = filename ^ ".csv" in 
-  let () = print_endline ("Data saved at: " ^ file_name) in 
   Csv.save file_name csv 

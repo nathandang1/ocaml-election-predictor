@@ -10,10 +10,9 @@ let all_elements_between_zero_and_one lst =
 
 let test_opens =
   try
-    let _ = Regularizer.open_metadata "data/metadata/metadata.csv" in
+    let _ = Regularizer.open_metadata "metadata.csv" in
     ()
-  with _ ->
-    assert_failure "Unexpected Exception."
+  with _ -> assert_failure "Unexpected Exception."
 
 let test_open =
   [ ("ensures function does not throw an exception" >:: fun _ -> test_opens) ]
