@@ -24,7 +24,7 @@ let random_simulate
 let certain_simulate
     ((state : State.t), (probabilities : (Candidate.t * float) list)) =
   let sorted_lst =
-    List.sort_uniq (fun (_, p0) (_, p1) -> Stdlib.compare p0 p1) probabilities
+    List.sort_uniq (fun (_, p0) (_, p1) -> -Stdlib.compare p0 p1) probabilities
   in
   (state, fst (List.hd sorted_lst))
 
