@@ -55,6 +55,7 @@ let poll_cols =
   [ "year"; "state"; "percent_votes_rep"; "percent_votes_dem"; "winner" ]
 
 let add_poll (_, states) =
+  ANSITerminal.erase Screen;
   ANSITerminal.print_string [ ANSITerminal.Bold ] "ADDING POLL: \n";
   print_states states;
   print_endline "";
@@ -95,6 +96,7 @@ let add_poll (_, states) =
     Csv.save path new_data
 
 let remove_poll (_, states) =
+  ANSITerminal.erase Screen;
   ANSITerminal.print_string [ ANSITerminal.Bold ] "ADDING POLL: \n";
   print_states states;
   print_endline "";
@@ -122,6 +124,7 @@ let remove_poll (_, states) =
   Csv.save path new_data
 
 let add_state (_, states) =
+  ANSITerminal.erase Screen;
   ANSITerminal.print_string [ ANSITerminal.Bold ] "ADDING STATES: \n";
   print_states states;
   print_endline "";
@@ -151,6 +154,7 @@ let add_state (_, states) =
   Countrypoll.save_data_locally nation "data/metadata/states.csv"
 
 let remove_state (_, states) =
+  ANSITerminal.erase Screen;
   ANSITerminal.print_string [ ANSITerminal.Bold ] "REMOVING STATES: \n";
   print_states states;
   print_endline "";
