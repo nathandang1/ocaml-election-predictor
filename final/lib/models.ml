@@ -68,18 +68,16 @@ let naive_bayes_randomized state_data =
     multiply_factor *. likelihood_rep /. total_likelihood )
 
 (* Acknowledgement: The following code for the logistic regression algorithm was
-   written with the guidance of ChatGPT. *)
-(* logistic regression *)
+   written with the guidance of Github Copilot.*)
+(* Citation: 'Give ideas for how to implement logistic regression natively in
+   OCaml.', GitHub Copilot, OpenAI/Microsoft, 15 May 2024,
+   https://github.com/features/copilot. *)
+
 (* Sigmoid function *)
 let sigmoid z = 1. /. (1. +. exp (-.z))
 
-(* Hypothesis function *)
 let hypothesis theta x =
   sigmoid (List.fold_left2 (fun acc t x -> acc +. (t *. x)) 0.0 theta x)
-
-let interpret_hypo res =
-  (* -1 denotes republican winner, 1 denotes democrat winner*)
-  if res < 0.5 then -1 else 1
 
 (* Gradient of the cost function *)
 let gradient theta xs ys =
@@ -95,7 +93,6 @@ let gradient theta xs ys =
   in
   List.map (fun g -> g /. m) grad
 
-(* Gradient descent algorithm *)
 let rec gradient_descent theta xs ys alpha num_iters =
   if num_iters = 0 then theta
   else
