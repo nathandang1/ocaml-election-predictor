@@ -39,7 +39,7 @@ val logistic_regression_helper : string list list -> float -> int -> float
     data point. If the last element is "rep", the label is -1.0, otherwise it is
     1.0. The function returns the extracted features and labels as a tuple. *)
 
-val logistic_regression : string list list -> float -> float -> float * float
+val logistic_regression : string list list -> float * float
 (** [logistic_regression data r_prior d_prior] is a function that performs
     logistic regression on the given data. It calculates the probability of a
     binary outcome using the logistic function and returns the predicted

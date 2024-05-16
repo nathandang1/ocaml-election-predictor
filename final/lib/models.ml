@@ -100,12 +100,26 @@ let rec gradient_descent theta xs ys alpha num_iters =
     let theta = List.mapi (fun j t -> t -. (alpha *. List.nth grad j)) theta in
     gradient_descent theta xs ys alpha (num_iters - 1)
 
+(* let logistic_regression_helper data alpha iters = let features = List.map
+   (fun lst -> [ List.nth lst 2; List.nth lst 3 ]) data in let features_float =
+   List.map (fun lst -> List.map float_of_string lst) features in let labels =
+   List.map (fun lst -> if List.hd (List.rev lst) = "rep" then -1. else 1.) data
+   in let theta_0 = [ 0.0; 0.0 ] in let xs = features_float in let ys = labels
+   in let theta = gradient_descent theta_0 xs ys alpha iters in let recent =
+   List.hd (List.rev features) in let recent_float = List.map float_of_string
+   recent in let prediction = hypothesis theta recent_float in prediction *)
 let logistic_regression_helper data alpha iters =
+  let () = Random.self_init () in
   let features =
     List.map (fun lst -> [ List.nth lst 2; List.nth lst 3 ]) data
   in
   let features_float =
     List.map (fun lst -> List.map float_of_string lst) features
+  in
+  let features_float_random =
+    List.map
+      (fun lst -> List.map (fun x -> x +. (Random.float 2. -. 1.)) lst)
+      features_float
   in
   let labels =
     List.map
@@ -113,7 +127,7 @@ let logistic_regression_helper data alpha iters =
       data
   in
   let theta_0 = [ 0.0; 0.0 ] in
-  let xs = features_float in
+  let xs = features_float_random in
   let ys = labels in
   let theta = gradient_descent theta_0 xs ys alpha iters in
   let recent = List.hd (List.rev features) in
@@ -121,17 +135,14 @@ let logistic_regression_helper data alpha iters =
   let prediction = hypothesis theta recent_float in
   prediction
 
-let logistic_regression data r_prior d_prior =
+let logistic_regression data =
   let alpha = 0.01 in
   let iters = 1000 in
   let pred = logistic_regression_helper data alpha iters in
-  if pred < 0.5 then
-    let r_pred = (1. -. pred) *. r_prior in
-    let d_pred = pred *. d_prior in
-    let s = r_pred +. d_pred in
-    (r_pred /. s, d_pred /. s)
-  else
-    let r_pred = pred *. r_prior in
-    let d_pred = (1. -. pred) *. d_prior in
-    let s = r_pred +. d_pred in
-    (r_pred /. s, d_pred /. s)
+  (pred, 1. -. pred)
+
+(*in if pred < 0.5 then let r_pred = (1. -. pred) *. r_prior in let d_pred =
+  pred *. d_prior in let s = r_pred +. d_pred in (d_pred, r_pred) (*(r_pred /.
+  s, d_pred /. s)*) else let r_pred = pred *. r_prior in let d_pred = (1. -.
+  pred) *. d_prior in let s = r_pred +. d_pred in (d_pred, r_pred) (*(r_pred /.
+  s, d_pred /. s)*) *)
