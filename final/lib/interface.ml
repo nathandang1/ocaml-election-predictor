@@ -28,6 +28,25 @@ let menu () =
   | "2" -> Simulator
   | _ -> Menu
 
+let rec read_int_rec query =
+  ANSITerminal.print_string [] query;
+  match int_of_string_opt (read_line ()) with
+  | Some n -> n
+  | None -> read_int_rec query
+
+let rec read_int_rec_range (lb, ub) query =
+  ANSITerminal.print_string [] query;
+  match int_of_string_opt (read_line ()) with
+  | Some n ->
+      if n >= lb && ub >= n then n else read_int_rec_range (lb, ub) query
+  | None -> read_int_rec_range (lb, ub) query
+
+let rec read_float_rec query =
+  ANSITerminal.print_string [] query;
+  match float_of_string_opt (read_line ()) with
+  | Some n -> n
+  | None -> read_float_rec query
+
 let rec print_states = function
   | (state : State.t) :: tl ->
       ANSITerminal.print_string [] ("[" ^ state.abbr ^ "] " ^ state.name ^ "\n");
@@ -68,15 +87,16 @@ let add_poll (_, states) =
   in
   print_endline "";
   ANSITerminal.print_string [] "Please specify the data for this poll: \n";
-  let () = ANSITerminal.print_string [] "YEAR: " in
-  let year = read_line () in
+  let year = read_int_rec "YEAR :" |> string_of_int in
   let () = ANSITerminal.print_string [] "STATE: " in
   let state = read_line () in
-  let () = ANSITerminal.print_string [] "REPUBLICAN PERCENTAGE: " in
-  let rep_percentage = read_line () in
-  let () = ANSITerminal.print_string [] "DEMOCRAT PERCENTAGE: " in
-  let dem_percentage = read_line () in
-  let () = ANSITerminal.print_string [] "WINNER [rep/dem]: " in
+  let rep_percentage =
+    read_float_rec "REPUBLICAN PERCENTAGE: " |> string_of_float
+  in
+  let dem_percentage =
+    read_float_rec "DEMOCRAT PERCENTAGE: " |> string_of_float
+  in
+  let () = ANSITerminal.print_string [] "WINNER [rep, dem]: " in
   let winner = read_line () in
   let path =
     "data/data-extraction/state-data/" ^ selected_state.name ^ ".csv"
@@ -134,14 +154,11 @@ let add_state (_, states) =
   let name = read_line () in
   let () = ANSITerminal.print_string [] "ABBR: " in
   let abbr = read_line () in
-  let () = ANSITerminal.print_string [] "VOTES: " in
-  let votes = int_of_string (read_line ()) in
-  let () = ANSITerminal.print_string [] "POPULATION: " in
-  let pop = int_of_string (read_line ()) in
+  let votes = read_int_rec "VOTES: " in
+  let pop = read_int_rec "POPULATION: " in
   let () = ANSITerminal.print_string [] "PREFERRED CANDIDATE: " in
   let pref_can = read_line () in
-  let () = ANSITerminal.print_string [] "PREFERRED PERCENT: " in
-  let pref_percent = float_of_string (read_line ()) in
+  let pref_percent = read_float_rec "PREFERRED PERCENT: " in
   let new_state : State.t =
     { name; abbr; votes; pop; pref_can; pref_percent }
   in
@@ -211,26 +228,26 @@ let modify_state (_, states) =
   print_endline "";
   ANSITerminal.print_string []
     "Please specify the field you would like to modify: \n";
-  let () = ANSITerminal.print_string [] "FIELD NAME: " in
+  let () =
+    ANSITerminal.print_string []
+      "FIELD NAME [vote, pop, pref_can, pref_margin]: "
+  in
   let field_name = read_line () in
-  let _ =
+  let rec choose_val () =
     match field_name with
-    | "Votes" ->
-        ANSITerminal.print_string [] "NEW VALUE: ";
-        Statepoll.set_num_votes modifying_state (int_of_string (read_line ()))
-    | "Population" ->
-        ANSITerminal.print_string [] "NEW VALUE: ";
-        Statepoll.set_population modifying_state (int_of_string (read_line ()))
-    | "Preferred Candidate" ->
+    | "vote" ->
+        Statepoll.set_num_votes modifying_state (read_int_rec "NEW VALUE: ")
+    | "pop" ->
+        Statepoll.set_num_votes modifying_state (read_int_rec "NEW VALUE: ")
+    | "pref_can" ->
         ANSITerminal.print_string [] "NEW VALUE: ";
         Statepoll.set_preferred_candidate modifying_state (read_line ())
-    | "Preferred Margin" ->
-        ANSITerminal.print_string [] "NEW VALUE: ";
+    | "pref_margin" ->
         Statepoll.set_preferred_margin modifying_state
-          (float_of_string (read_line ()))
-    | _ -> ()
+          (read_float_rec "NEW VALUE: ")
+    | _ -> choose_val ()
   in
-  ();
+  choose_val ();
   print_endline "";
   ANSITerminal.print_string [ ANSITerminal.Bold ] "UPDATED STATE: \n";
   print_statepoll modifying_state;
@@ -266,7 +283,6 @@ let state_poll () =
     | "5" -> modify_state current_data
     | _ -> ()
   in
-  ();
   Menu
 
 let uniform_model () =
@@ -297,8 +313,9 @@ let naive_bayes () =
   let () = ANSITerminal.print_string [] "< Enable Randomization [Y/n]? > " in
   let randomized = read_line () = "Y" in
   let () = print_endline "" in
-  let () = ANSITerminal.print_string [] "< Randomness Score? [0 - 20]? > " in
-  let randomness = int_of_string (read_line ()) in
+  let randomness =
+    read_int_rec_range (0, 20) "< Randomness Score? [0 - 20]? > "
+  in
   let cand_path = "data/metadata/candidates.csv" in
   let state_path = "data/metadata/states.csv" in
   match Extractor.data (cand_path, state_path) with
