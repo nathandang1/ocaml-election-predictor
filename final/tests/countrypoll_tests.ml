@@ -24,7 +24,7 @@ let state4_attributes =
 let state4 = Statepoll.create_state state4_attributes
 let state_list_1 = [ state1; state2 ]
 let state_list_2 = [ state3; state4 ]
-let state_list_3 = [state1; state2; state3]
+let state_list_3 = [ state1; state2; state3 ]
 
 let country1 =
   {
@@ -67,10 +67,9 @@ let test_equals =
         true );
     ( "false test" >:: fun _ ->
       assert_equal (Countrypoll.equals country1 country2) false );
-    ("corner case: two countries with different number of states are not equal" >::
-    fun _ -> 
-      assert_equal (Countrypoll.equals country1 country3) false); 
-    ("corner case: the same list of states ordered differently are still equal"
+    ( "corner case: two countries with different number of states are not equal"
+    >:: fun _ -> assert_equal (Countrypoll.equals country1 country3) false );
+    ( "corner case: the same list of states ordered differently are still equal"
     >:: fun _ -> assert_equal (Countrypoll.equals country1 country1_rev) true );
   ]
 
@@ -164,7 +163,6 @@ let mutability_tests =
       assert_equal new_states_length original_states_length );
   ]
 
-
 let good_csv = Csv.load "test.csv"
 let bad_csv_1 = Csv.load "test_bad.csv"
 let bad_csv_2 = Csv.load "test_bad_2.csv"
@@ -173,22 +171,19 @@ let empty_csv = Csv.load "empty_country.csv"
 let test_create_from_csv =
   [
     ( "exception thrown when column count is not 6" >:: fun _ ->
-      assert_raises (Countrypoll.ImproperCSV "") 
-      (fun () ->
+      assert_raises (Countrypoll.ImproperCSV "") (fun () ->
           Countrypoll.create_country_from_CSV bad_csv_1 "bad country" true) );
     ( "exception thrown when row is faulty" >:: fun _ ->
-      assert_raises (Countrypoll.ImproperCSV "") 
-      (fun () ->
+      assert_raises (Countrypoll.ImproperCSV "") (fun () ->
           Countrypoll.create_country_from_CSV bad_csv_2 "also bad" false) );
     ( "when a good csv is passed, the country created is valid \n\
       \  (this test checks attributes"
     >:: fun _ ->
       let country = Countrypoll.create_country_from_CSV good_csv "good" true in
       assert_equal (List.length (Countrypoll.get_states country)) 4 );
-    ("an empty CSV throws an exception" >:: fun _ -> 
-      assert_raises (Countrypoll.ImproperCSV "") 
-      (fun () ->
-        Countrypoll.create_country_from_CSV empty_csv "empty" true)) 
+    ( "an empty CSV throws an exception" >:: fun _ ->
+      assert_raises (Countrypoll.ImproperCSV "") (fun () ->
+          Countrypoll.create_country_from_CSV empty_csv "empty" true) );
   ]
 
 let alabama =
@@ -219,29 +214,35 @@ let test_create_from_csv2 =
       assert_equal (Countrypoll.equals test_country test_country_from_csv) true
     );
   ]
+
 let () = Countrypoll.save_data_locally test_country_from_csv "fuck my life"
-let export_to_csv_tests = 
+
+let export_to_csv_tests =
   [
-    ("calling export_data on test_country_from_csv csv it originated from"
+    ( "calling export_data on test_country_from_csv csv it originated from"
     >:: fun _ ->
-      let () = print_endline (string_of_int (Csv.compare
-      (Countrypoll.export_data test_country_from_csv)
-      good_csv)) in 
-      assert_equal (Csv.compare
-      (Countrypoll.export_data test_country_from_csv)
-      good_csv) 0); 
+      let () =
+        print_endline
+          (string_of_int
+             (Csv.compare
+                (Countrypoll.export_data test_country_from_csv)
+                good_csv))
+      in
+      assert_equal
+        (Csv.compare (Countrypoll.export_data test_country_from_csv) good_csv)
+        0 );
   ]
+
 (*GPT*)
 let does_not_throw_exception test name () =
-  try
-    Countrypoll.save_data_locally test name;
-  with
-    | _ -> assert_failure "Unexpected Exception"
+  try Countrypoll.save_data_locally test name
+  with _ -> assert_failure "Unexpected Exception"
+
 (*END GPT*)
-let export_to_machine_tests = 
+let export_to_machine_tests =
   [
-    ("trying to export does not throw an exception" >::
-    fun _ -> does_not_throw_exception test_country "hello" ())
+    ( "trying to export does not throw an exception" >:: fun _ ->
+      does_not_throw_exception test_country "hello" () );
   ]
 
 let countrypoll_tests =
@@ -254,8 +255,8 @@ let countrypoll_tests =
            mutability_tests;
            test_create_from_csv;
            test_create_from_csv2;
-           export_to_csv_tests; 
-           export_to_machine_tests
+           export_to_csv_tests;
+           export_to_machine_tests;
          ]
 
-let run_countrypoll_tests = run_test_tt_main countrypoll_tests
+let run_countrypoll_tests () = run_test_tt_main countrypoll_tests

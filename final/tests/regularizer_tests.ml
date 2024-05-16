@@ -86,4 +86,4 @@ let test_regularizer =
            test_concatenate;
          ]
 
-let run_regularizer_test = run_test_tt_main test_regularizer
+let run_regularizer_test () = run_test_tt_main test_regularizer

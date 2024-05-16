@@ -44,4 +44,4 @@ let test_extractor =
              (candidate_lst, state_lst) );
        ]
 
-let run_extractor_test = run_test_tt_main test_extractor
+let run_extractor_test () = run_test_tt_main test_extractor
