@@ -8,8 +8,8 @@ let test_sigmoid _ =
     (sigmoid 1000. > 0.99);
   assert_bool "sigmoid of a large negative number should be close to 0"
     (sigmoid (-1000.) < 0.01);
-  assert_equal (sigmoid (log 2.)) 0.5;
-  assert_equal (sigmoid (log 3.)) (2. /. 3.)
+  assert_equal (sigmoid (log 2.)) (2. /. 3.);
+  assert_equal (sigmoid (log 3.)) (3. /. 4.)
 
 let test_hypothesis _ =
   assert_equal (hypothesis [ 1.; 2. ] [ 3.; 4. ]) (sigmoid 11.);
