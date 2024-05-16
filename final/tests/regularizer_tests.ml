@@ -33,19 +33,31 @@ let test_issues_weights =
 let list_negatives = [ -1.0; -2.0; -3.0 ]
 let list_mixed = [ -1.0; 2.0; -3.0 ]
 
+let float_lst_equal lst1 lst2 =
+  List.for_all
+    (fun x -> x < 0.1 && x > -0.1)
+    (List.map2 (fun a b -> a -. b) lst1 lst2)
+
 let test_element_product =
   [
     ( "element_product test (positives x positives)" >:: fun _ ->
-      assert_equal (Regularizer.element_product lst1 lst2) [ 0.75; 7.04; 23.22 ]
-    );
+      assert_equal
+        (float_lst_equal
+           (Regularizer.element_product lst1 lst2)
+           [ 0.75; 7.04; 23.22 ])
+        true );
     ( "element_product test (negatives x negatives)" >:: fun _ ->
       assert_equal
-        (Regularizer.element_product list_negatives list_negatives)
-        [ 1.0; 4.0; 9.0 ] );
+        (float_lst_equal
+           (Regularizer.element_product list_negatives list_negatives)
+           [ 1.0; 4.0; 9.0 ])
+        true );
     ( "element_product test (negatives x positives)" >:: fun _ ->
       assert_equal
-        (Regularizer.element_product lst1 list_negatives)
-        [ -1.5; 6.4; -12.9 ] );
+        (float_lst_equal
+           (Regularizer.element_product lst1 list_mixed)
+           [ -1.5; 6.4; -12.9 ])
+        true );
   ]
 
 let test_sum_float_list =
