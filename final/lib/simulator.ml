@@ -1,6 +1,7 @@
 let () = Random.self_init ()
 
-let simulate ((state : State.t), (probabilities : (Candidate.t * float) list)) =
+let random_simulate
+    ((state : State.t), (probabilities : (Candidate.t * float) list)) =
   let rec partition = function
     | [] -> []
     | (c, p) :: [] -> [ (c, 0., p) ]
@@ -20,8 +21,21 @@ let simulate ((state : State.t), (probabilities : (Candidate.t * float) list)) =
   let winner = in_range win_num range in
   (state, winner)
 
-let rec simulate_all = function
-  | h :: t -> simulate h :: simulate_all t
+let certain_simulate
+    ((state : State.t), (probabilities : (Candidate.t * float) list)) =
+  let sorted_lst =
+    List.sort_uniq (fun (_, p0) (_, p1) -> Stdlib.compare p0 p1) probabilities
+  in
+  (state, fst (List.hd sorted_lst))
+
+let simulate ((state : State.t), (probabilities : (Candidate.t * float) list)) =
+  function
+  | true -> random_simulate (state, probabilities)
+  | false -> certain_simulate (state, probabilities)
+
+let rec simulate_all lst is_random =
+  match lst with
+  | h :: t -> simulate h is_random :: simulate_all t is_random
   | [] -> []
 
 let votes outcome =
