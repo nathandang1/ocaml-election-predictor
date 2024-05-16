@@ -14,10 +14,10 @@ match lst with
   {
     name = nam; 
     abbreviation = abbr; 
-    preferred_candidate = pref_can; 
-    preferred_margin = float_of_string pref_percent; 
     num_votes = int_of_string votes; 
-    population = int_of_string pop 
+    population = int_of_string pop; 
+    preferred_candidate = pref_can; 
+    preferred_margin = float_of_string pref_percent
   }
 | _ -> raise (ImproperList "")
 with _ -> raise (ImproperList "")
@@ -41,7 +41,8 @@ let export_state_to_csv st =
   "abbr"; 
   "votes"; 
   "pop"; 
-  "pref_can"; "pref_percent"
+  "pref_can"; 
+  "pref_percent"
   ] 
 in 
   let state_data = [get_name st; 
