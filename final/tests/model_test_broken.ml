@@ -50,6 +50,13 @@ let test_gradient_descent _ =
     | f when f = f -> true
     | _ -> false)
 
+let test_geometric_mean _ =
+  assert_equal 1. (geometric_mean (List.init 5 (fun _ -> 1.)));
+  assert_equal 4. (geometric_mean [ 2.; 4.; 8. ]);
+  assert_equal 0. (geometric_mean [ 1.; 2.; 0.; 3. ]);
+  assert_equal 1. (geometric_mean []);
+  assert_equal 4. (geometric_mean [ 4.0000000001; 3.9999999999 ])
+
 let run_models_tests () =
   run_test_tt_main
     ("all tests"
@@ -58,4 +65,5 @@ let run_models_tests () =
            "test_hypothesis" >:: test_hypothesis;
            "test_gradient" >:: test_gradient;
            "test_gradient_descent" >:: test_gradient_descent;
+           "test geometric mean" >:: test_geometric_mean;
          ])
