@@ -411,7 +411,6 @@ let results (candidates, state) model randomized =
   let tied = snd (List.hd electors) = snd (List.hd (List.tl electors)) in
   let winner : Candidate.t = fst (List.hd electors) in
   let votes = snd (List.hd electors) in
-
   ANSITerminal.erase Screen;
   ANSITerminal.print_string [ ANSITerminal.Bold ] "RESULTS \n";
   print_endline "";
