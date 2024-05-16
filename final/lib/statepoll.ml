@@ -14,7 +14,8 @@ match lst with
 | nam :: abbr :: votes :: pop :: pref_can :: pref_percent :: [] ->
   if ((int_of_string (String.trim votes)) <= 0) || 
     (int_of_string (String.trim pop) <= 0) || 
-  (float_of_string (String.trim pref_percent) <= 0.0) 
+  (float_of_string (String.trim pref_percent) <= 0.0) ||
+  (float_of_string (String.trim pref_percent) >= 100.0)
     then 
       raise (ImproperList "")
 else 
@@ -50,13 +51,14 @@ in
   let state_data = [get_name st; 
   get_abbreviation st; 
   (string_of_int (get_num_votes st)); 
-  (string_of_int (get_population st)); 
+  (string_of_int (get_population st));
+  get_preferred_candidate_name st;  
   (string_of_float (get_preferred_margin st)); 
   ]
 in 
   let data = [attributes; state_data] 
 in 
-  Csv.transpose data 
+  Csv.transpose (Csv.transpose data)
 
 let save_data_locally st filename = 
   let csv = export_state_to_csv st in 

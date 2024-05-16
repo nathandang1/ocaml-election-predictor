@@ -3,6 +3,5 @@
  (libraries ounit2 final)
  (deps
   (glob_files *.csv))
-  (instrumentation
-  (backend bisect_ppx)))
+  )
   

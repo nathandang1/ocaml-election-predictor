@@ -61,6 +61,14 @@ let create_test =
         assert_raises (Statepoll.ImproperList "") (fun () -> 
           Statepoll.create_state
             [ "New York"; "ny"; "28"; "196800000"; "Biden"; "0.0" ])); 
+    ("error is throw (margin of preference is 100)" >:: fun _ ->
+        assert_raises (Statepoll.ImproperList "") (fun () -> 
+          Statepoll.create_state
+            [ "New York"; "ny"; "28"; "196800000"; "Biden"; "100.0" ]));
+    ("error is throw (margin of preference is greater than 100)" >:: fun _ ->
+        assert_raises (Statepoll.ImproperList "") (fun () -> 
+          Statepoll.create_state
+            [ "New York"; "ny"; "28"; "196800000"; "Biden"; "1000.0" ]));
     ("whitespace name is trimmed" >:: fun _ ->  
       assert_equal (Statepoll.get_name state_whitespace) ("New York")); 
     ("whitespace abbreviation is trimmed" >:: fun _ ->  
@@ -136,9 +144,24 @@ let setter_method_tests =
     );
   ]
 
+let answer_key = Csv.load "fake_state.csv"
+let fake_state = Statepoll.create_state ["California";"ca";"10";"10";"Biden";"2.3"]
+
+let answer_key_2 = Csv.load "fake_state_2.csv"
+let even_faker_state = Statepoll.create_state["California";"ca";"1000000000";"100000000000000000";"Trump";"99.9"]
+let () = Statepoll.save_data_locally even_faker_state "very fake"
+let csv_method_tests = [
+  ( "test for Statepoll.export_state_to_csv" >:: fun _ ->
+    let csv_cali_fake = Statepoll.export_state_to_csv fake_state in
+    assert_equal (Csv.compare csv_cali_fake answer_key) 0 );
+  ( "test for Statepoll.export_state_to_csv, bigger numbers">:: fun _ ->
+    let csv_cali_faker = Statepoll.export_state_to_csv even_faker_state in
+    assert_equal (Csv.compare csv_cali_faker answer_key_2) 0 )
+]
+
 let statepoll_tests =
   "full test suite"
   >::: List.flatten
-         [ create_test; test_equals; getter_method_tests; setter_method_tests ]
+         [ create_test; test_equals; getter_method_tests; setter_method_tests; csv_method_tests]
 
 let run_statepoll_tests = run_test_tt_main statepoll_tests
