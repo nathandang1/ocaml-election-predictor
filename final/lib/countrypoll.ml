@@ -77,7 +77,7 @@ else
   let states = create_country_csv_helper (List.tl csv) [] in 
   create_country states bool name
 with 
-| Statepoll.ImproperList x -> 
+| Statepoll.ImproperList _ -> 
   raise (ImproperCSV (""))
 
 let get_population cnt = count_pop cnt.states 0 
