@@ -78,19 +78,11 @@ let do_computations () =
   (issues_titles_weights, (trump_sum, biden_sum))
 
 (* Print results *)
-let print_issues () =
-  let result = do_computations () in
-  let issues_titles_weights = fst result in
+(* let print_issues () = let result = do_computations () in let
+   issues_titles_weights = fst result in
 
-  let () =
-    List.iter
-      (fun (title, value) ->
-        print_string (title ^ " ");
-        print_float value;
-        print_endline "")
-      issues_titles_weights
-  in
-  ()
+   let () = List.iter (fun (title, value) -> print_string (title ^ " ");
+   print_float value; print_endline "") issues_titles_weights in () *)
 
 (* let print_totals () = let result = do_computations () in
 

@@ -1,17 +1,23 @@
-(* Acknowledgement: The documentation for these functions was written by GitHub
-   CoPilot.*)
+(* Acknowledgement: The documentation for some of these functions were written
+   by GitHub CoPilot.*)
 (* Citation: 'Develop Succinct OCaml style documentation for these functions.',
    GitHub Copilot, OpenAI/Microsoft, 15 May 2024,
    https://github.com/features/copilot. *)
 
 val geometric_mean : float list -> float
-(** [geometric_mean lst] computes the geometric mean of [lst] *)
+(** [geometric_mean lst] computes the geometric mean of [lst]. *)
 
 val get_reg_total : int -> float
+(** [get_reg_total iters] uses the Regularizer module to perform randomization
+    [iters] number of times. Returns a summed percentage change across these
+    iterations. *)
 
 val naive_bayes_randomized : string list list -> float * float
-(** [naive_bayes_randomized data] takes in
-    [[year; state; republican votes; democrat votes; winner] ...] *)
+(** [naive_bayes_randomized data] takes in [data] with the following format:
+    [[year; state; republican votes; democrat votes; winner]; ..(more rows)..]
+    and outputs [(dem, rep)] corresponding to the randomized probabilities that
+    a Democrat/Republican candidate wins the state. Requires: all values in the
+    [state] column to be uniform. *)
 
 val sigmoid : float -> float
 (** [sigmoid z] applies the sigmoid function to argument [z]. *)
