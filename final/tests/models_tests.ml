@@ -135,10 +135,71 @@ let test_gradient =
       done );
   ]
 
+let test_gradient_descent =
+  [
+    ( "Testing gradient_descent function with num_iters = 0, expecting theta \
+       unchanged"
+    >:: fun _ ->
+      assert_equal [ 1.; 2.; 3. ]
+        (Models.gradient_descent [ 1.; 2.; 3. ] [ [ 1.; 2.; 3. ] ] [ 6. ] 0.1 0)
+    );
+    ( "Testing gradient_descent function with alpha = 0, expecting theta \
+       unchanged"
+    >:: fun _ ->
+      assert_equal [ 1.; 2.; 3. ]
+        (Models.gradient_descent [ 1.; 2.; 3. ]
+           [ [ 1.; 2.; 3. ] ]
+           [ 6. ] 0.0 100) );
+    ( "Testing gradient_descent function with num_iters = 1" >:: fun _ ->
+      assert_bool ""
+        (Models.gradient_descent [ 1.; 2.; 3. ] [ [ 1.; 2.; 3. ] ] [ 6. ] 0.1 1
+        <> [ 1.; 2.; 3. ]) );
+    ( "Testing gradient_descent function with num_iters = 5" >:: fun _ ->
+      assert_bool ""
+        (Models.gradient_descent [ 1.; 2.; 3. ] [ [ 1.; 2.; 3. ] ] [ 6. ] 0.1 5
+        <> [ 1.; 2.; 3. ]) );
+    ( "Testing gradient_descent function with num_iters = 10" >:: fun _ ->
+      assert_bool ""
+        (Models.gradient_descent [ 1.; 2.; 3. ] [ [ 1.; 2.; 3. ] ] [ 6. ] 0.1 10
+        <> [ 1.; 2.; 3. ]) );
+    ( "Testing gradient_descent function with list size = 1" >:: fun _ ->
+      assert_equal 1
+        (List.length (Models.gradient_descent [ 1. ] [ [ 1. ] ] [ 1. ] 0.1 100))
+    );
+    ( "Testing gradient_descent function with list size = 5" >:: fun _ ->
+      assert_equal 5
+        (List.length
+           (Models.gradient_descent [ 1.; 1.; 1.; 1.; 1. ]
+              [ [ 1.; 1.; 1.; 1.; 1. ] ]
+              [ 5. ] 0.1 100)) );
+    ( "Testing gradient_descent function with list size = 10" >:: fun _ ->
+      assert_equal 10
+        (List.length
+           (Models.gradient_descent
+              [ 1.; 1.; 1.; 1.; 1.; 1.; 1.; 1.; 1.; 1. ]
+              [ [ 1.; 1.; 1.; 1.; 1.; 1.; 1.; 1.; 1.; 1. ] ]
+              [ 10. ] 0.1 100)) );
+    ( "Testing gradient_descent function with empty theta, xs, and ys"
+    >:: fun _ -> assert_equal [] (Models.gradient_descent [] [] [] 0.1 100) );
+    ( "Testing gradient_descent function with large alpha" >:: fun _ ->
+      let theta =
+        Models.gradient_descent [ 1.; 2.; 3. ]
+          [ [ 1.; 2.; 3. ] ]
+          [ 6. ] 100.0 100
+      in
+      assert_bool "" (List.for_all (( < ) 0.) theta) );
+    ( "Testing gradient_descent function with large num_iters" >:: fun _ ->
+      let theta =
+        Models.gradient_descent [ 1.; 2.; 3. ]
+          [ [ 1.; 2.; 3. ] ]
+          [ 6. ] 0.1 10000
+      in
+      assert_bool "" (List.for_all (( < ) 0.) theta) );
+  ]
+
 let test_models =
   "test suite for models.ml"
-  >::: List.flatten [ test_sigmoid; test_hypothesis; test_gradient ]
+  >::: List.flatten
+         [ test_sigmoid; test_hypothesis; test_gradient; test_gradient_descent ]
 
-(* let test_models = "test suite for models.ml" >::: [ ( "create test" >:: fun _
-   -> assert_equal (Float.round (Models.geometric_mean lst1)) 2. ); ] [] *)
 let run_models_test () = run_test_tt_main test_models

@@ -94,20 +94,13 @@ let gradient theta xs ys =
   List.map (fun g -> g /. m) grad
 
 let rec gradient_descent theta xs ys alpha num_iters =
+  let alpha = abs_float alpha in
   if num_iters = 0 then theta
   else
     let grad = gradient theta xs ys in
     let theta = List.mapi (fun j t -> t -. (alpha *. List.nth grad j)) theta in
     gradient_descent theta xs ys alpha (num_iters - 1)
 
-(* let logistic_regression_helper data alpha iters = let features = List.map
-   (fun lst -> [ List.nth lst 2; List.nth lst 3 ]) data in let features_float =
-   List.map (fun lst -> List.map float_of_string lst) features in let labels =
-   List.map (fun lst -> if List.hd (List.rev lst) = "rep" then -1. else 1.) data
-   in let theta_0 = [ 0.0; 0.0 ] in let xs = features_float in let ys = labels
-   in let theta = gradient_descent theta_0 xs ys alpha iters in let recent =
-   List.hd (List.rev features) in let recent_float = List.map float_of_string
-   recent in let prediction = hypothesis theta recent_float in prediction *)
 let logistic_regression_helper data alpha iters =
   let () = Random.self_init () in
   let features =
