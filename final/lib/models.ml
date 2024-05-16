@@ -103,7 +103,7 @@ let rec gradient_descent theta xs ys alpha num_iters =
     let theta = List.mapi (fun j t -> t -. (alpha *. List.nth grad j)) theta in
     gradient_descent theta xs ys alpha (num_iters - 1)
 
-let logistic_regression data alpha iters =
+let logistic_regression_helper data alpha iters =
   let features =
     List.map (fun lst -> [ List.nth lst 2; List.nth lst 3 ]) data
   in
@@ -123,3 +123,18 @@ let logistic_regression data alpha iters =
   let recent_float = List.map float_of_string recent in
   let prediction = hypothesis theta recent_float in
   prediction
+
+let logistic_regression data r_prior d_prior =
+  let alpha = 0.01 in
+  let iters = 1000 in
+  let pred = logistic_regression_helper data alpha iters in
+  if pred < 0.5 then
+    let r_pred = (1. -. pred) *. r_prior in
+    let d_pred = pred *. d_prior in
+    let s = r_pred +. d_pred in
+    (r_pred /. s, d_pred /. s)
+  else
+    let r_pred = pred *. r_prior in
+    let d_pred = (1. -. pred) *. d_prior in
+    let s = r_pred +. d_pred in
+    (r_pred /. s, d_pred /. s)
