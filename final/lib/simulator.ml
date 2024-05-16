@@ -10,7 +10,9 @@ let simulate ((state : State.t), (probabilities : (Candidate.t * float) list)) =
         (c, prob, prob +. p) :: rem
   in
   let range = partition probabilities in
-  let win_num = Random.float 1. in
+  let win_num =
+    Random.float (List.fold_left (fun acc (_, n) -> acc +. n) 0. probabilities)
+  in
   let rec in_range num = function
     | (c, lb, ub) :: t -> if num >= lb && num <= ub then c else in_range num t
     | [] -> failwith "out of bounds"

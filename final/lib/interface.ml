@@ -4,7 +4,7 @@ type screen =
   | Menu
   | StatePoll
   | Simulator
-  | Results of Candidate.t list * State.t list * (State.t * Csv.t) list
+  | Results of Candidate.t list * State.t list * Model.model
 
 let title () =
   ANSITerminal.erase Screen;
@@ -51,10 +51,10 @@ let country states =
   in
   Countrypoll.create_country statepoll_states true "USA"
 
-let add_poll (cands, states, polls) = failwith "unimplemented"
-let remove_poll (cands, states, polls) = failwith "unimplemented"
+let add_poll (cands, states) = failwith "unimplemented"
+let remove_poll (cands, states) = failwith "unimplemented"
 
-let add_state (cands, states, polls) =
+let add_state (cands, states) =
   ANSITerminal.print_string [ ANSITerminal.Bold ] "ADDING STATES: \n";
   print_states states;
   print_endline "";
@@ -83,7 +83,7 @@ let add_state (cands, states, polls) =
   let nation = country all_states in
   Countrypoll.save_data_locally nation "data/metadata/states.csv"
 
-let remove_state (_, states, _) =
+let remove_state (_, states) =
   ANSITerminal.print_string [ ANSITerminal.Bold ] "REMOVING STATES: \n";
   print_states states;
   print_endline "";
@@ -112,7 +112,7 @@ let state_poll () =
   let cand_path = "data/metadata/candidates.csv" in
   let state_path = "data/metadata/states.csv" in
   let poll_path = "data/polling" in
-  let current_data = Extractor.data (cand_path, state_path, poll_path) in
+  let current_data = Extractor.data (cand_path, state_path) in
   let () =
     match read_line () with
     | "1" -> add_poll current_data
@@ -137,9 +137,23 @@ let uniform_model () =
   ignore (read_line ());
   let cand_path = "data/metadata/candidates.csv" in
   let state_path = "data/metadata/states.csv" in
-  let poll_path = "data/polling" in
-  match Extractor.data (cand_path, state_path, poll_path) with
-  | cands, states, polls -> Results (cands, states, polls)
+  match Extractor.data (cand_path, state_path) with
+  | cands, states -> Results (cands, states, Uniform)
+
+let naive_bayes () =
+  ANSITerminal.erase Screen;
+  ANSITerminal.print_string [ ANSITerminal.Bold ] "BAYES MODEL \n";
+  print_endline "";
+  ANSITerminal.print_string []
+    "The Naive Bayes model is the Naive Bayes model. \n";
+  print_endline "";
+  ANSITerminal.print_string [] "<Press ENTER to Run> \n";
+  print_endline "";
+  ignore (read_line ());
+  let cand_path = "data/metadata/candidates.csv" in
+  let state_path = "data/metadata/states.csv" in
+  match Extractor.data (cand_path, state_path) with
+  | cands, states -> Results (cands, states, Bayes)
 
 let simulator () =
   ANSITerminal.erase Screen;
@@ -151,7 +165,7 @@ let simulator () =
   print_endline "";
   match read_line () with
   | "1" -> uniform_model ()
-  | "2" -> failwith ""
+  | "2" -> naive_bayes ()
   | _ -> Simulator
 
 let rec print_outcomes = function
@@ -169,8 +183,8 @@ let rec print_electors = function
       print_electors tl
   | [] -> ()
 
-let results (candidates, state, polling) =
-  let state_odds = Model.run_all (candidates, state, polling) in
+let results (candidates, state) model =
+  let state_odds = Model.run_all (candidates, state) model in
   let outcomes = Simulator.simulate_all state_odds in
   let electors = Simulator.votes outcomes in
   let winner : Candidate.t = fst (List.hd electors) in
@@ -184,7 +198,7 @@ let results (candidates, state, polling) =
   print_endline "";
   print_endline
     (winner.name ^ " has won the election with " ^ string_of_int votes
-   ^ " votes.");
+   ^ " electors.");
   print_endline "";
   Quit
 
@@ -194,5 +208,5 @@ let rec transition = function
   | Menu -> transition (menu ())
   | StatePoll -> transition (state_poll ())
   | Simulator -> transition (simulator ())
-  | Results (candidates, state, polling) ->
-      transition (results (candidates, state, polling))
+  | Results (candidates, state, model) ->
+      transition (results (candidates, state) model)

@@ -5,7 +5,7 @@ type screen =
   | Menu
   | StatePoll
   | Simulator
-  | Results of Candidate.t list * State.t list * (State.t * Csv.t) list
+  | Results of Candidate.t list * State.t list * Model.model
 
 val title : unit -> screen
 (** [title ()] runs the title screen. *)
@@ -22,7 +22,7 @@ val simulator : unit -> screen
 (** [simulator ()] runs the simulator screen, where users can choose to
     configure the simulation in advance. *)
 
-val results : Candidate.t list * State.t list * (State.t * Csv.t) list -> screen
+val results : Candidate.t list * State.t list -> Model.model -> screen
 (** [results (candidates, state, polling)] runs the results screen, where users
     view the results of the simulation. *)
 

@@ -51,29 +51,7 @@ end
 module StatesFile = File.Make (StateList)
 module CandidatesFile = File.Make (CandidateList)
 
-(* Module for Loading Polling Data *)
-module Polling = struct
-  type t = Csv.t
-
-  let extract (csv : Csv.t) =
-    csv |> Csv.transpose
-    |> List.mapi (fun i0 lst ->
-           List.mapi (fun i1 str -> if i0 + i1 = 0 then "polls" else str) lst)
-end
-
-module PollingFile = File.Make (Polling)
-
-let get_poll file = file |> PollingFile.of_path |> PollingFile.data
-
-let data (cand_path, state_path, poll_path) =
+let data (cand_path, state_path) =
   let candidates = cand_path |> CandidatesFile.of_path |> CandidatesFile.data in
   let states = state_path |> StatesFile.of_path |> StatesFile.data in
-  let polling =
-    List.map
-      (fun (state : State.t) ->
-        (state, get_poll (poll_path ^ "/" ^ state.abbr ^ ".csv")))
-      states
-  in
-  ( (candidates : Candidate.t list),
-    (states : State.t list),
-    (polling : (State.t * Csv.t) list) )
+  ((candidates : Candidate.t list), (states : State.t list))

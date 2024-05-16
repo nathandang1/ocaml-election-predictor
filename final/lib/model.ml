@@ -19,8 +19,7 @@ let bayes_model (state : State.t) =
         (Candidate.create ("Donald Trump", "Republican"), rep);
       ]
 
-let run ((candidates : Candidate.t list), (state : State.t), polling) model =
-  let () = ignore polling in
+let run ((candidates : Candidate.t list), (state : State.t)) model =
   let probabilities =
     match model with
     | Uniform -> uniform_model candidates
@@ -28,5 +27,5 @@ let run ((candidates : Candidate.t list), (state : State.t), polling) model =
   in
   (state, probabilities)
 
-let run_all (candidates, states, polling) model =
-  List.map (fun state -> run (candidates, state, polling) model) states
+let run_all (candidates, states) model =
+  List.map (fun state -> run (candidates, state) model) states
