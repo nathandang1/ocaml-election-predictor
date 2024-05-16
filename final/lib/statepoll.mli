@@ -75,4 +75,4 @@ val export_state_to_csv : state -> Csv.t
 
 val equals : state -> state -> bool
 (** [equals state1 state2] returns whether state1 and state2 are equal based off
-    the name of the state*)
+    the name of the state (case sensitive)*)
