@@ -1,0 +1,1910 @@
+commit ec63ea64807a8f14a36bbc612b8273318c0fa922
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 17:56:47 2024 -0400
+
+    Add test plan to repo
+    
+    - Added test plan to repo
+
+commit 0b07137b9cbc75710d621100bf13848b087e2a64
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 17:54:05 2024 -0400
+
+    Add clean states.csv to local
+    
+    - Added clean states.csv file to local
+
+commit e2927b3a7a56af6021008f240a5ee89e70d13822
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 17:49:45 2024 -0400
+
+    Add local folder to repo
+    
+    - Added local folder to repo
+
+commit 0f36188941c86484828952386494313e82294835
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 17:00:22 2024 -0400
+
+    remove extraneous comments
+
+commit 80025d33dc8faa487e61829373ef684ec6179027
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 16:52:37 2024 -0400
+
+    update test suite for consistency
+
+commit 033fc6bc525a46f81a24c0a5751cbcb4e52018a9
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 16:39:04 2024 -0400
+
+    update naive bayes tests with additional cases
+
+commit bebfcd5857074a01c90a199b352f16818d06dc2a
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 16:30:32 2024 -0400
+
+    refactor helper function
+
+commit e9deb3e1f813df6f576ad0cd49fcd38b5367170e
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 16:27:07 2024 -0400
+
+    delete extraneous files
+
+commit cef8dd6d01aaf5b35e1fc355909a93c6fdeaf37c
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 16:26:39 2024 -0400
+
+    add tests for naive bayes
+
+commit 5c78b97415746715634e28ffb1dbbfe3dace7889
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 15:59:26 2024 -0400
+
+    add citations for data
+
+commit 3c6c8144ddfd79d4a544160537d2926b6cf370d3
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu May 16 15:50:04 2024 -0400
+
+    Small interface tweaks
+
+commit 63f0a52561ea9aa08e5b9fc6f4cc2f3b5b337b61
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 15:44:46 2024 -0400
+
+    Fix big with simulation algorithm
+    
+    - Fixed bug with simulator
+
+commit 943c3075fe1926eac6e236ac9fef5e38e936facb
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Thu May 16 15:15:09 2024 -0400
+
+    Updated spec to statepoll.mli
+
+commit 7407beb4a0d0dffd32ddec99f6751c1a6378bc7a
+Merge: b700522 67abd2f
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 15:12:56 2024 -0400
+
+    Merge remote-tracking branch 'refs/remotes/origin/main'
+    
+    - Merge versions
+
+commit 67abd2f49051dc2b2b3ffe408431156302a4df81
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Thu May 16 15:12:27 2024 -0400
+
+    editted state.mli documentation
+
+commit b700522073406e14ba4362c841e3fab0508c03f0
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 15:12:18 2024 -0400
+
+    Fix typo
+    
+    - Fixed typo in interface.ml
+
+commit c167df80c4e2b8f6f71a31589b29e73c8987ace5
+Merge: d8fcee2 3c5c80f
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 15:09:19 2024 -0400
+
+    Merge remote-tracking branch 'refs/remotes/origin/main'
+    
+    - Merge versions
+
+commit d8fcee2cafade0bb459a5dbfea9ba57c44d8cec7
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 15:08:39 2024 -0400
+
+    Add loop for randomization_query
+    
+    - Added loop to ensure appropriate response for randomization query in interface
+
+commit 3c5c80fdf0dffae140b51ef3d85bd1883a8666fd
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu May 16 15:05:15 2024 -0400
+
+    Add logic for a tied election
+
+commit de0db96090b9a19427c4eacb312e3fc98493dd81
+Merge: 4c1416c f537c56
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu May 16 14:52:19 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:ayk36/cs3110-final
+
+commit f537c569bb736d45e4320df90aa786b81c7dedbe
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 14:52:08 2024 -0400
+
+    purge extraneous data files
+
+commit 4c1416c8e7043fedb0048628610ec2972cdc5e89
+Merge: c5205c6 3eac3b4
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu May 16 14:51:58 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:ayk36/cs3110-final
+
+commit c5205c6b211a37a5e8463fb8a421fd60d5998234
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu May 16 14:50:50 2024 -0400
+
+    add randomization factor to bayes model
+
+commit 3eac3b4a808f8decbef26ca0a6588a195d1e75f0
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 14:50:21 2024 -0400
+
+    Remove MakeFile
+    
+    - Removed MakeFile
+
+commit fa70d95d8a09788af837354974cef5552c6749a3
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 14:48:56 2024 -0400
+
+    Add authorship
+    
+    - Added authorship to main.ml
+
+commit bd694e8741ca3a8b214217035f98e3900bae14c7
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 14:41:00 2024 -0400
+
+    add exact hand calculation tests for gradient descent
+
+commit b0feec1de8017a3adf97eed42c824c93f8ba87c7
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 14:22:57 2024 -0400
+
+    add additional gradient tests
+
+commit 848de26e26e87e2c5f393b250ea7dbb4f54fe3b9
+Merge: 66b57f5 c78763d
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 14:17:12 2024 -0400
+
+    Merge remote-tracking branch 'refs/remotes/origin/main'
+    
+    - Merge versions
+
+commit 66b57f52fc571f8288cf8e44e7f66bd1bb9746dd
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 14:16:20 2024 -0400
+
+    Implement local files in Interface
+    
+    - Completed implementation of local files in Interface
+    - Modified model.ml to handle local files
+    - Modified local.ml implementation
+
+commit c78763d36cf44512b2263f67356b95ca7e6fd125
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 14:02:06 2024 -0400
+
+    decrease noising for LR to stabilize predictions
+
+commit 468b203fcdd6b0bed3a768372877bb7b389712bd
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 13:50:21 2024 -0400
+
+    add comment on sigmoid tests
+
+commit e230e60a6c4d32dcb8e588c6ab3dbc4d6114494e
+Merge: ff40596 97c28b8
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 13:49:50 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:ayk36/cs3110-final
+
+commit 97c28b813735fcc3d259ceb0f73a3b3bd75976aa
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 13:47:18 2024 -0400
+
+    Fix bug with previous push
+    
+    - Fixed bug with previous push
+
+commit ff4059662795bf72d2572c7302d56cd93056111c
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 13:46:03 2024 -0400
+
+    update sigmoid tests
+
+commit d46de776e11c90a14d5d19fd2b2c86ba660b2b91
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 13:45:06 2024 -0400
+
+    Modify interface to write polling to local
+    
+    - Modified interface to write polling to local
+
+commit c8693aed3b2768f5a3bfde591128d81f3bb8834a
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 13:41:08 2024 -0400
+
+    Implement local data module
+    
+    - Implemented module to create local version of data
+    - Integrated Local module into Interface
+
+commit a9f5d7f093dfeb6aaf71449077b153daf52c179b
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 13:21:50 2024 -0400
+
+    Remove buggy no randomization uniform model
+    
+    - Disabled non-randomization for uniform model
+
+commit 9a4cd2f2ac46a57dbaecf563cb20e331b676cc8e
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 13:18:08 2024 -0400
+
+    Add protections against bad user input
+    
+    - Added first layer of protections against bad user input (no visible exceptions)
+
+commit fb1228e7ff0b0a2f142989e427ee615a91e9518b
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 12:40:08 2024 -0400
+
+    repair sigmoid tests
+
+commit 0489c955d19bede3578f2da434a0171e1229a20a
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 11:41:50 2024 -0400
+
+    add data citation
+
+commit 3da19bd1e6e3360c4b6847e80f86ffe3359d668f
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 11:34:46 2024 -0400
+
+    refactor models
+
+commit 2b61cd0e33984f07739fe9df344cdde19adc8ca2
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 11:30:33 2024 -0400
+
+    Modify INSTALL.txt and project.yml
+    
+    - Modified INSTALL.txt to include ANSITerminal
+    - Modified yaml file to better reflect our implementation
+
+commit fb0c7c1613a4c9545b0740693d00fe0cfd5a8485
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 11:12:32 2024 -0400
+
+    refactor and remove extraneous comments
+
+commit 4515dbeb73b68ae82a85c470d396829e6eee3c85
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Thu May 16 11:10:22 2024 -0400
+
+    Documentation for candidate
+
+commit ea7d85290110305045153c0c126d764b46f8c77a
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 10:55:54 2024 -0400
+
+    add blue and red state logistic regression tests
+
+commit ce198ff6e4006df376f45fbad07b109b35d7d03b
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 10:50:27 2024 -0400
+
+    Fix bugs with Interface
+    
+    - Fixed bug with modify poll in which poll would ask for new_value even if appropriate preceding field was not provided
+    - Fixed bug with Interface in which updated state data would be saved to states.csv.csv
+
+commit f356fb708deeb5a534a92860728ee3adacde7499
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 10:46:37 2024 -0400
+
+    update testing
+
+commit 3bff7e4abc9ada71494e4f87ef9d8e8ad79280cf
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 10:45:42 2024 -0400
+
+    update model testing to incorporate logistic regression helper function testing
+
+commit 0f81eb8eb28a439a73ea310b4bba1299939ff594
+Merge: fd11e34 a9ba7be
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 10:43:46 2024 -0400
+
+    Merge remote-tracking branch 'refs/remotes/origin/main'
+    
+    Merge versions
+    
+    - Merged versions
+
+commit fd11e34d0d0a3c02b92a886343d194472b94014b
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 10:43:16 2024 -0400
+
+    Add feature to modify states to interface
+    
+    - Added functionality to interface allowing modification of states
+
+commit a9ba7bec373ac9958dd4c459faa17f0e0017213d
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 10:25:07 2024 -0400
+
+    update description for LR
+
+commit fc799a0df061cc7fc37c73be333315a663571c25
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu May 16 10:14:44 2024 -0400
+
+    Add geometric_mean tests
+
+commit 47efcf0e2efa80fcb72d29859614d3f52eb96f0d
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 10:09:59 2024 -0400
+
+    update test suite with gradient descent tests
+
+commit a7bdb7f0a76f8882699a154b9ad79a506c7d57a4
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 09:56:12 2024 -0400
+
+    gradient and hypothesis tests for lr
+
+commit 792c2f93c0f213736009bc74a565d0555d19b8e9
+Merge: 6778b52 1f24e62
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 09:37:11 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:ayk36/cs3110-final
+
+commit 6778b527ff87a233665716bfbca1e0c0599f37d9
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 09:37:08 2024 -0400
+
+    Update sigmoid tests
+
+commit 1f24e621b43304b6326ffa5a6ea4554f1460516b
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 09:25:26 2024 -0400
+
+    Fix typo with Naive Bayes in interface
+    
+    - Fixed typo with Naive Bayes in interface
+
+commit 133ed027aa76fec0443fd67bac02029961410727
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 09:23:51 2024 -0400
+
+    Add randomization score for Naive Bayes model in interface
+    
+    - Added randomization score for Naive Bayes model in interface
+
+commit 491a38efd05cc5c18a65eec93ab2a053cd84a859
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 08:45:03 2024 -0400
+
+    Remove unused function in statepoll.mli
+    
+    - Removed function in statepoll.mli that had no usages
+
+commit 404c85da45e56797eeee3dc34077a9ecd6cc6c29
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 08:41:38 2024 -0400
+
+    Fixed regularizer tests
+    
+    - Fixed regularizer tests by using floating-point approximation equalities
+
+commit 70441d5b0c63fd4ada116b8d79eca49596f4467a
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 08:26:09 2024 -0400
+
+    Remove side-effects of state_poll csv feature
+    
+    - Removed side effects of state_poll csv feature
+
+commit b5d919141f33a2c72232ee69d046eee6e419a3b5
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 08:21:30 2024 -0400
+
+    Fix bug with statepoll exceptions
+    
+    - Fixed a bug with statepoll exception throwing mechanics
+
+commit c08bd75571624cee54700dacadbec7457de1c484
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 08:16:40 2024 -0400
+
+    Covert tests to functions
+    
+    - Converted test file runners to functions so that they are not immediately run when the file is opened
+
+commit afe4ad3ef8dd2963dd748c4356dbfbf0538f089c
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 08:10:58 2024 -0400
+
+    Remove unused variable in countrypoll.ml
+    
+    - Replaced unused variable 'x' with '_' in countrypoll.ml (line 80)
+
+commit 848ebd872dd56fcc3e5c0c8c6c44a4921b73b558
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu May 16 08:09:17 2024 -0400
+
+    Fix bugs with testing
+    
+    - Fixed typo in extractor_test.ml
+    - Fixed typo in regukarizer_tests.ml
+    - Commented-out model_test_broken.ml in test_final.ml
+    - Removed unnecessary side effects from countrypoll.ml
+    - Fixed bug with extractor.ml
+
+commit e84bad7b7204f4fbcb4ef4aad2c93ed81a846e94
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Thu May 16 05:18:06 2024 -0400
+
+    Fixed issue with test case in countrypoll_tests.ml
+
+commit 649ddee2339495e5f9b2f3ac45caaad0b74e2252
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Thu May 16 04:27:24 2024 -0400
+
+    Achieved full coverage for sountrypoll_tests.ml
+
+commit be26a88b430b9cd215620c160268844f0e2fcd48
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Thu May 16 03:59:05 2024 -0400
+
+    Added more testing to countrypoll_tests.ml
+
+commit 7ef3984e811ae51c54b490bc405a7750b99889e8
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Thu May 16 03:57:33 2024 -0400
+
+    extractor_tests.ml
+
+commit 38feab11fbd8267341f7a24cbfb43bd9b3a538b9
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Thu May 16 03:47:46 2024 -0400
+
+    More testing!
+
+commit 7bbe252482fc79edec61e7da078bb4b477248bf6
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu May 16 03:32:32 2024 -0400
+
+    Add geometric mean test cases
+
+commit e1f2a815e8942358fe619a184580f3375b6a936d
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu May 16 03:19:15 2024 -0400
+
+    Fix broken test cases in model_test_broken
+
+commit 15a6f5fc016ec16add0aadb703ba9ce0fedacfa6
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu May 16 03:13:44 2024 -0400
+
+    refactor broken model test code and fix one bug in countrypoll_tests
+
+commit 2a1ce206427b8e03247592cea1b4416250f657ca
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Thu May 16 03:11:20 2024 -0400
+
+    More test cases!
+
+commit 8b4c60d580fb58e7f24cc440952458b31c676b28
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Thu May 16 01:37:50 2024 -0400
+
+    add basic tests for model
+
+commit d1a1192ae895c0c3f7f1387b0e8d0c58588f72d7
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu May 16 01:04:18 2024 -0400
+
+    Remove redundant comments in main
+
+commit 0a1355277e6567510a8e228c6b540fbcf719f13a
+Merge: 8a76f1e 64f0fa2
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu May 16 00:59:09 2024 -0400
+
+    My bad
+
+commit 8a76f1e470cb8b83359bf815bdb0e5a74283fa15
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu May 16 00:58:58 2024 -0400
+
+    Comment redundant code and write better specs for models
+
+commit 64f0fa23ece49dc4e86f2b7ca2ab2eb0f1ab47e5
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Wed May 15 23:40:04 2024 -0400
+
+    Fixed bugs, added tests
+
+commit 0ed07dbf8ff24af0492d3ac11ab97ff3fd2cf44d
+Author: Andrew <ayk36@cornell.edu>
+Date:   Wed May 15 23:03:24 2024 -0400
+
+    Add Logistic regression model to interface
+    
+    - Added logistic regression model to interface
+
+commit d1729a6452b185e50c342437d50e60d147933077
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Wed May 15 22:42:17 2024 -0400
+
+    comment out redundant code and work on regularizer specs
+
+commit cff3f7d91831165a9802ff83c2a3540321836c74
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Wed May 15 22:37:46 2024 -0400
+
+    models_tests.ml
+
+commit faebbbc00a5002cbd2675b2d16ebde53450d3225
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Wed May 15 22:35:49 2024 -0400
+
+    More bug fixes
+
+commit c6dc3376c5521587f23c0d8ab21bc3fb6dc5af3e
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Wed May 15 22:34:30 2024 -0400
+
+    Fixed issue with countrypoll.ml create from csv function
+
+commit 81812aac6b5e1c77b43f4c718ebb271bbaf2b1c0
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Wed May 15 22:25:09 2024 -0400
+
+    update logistic regression
+
+commit 1f5d1f8fca113d5ad12deeeddf5ee1ea7725cd2b
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Wed May 15 22:20:23 2024 -0400
+
+    Fix file not found errors in countrypoll_tests
+
+commit eb0317cd710c5a2cc25540a505437d499b73f9ea
+Author: Andrew <ayk36@cornell.edu>
+Date:   Wed May 15 22:03:14 2024 -0400
+
+    Add description for Naive Bayes
+    
+    - Added a description for Naive Bayes in the interface
+
+commit 5b2a88c873e4a90c6a274ada033b5eb09ca05a75
+Author: Andrew <ayk36@cornell.edu>
+Date:   Wed May 15 22:00:44 2024 -0400
+
+    Add formatting revisions to interface
+    
+    - Added formatting revisions to interface
+
+commit d9334b9fc539a3a6a6ec1246b167c3aec8455abb
+Author: Andrew <ayk36@cornell.edu>
+Date:   Wed May 15 21:56:04 2024 -0400
+
+    Add poll remover to interface
+    
+    - Added functionality allowing user to remove polls through interface
+
+commit ed43f6ef4e49c721786df451919b159896186beb
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Wed May 15 21:42:21 2024 -0400
+
+    Reformat regularizer_tests
+
+commit 064c5de42a94ca99f1aa437e5c6614cd6fad95a2
+Author: Andrew <ayk36@cornell.edu>
+Date:   Wed May 15 21:38:27 2024 -0400
+
+    Implement add_poll in interface
+    
+    - Implemented add_poll in interface
+
+commit 4efc46e36bffb09bf7a3acd069dcebbc253130fa
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Wed May 15 21:35:10 2024 -0400
+
+    More testing stuff
+
+commit 6ed14d8ebfd96423f99bf380082a05094e095a14
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Wed May 15 21:30:35 2024 -0400
+
+    Fix regularizer issue causing test to fail
+
+commit ea9bbb536fde14f5353af328d1efd6410870b651
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Wed May 15 21:30:05 2024 -0400
+
+    add documentation in mli for models
+
+commit 9767e76fd93bcb734a801507e4ae6a212ff5c939
+Merge: 08ebcd9 1ed50cb
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Wed May 15 21:16:02 2024 -0400
+
+    Idk bruh
+
+commit 08ebcd93f4bea4c15f3671d55cbc7a1aac116b41
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Wed May 15 21:15:48 2024 -0400
+
+    Remove another redundant line in state
+
+commit 1ed50cbcf4f6d6e463d792d997dac3670df061fb
+Merge: 2402684 88322f5
+Author: Andrew <ayk36@cornell.edu>
+Date:   Wed May 15 21:15:18 2024 -0400
+
+    Merge remote-tracking branch 'refs/remotes/origin/main'
+    
+    Merge versions
+    
+    - Merged versions
+
+commit 240268494573a7a45677ed2d1a0292ebcabd2d78
+Author: Andrew <ayk36@cornell.edu>
+Date:   Wed May 15 21:13:49 2024 -0400
+
+    Fix bugs with interface
+    
+    - Fixed bugs with interface loading states
+    - Begin drafting code to enable adding new polls
+
+commit 88322f51d8d7bcc28e022d4eb91119240b5c4e8c
+Merge: dd86428 0db1fbe
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Wed May 15 21:13:33 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:ayk36/cs3110-final
+
+commit dd864283079aa2f4b3803c95f108853455b4ca76
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Wed May 15 21:13:23 2024 -0400
+
+    Remove 'outcome' in state
+
+commit 0db1fbe6fceb3f3e757d96b2fa439590459b524d
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Wed May 15 21:11:40 2024 -0400
+
+    Countrypoll_tests.ml implementations
+
+commit e095c9b3a3548b317fdde3c6778bb74543ef834f
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Wed May 15 21:08:57 2024 -0400
+
+    add mli file for models
+
+commit 349197c130a6534b572ce515d7df5bceb1531495
+Merge: ebb8b59 57dcc3d
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Wed May 15 21:05:14 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:ayk36/cs3110-final
+
+commit ebb8b593bf728af39396effb0069fac9da2ffe0a
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Wed May 15 21:05:09 2024 -0400
+
+    logistic regression with priors
+
+commit 57dcc3d40835612ea5cb97a7d4c7b51c292e5e7e
+Author: Andrew <ayk36@cornell.edu>
+Date:   Wed May 15 21:02:27 2024 -0400
+
+    Revise interface to allow user to configure randomization
+    
+    - Revised interface to allow user to configure randomization
+
+commit 24a99b6429c19f74b893cb9b02b7fb2d2fddc81a
+Merge: 5e21a07 d5518c1
+Author: Andrew <ayk36@cornell.edu>
+Date:   Wed May 15 20:44:48 2024 -0400
+
+    Merge remote-tracking branch 'refs/remotes/origin/main'
+    
+    Merge versions
+    
+    - Merged versions
+
+commit 5e21a0723b7db33fffd192c90cba88d018390598
+Author: Andrew <ayk36@cornell.edu>
+Date:   Wed May 15 20:43:53 2024 -0400
+
+    Implement Naive Bayes into Interface
+    
+    - Merged Naive Bayes into Interface
+
+commit d5518c14547c99f7f45261f89cb74afa11d9021b
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Wed May 15 20:38:15 2024 -0400
+
+    Implemented a new method in countrypoll.ml. TODO: write better spec
+
+commit 746e8f4b9feb1dabd61bf4135faca70f0ea32224
+Merge: 74c764e f1375bd
+Author: Andrew <ayk36@cornell.edu>
+Date:   Wed May 15 20:18:28 2024 -0400
+
+    Merge remote-tracking branch 'refs/remotes/origin/main'
+    
+    Merge branches
+    
+    - Merged branches
+
+commit 74c764e38cda7f728b37570e698911537818dec2
+Author: Andrew <ayk36@cornell.edu>
+Date:   Wed May 15 20:17:25 2024 -0400
+
+    Add Bayes model to model pipeline
+    
+    - Added Naive Bayes to model pipeline
+
+commit f1375bd870bf12532210f6354dae267bdfd98929
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Wed May 15 20:13:03 2024 -0400
+
+    Fixed issues with statepoll metadata, updated test suite to match. Shoutout Andrew Kang for being #awesomesauce
+
+commit da71e1001fe6c045c7e8b6d0ce7eff07d6e25ea8
+Author: Andrew <ayk36@cornell.edu>
+Date:   Wed May 15 19:56:54 2024 -0400
+
+    Modify Interface to affect metadata
+    
+    - Modified interface to affect metadata csv
+
+commit 5b4e77eb16b7d4ed8c8f15e256f249c0346e0b9e
+Author: Andrew <ayk36@cornell.edu>
+Date:   Wed May 15 19:47:41 2024 -0400
+
+    Remove old state data
+    
+    - Removed old state data
+
+commit cf6908ca20beb55f4a3867343181859b83b4acd0
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Wed May 15 19:42:08 2024 -0400
+
+    More tests
+
+commit 13b4d188d4d2972557e4995f966c19525cac873d
+Merge: 9877bd9 32446d4
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Wed May 15 19:39:29 2024 -0400
+
+    Some merge conflict in main or models
+
+commit 9877bd98e8656f2caec5f3e61ab3002a67edf27c
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Wed May 15 19:39:21 2024 -0400
+
+    Add randomization factor to naive bayes
+
+commit 32446d4d0c8c44507aa0bf72ec8ec4deceff16ef
+Author: Andrew <ayk36@cornell.edu>
+Date:   Wed May 15 19:37:16 2024 -0400
+
+    Remove owl from main
+    
+    - Removed owl library from main
+
+commit 1cf7c4dae88394b17e8ff76030a2d0126724e96b
+Author: Andrew <ayk36@cornell.edu>
+Date:   Wed May 15 18:09:09 2024 -0400
+
+    Update interface to meet new specs for countrypoll
+    
+    - Updated interface to respond to the new specifiations for countrypoll
+
+commit da8e328797dbc44d14108bd023ae360cda6c0f8e
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Wed May 15 18:04:12 2024 -0400
+
+    remove extraneous code
+
+commit c316eba6c99c84ba017c1b1f0d1c38f13eaa1325
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Wed May 15 18:00:22 2024 -0400
+
+    Improve naive bayes calculation and put place holders for buggy code
+
+commit 34f6e12e2e2b8d63f0b51d0371ad33550094ef09
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Wed May 15 17:52:19 2024 -0400
+
+    Remove redundant code and owl module dependency
+
+commit d58048b235c96fce7a9a3360a40b6d2c59341886
+Merge: 36b6a5b ad113a8
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Wed May 15 17:45:54 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:ayk36/cs3110-final
+
+commit 36b6a5bb739f82ff7f31b5132d90ae16cefe19a2
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Wed May 15 17:44:31 2024 -0400
+
+    add linear logistic regression model code
+
+commit ad113a8f537b6033ce48991ac03db97ac8b9035e
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Wed May 15 17:43:34 2024 -0400
+
+    Remove redundant code in candidate
+
+commit d829a51af70e7a44e103e82944e1de87eebedb6f
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Wed May 15 17:37:28 2024 -0400
+
+    Improve naive bayes calculations
+
+commit f070f2c2356173986fd2caed4309cedbfbd48e8c
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Wed May 15 17:22:03 2024 -0400
+
+    Finished testing countrypoll.ml
+
+commit b4776a1e2ab4610a5d18cd4fd7df5beb9ffeb0a1
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Wed May 15 16:15:44 2024 -0400
+
+    regularizer_tests.ml
+
+commit c263cafc9b28f40e28770bf755cf2d0bf4eefa52
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Wed May 15 16:10:16 2024 -0400
+
+    Fixed issue with csv saving
+
+commit 9e3aa83791a504f7fe84a327ebc2c21ba2ee9d64
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Wed May 15 16:00:46 2024 -0400
+
+    more testing
+
+commit a55692f08b990e4e2d0a7fd49c2374406a12185d
+Author: Andrew <ayk36@cornell.edu>
+Date:   Wed May 15 15:54:07 2024 -0400
+
+    Implement adding and removing states in interface
+    
+    - Wrote code to allow user to add states in interface
+    - Wrote code to allow user to remove states in interface
+
+commit edba83ff10a9545d207abdc70c5b653c6e68fc84
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Wed May 15 15:24:35 2024 -0400
+
+    candidate_test
+
+commit c06a0b7b504c5e4972b016893383c70fff477f01
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Wed May 15 15:14:49 2024 -0400
+
+    change state params
+
+commit 13a9abe6590a95d370a5e28a88a83462edd42171
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Wed May 15 14:54:16 2024 -0400
+
+    Add interface visibility for regularizer functions and implement basic naive bayes model
+
+commit ea5e1e8e77bbc81c0a15c51f91ae559a3bfb6445
+Author: Andrew <ayk36@cornell.edu>
+Date:   Wed May 15 14:42:55 2024 -0400
+
+    Finalize election results in interface
+    
+    - Finalized interface for election results from simulation
+
+commit 3800235e34b04ad586b8de97bddfb5ab5bd93cd6
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Wed May 15 14:33:57 2024 -0400
+
+    labeled data processed for supervised learning
+
+commit 65151fb8b762cfffa4205def618c4543d25717b0
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Wed May 15 14:18:55 2024 -0400
+
+    Regularizer.mli
+
+commit 6b44a6dd420dbb4fd31f2f91170baea10aa43eb9
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Wed May 15 14:10:36 2024 -0400
+
+    Edits to tests
+
+commit bbc173c7cd0d99cd147ef4f6d16089d19af0978d
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Wed May 15 13:58:24 2024 -0400
+
+    Fix difference computation
+
+commit dedc80e5ac0b6bb2936250281b57b80cf074bf0a
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Wed May 15 13:55:21 2024 -0400
+
+    Added to countrypoll.mli and doing more testing
+
+commit 70c45041e806b2a7e460a0d2fef75eecbff3339f
+Merge: 89832bf 320ac05
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Wed May 15 13:44:08 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:ayk36/cs3110-final
+
+commit 89832bfd2471ff04847f6e5ca32be4a015c74347
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Wed May 15 13:43:55 2024 -0400
+
+    abstract computations into separate function
+
+commit 320ac05fbd9b96bd1238b35f6796f94a08c15ba0
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Wed May 15 13:26:17 2024 -0400
+
+    minor changes to economic.csv
+
+commit afcf38bc1787faf8ab1f7ca4f12d3a74f91dee4e
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Wed May 15 11:55:02 2024 -0400
+
+    update files to ignore
+
+commit 3f671fd4e32d08f821ba3a5c06dad3a714e3bad3
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Wed May 15 11:44:12 2024 -0400
+
+    Fixed compile errors
+
+commit 529c6bdc4027d4dae3ae03123068c226ad6f3065
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Wed May 15 11:37:09 2024 -0400
+
+    (Hopefully) fixed the compliation errors
+
+commit 910f074004deb9ab73d554acfac7627f59f9af5e
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Wed May 15 11:13:52 2024 -0400
+
+    Fixed issue with dune build
+
+commit e31a942fb9fc4a55c945f78ec7f3f5b7302cb2b0
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Wed May 15 11:11:06 2024 -0400
+
+    Added test files
+
+commit 0be4e02e7fa2fc9dce373daaecce91fcc92f6a2a
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Wed May 15 10:42:23 2024 -0400
+
+    Added testing and additional functionality to countrypoll
+
+commit 032fd4be2aafb0a5bdc58bb7366b5257d6fc201d
+Author: Andrew <ayk36@cornell.edu>
+Date:   Tue May 14 23:41:33 2024 -0400
+
+    Resolve issues fro merge
+    
+    - Fixed merge issues to allow program to theoretically compile
+
+commit e23a5fed6cb95a6372ea33cce4215348faa3756f
+Merge: 607fcc9 2ea6eaa
+Author: Andrew <ayk36@cornell.edu>
+Date:   Tue May 14 23:16:11 2024 -0400
+
+    Merge branch 'framework'
+
+commit 2ea6eaa3002adb9e135ca2f5a7aa6cdde2b9fa7d
+Author: Andrew <ayk36@cornell.edu>
+Date:   Tue May 14 23:09:10 2024 -0400
+
+    Implement core terminal interface
+    
+    - Implemented core features of terminal interface to allow for the running of simulation.
+
+commit 607fcc9bf1f96eba6ce64f545056ddb6b7587724
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Tue May 14 19:36:07 2024 -0400
+
+    Test cases for candidate, state, and statepoll.
+
+commit 11e69496117ad5037728543314f92f94e8e309e4
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Tue May 14 19:13:42 2024 -0400
+
+    refactor and rename state supervised files
+
+commit 261deaf3301ed9af00c6d23bd37904f9f6b9ad69
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Tue May 14 19:04:08 2024 -0400
+
+    Add supervised learning data files
+
+commit f4d580ca599c58144d136bd46fc841f0e47f86dc
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Tue May 14 15:49:07 2024 -0400
+
+    Update states.csv with preferred candidate information (not entirely accurate)
+
+commit 8fe6216ab6d21a6534e58401fc21f8ea7ec2830a
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Tue May 14 15:27:03 2024 -0400
+
+    Implemented countrypoll.ml and countrypoll.mli
+
+commit 314a3660ee1ac085af370c0812013dc8d82b1b9b
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Tue May 14 15:26:11 2024 -0400
+
+    Finished implementation of statepoll.mli
+
+commit 85c17db7a98eb792cbcdb12c0d7859e1c89b9b75
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Tue May 14 15:25:44 2024 -0400
+
+    Finished implementation of statepoll.ml
+
+commit 07aad77eaeda886e65af68ed51ff269f5e3488f7
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Tue May 14 14:58:21 2024 -0400
+
+    Change main to previous output and temporarily refactor existing data in nj_poll to nj_poll_temp
+
+commit 079f655a5baed9ff650b077ac787c7dcf4f74cc5
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Tue May 14 14:44:39 2024 -0400
+
+    Updated statepoll.mli
+
+commit dac17af644498d13573c920c021b64fd7e536fe0
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Tue May 14 14:38:30 2024 -0400
+
+    Updated statepoll.ml
+
+commit 452ba400bc5cbd657afac080e0ecce3e414fd7a1
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Tue May 14 14:35:38 2024 -0400
+
+    Refactor Regularizer code from main to regularizer.ml
+
+commit 43c7487548617f4d9f0a1748fc192e4b6e40baf3
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Tue May 14 00:35:12 2024 -0400
+
+    Tweak weight computations, incorporating softmax and refactoring some functions
+
+commit e5886141b2849afdd81bbca45e9736612d335b0d
+Author: Srivatsa Kundurthy <kundurthy.srivatsa@gmail.com>
+Date:   Mon May 13 22:54:05 2024 -0400
+
+    ignore data cleaning scripts
+
+commit f14357e4343a1d95f3c167ac945a36ac4b1faf1a
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Mon May 13 19:56:26 2024 -0400
+
+    Add stochastic weighting to each candidate
+
+commit 874a46d023f48b519e99b70fb05cc8202e4fd10b
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Mon May 13 19:47:04 2024 -0400
+
+    Investigate application of stochastic weights to metadata. Revert metadata.csv to preferred format.
+
+commit a5530e47064cc20b8c7356130086fbca2189a779
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Mon May 13 16:16:06 2024 -0400
+
+    Let statepoll compile. Create regularizer file and start testing implementation in main.
+
+commit d7aba604290f5dcf921c8f6509e1756826689598
+Merge: 60692d0 ea01533
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Mon May 13 15:52:53 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:ayk36/cs3110-final
+
+commit 60692d0e7ecf419da3fa9c52783106ff94769d4b
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Mon May 13 15:47:42 2024 -0400
+
+    created states' individual polling data in the form of .csv files
+
+commit ea015339b1bb3b62e50543745540e634a1b7ed6d
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Mon May 13 15:13:23 2024 -0400
+
+    Formatting in models and metadata
+    
+    - Empty lines in models.ml
+    - Refactor metadata to make it more interpretable and realistic
+    - Removed the "weights" because they are going to be random
+
+commit ba3b120e5535a52b33c5485fdff9f028a4b02214
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Sun May 12 13:08:40 2024 -0400
+
+    Changes to metadata.csv
+
+commit b04f395a090c00a7efd7eed67964cb3b082a06c3
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Sun May 12 00:04:32 2024 -0400
+
+    new data
+
+commit 8ae169db843d68e02d45378611f79aa834b3800c
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Sat May 11 23:23:21 2024 -0400
+
+    Statistic csv
+
+commit ac0e1dda3779c059eaa6f4e5024a55c2d66b1f24
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Thu May 9 23:57:47 2024 -0400
+
+    Updated statepoll.mli to mirror implementation
+
+commit a8e10c3c7f91655e2567d02f9323813b1375e7e4
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Thu May 9 23:49:44 2024 -0400
+
+    Added two new files
+    - statepoll.mli, which enables users to create their custom states
+    - statepoll.ml, which implements the above
+    - TODOs for these files are written within, please reference
+
+commit 8ca68f53e0e2c331d41cadbff2ff10594242a027
+Author: Andrew <ayk36@cornell.edu>
+Date:   Wed May 8 13:44:52 2024 -0400
+
+    Add Interface module for GUI
+    
+    - Add interface.ml file for implementation
+    - Add interface.mli file for specifications
+
+commit 9666f87d805b5f620e4e9bb207b6582c65d522d0
+Author: Andrew <ayk36@cornell.edu>
+Date:   Wed May 8 13:11:46 2024 -0400
+
+    Implement framework
+    
+    - Designed modular framework for implementing final project
+    - Transferred existing data extraction code to new framework
+    - Inserted dummy code in remaining sections of framework
+
+commit 9d178e75b1857c0af9f9c36a5bceaeb7333cd883
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Tue May 7 23:11:48 2024 -0400
+
+    Updated states.csv
+
+commit 07c4d210856316b3db9ff23ee9cc943cc7672c59
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Fri May 3 00:06:24 2024 -0400
+
+    Test out linear regression implementation in Owl library
+
+commit 4626746c03032556209de3fb44d4cce381ea30f6
+Author: Andrew <ayk36@cornell.edu>
+Date:   Sun Apr 28 14:16:16 2024 -0400
+
+    Remove Frame module
+    
+    - Removed defunct and unused Frame module
+
+commit cb8ecee9c3d15273b1db327b9361e7999ad20436
+Author: Andrew <ayk36@cornell.edu>
+Date:   Sun Apr 28 13:57:46 2024 -0400
+
+    Update Simulator to process user input files
+    
+    - Updated simulator.ml to be able to process .csv files containing user input
+
+commit e388b7395f99088bbd1e304ea5ad46c1e78f2d40
+Author: Andrew <ayk36@cornell.edu>
+Date:   Sun Apr 28 13:05:28 2024 -0400
+
+    Clarify state-polling pair in Simulator
+    
+    - Modified state-polling pair in simulator.ml to clarify relationship
+
+commit 68ddc1d1dcd9006d7f15a71bb0d5412ea1422056
+Author: Andrew <ayk36@cornell.edu>
+Date:   Sun Apr 28 13:01:31 2024 -0400
+
+    Update simulator to process polling data
+    
+    - Updated State module to include value for abbr. name in record type
+    - Updated simulator.ml to process polling data
+    - Added map pairing states and polling data to simulator.ml
+
+commit a5a921dfafcf1bc281d0dc3fbc5104f2b3cf903d
+Author: Andrew <ayk36@cornell.edu>
+Date:   Sun Apr 28 12:00:48 2024 -0400
+
+    Update simulator to process metadata
+    
+    - Modified simulator.ml to read metadata for simulation
+
+commit 9eaa1b306d4839216887635a57416f9fb16d5ebf
+Author: Andrew <ayk36@cornell.edu>
+Date:   Sun Apr 28 11:16:04 2024 -0400
+
+    Rework handling of metadata
+    
+    - Created new data/metadata folder to hold metadata for candidates and states
+    - Create new Data module (to replace to-be-defunct File module) to handle .csv files
+
+commit 7a2261c1b09302ebc51fe8f3878f9defa36061d6
+Merge: 8545cb2 35a57c3
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Wed Apr 24 10:34:08 2024 -0400
+
+    Revert "Merge branch 'main' of github.coecis.cornell.edu:ayk36/cs3110-final"
+    
+    This reverts commit 141152c66f07b834494dce56e3a61a516401d5fd, reversing
+    changes made to a0113d4100094b9fe7d2efa636452969d30f42c3.
+
+commit 8545cb29330fa5b95ae5cd5becb60e8063715b0a
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Wed Apr 24 10:31:28 2024 -0400
+
+    fixed merge changes
+
+commit 35a57c359eb8dc265b06f1e1c031c8c4ce06b548
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Sun Apr 21 22:57:23 2024 -0400
+
+    Add dependency on 'final' in test dune file and add comment to state
+
+commit 071c27a4a6c7955512a1f08f4da2284c27c86d17
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Sun Apr 21 18:37:36 2024 -0400
+
+    Add gitlog to .gitignore and remove redundancies in main
+
+commit ea38ac236fbc87755c9739ae840493d1e17264df
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Sun Apr 21 17:35:20 2024 -0400
+
+    Created minor test suite
+
+commit 141152c66f07b834494dce56e3a61a516401d5fd
+Merge: a0113d4 f438544
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Sun Apr 21 17:07:15 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:ayk36/cs3110-final
+
+commit f438544f414eb988061fad1d385a2ad90af1485a
+Author: Andrew <ayk36@cornell.edu>
+Date:   Fri Apr 19 08:05:01 2024 -0400
+
+    Add to_csv to Frame module
+    
+    - Wrote specifications for to_csv in frame.mli
+    - Implemented to_csv in frame.ml
+
+commit c0c0d6c67dd963593c1d5ffbcf92ee1b2c3613ce
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu Apr 18 21:49:45 2024 -0400
+
+    Implement Frame module
+    
+    - Wrote implementation of Frame module in frame.ml
+    - Wrote specifications for Frame module in frame.mli
+
+commit a06b125ff56dcd4d11a5cd22a6b03c4b0560e1a4
+Author: Andrew <ayk36@cornell.edu>
+Date:   Tue Apr 16 19:29:37 2024 -0400
+
+    Create Simulator module
+    
+    - Create Simulator module for simulation implementation code
+    - Move code from main.ml to simulator.ml to create interface-logic separation
+
+commit 7303fb1ab381fa1a1df324a980b19406794fdcc0
+Author: Andrew <ayk36@cornell.edu>
+Date:   Tue Apr 16 19:20:58 2024 -0400
+
+    Remove redundant code from Candidate and State modules
+    
+    - Removed encapsulating module in Candidate module
+    - Removed encapsulating module in State module
+    - Updated main.ml to reflect changes to Candidate and State modules
+
+commit 87f1461931ac44cc041e02452ae1271390112aa6
+Author: Andrew <ayk36@cornell.edu>
+Date:   Tue Apr 16 19:12:01 2024 -0400
+
+    Add Makefile
+    
+    - Added makefile with required commands: make main, make test, make doc
+    - Modified tests to work with makefile
+    - Added placeholder message to tests indicating that they have been run
+
+commit a0113d4100094b9fe7d2efa636452969d30f42c3
+Merge: 5087060 205a2e9
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Wed Apr 10 18:38:27 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:ayk36/cs3110-final
+
+commit 57477bdc7d2696ac8b2e279f978f42b7a6962356
+Merge: 02f490e 205a2e9
+Author: Andrew <ayk36@cornell.edu>
+Date:   Fri Mar 29 16:57:30 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:ayk36/cs3110-final
+
+commit 205a2e9198e2147644c5fd84cc0ec569643216cd
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu Mar 28 23:06:25 2024 -0400
+
+    Change data used in calculations to be extracted from csv files
+    
+    - Updated csv files to include full names of candidates
+
+commit 02f490e9f2ae4f03b8b244fd5d464c15cae900f7
+Merge: e7585da 9313f4f
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu Mar 28 22:59:11 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:ayk36/cs3110-final
+
+commit 9313f4f355d640a385eb8fae6b17b05f0f774a59
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu Mar 28 22:52:06 2024 -0400
+
+    Change read_csv to read from a string path
+
+commit e7585daf9108f52c9628f33b26d389fa324912be
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu Mar 28 22:43:55 2024 -0400
+
+    Fix bug with read_csv in main.ml
+    
+    - Fixed bug with read_csv in main.ml
+
+commit 2e13a9e11fdf67104f803622f7a80a1f4ae622f6
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu Mar 28 22:40:10 2024 -0400
+
+    Move file reading code to top of main
+
+commit 1deb3ee2fac74b5b494e2a5a9a63b7f76699c3c2
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu Mar 28 22:38:16 2024 -0400
+
+    Improve calculations of state results
+
+commit 4459a16049a1b8aa88839d9479395ea1560b9ab3
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu Mar 28 22:29:42 2024 -0400
+
+    Resolve merge conflicts in main and rewrite state outcome
+    
+    - Changed outcome signature in state interface
+    - Made outcome more applicable to current data
+
+commit f0ed5cdf9704bdf53556a42c6be5e6ff5d2d5328
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu Mar 28 22:14:43 2024 -0400
+
+    Implement reading CSV using File module
+    
+    - Implemented CSV reading using File module
+
+commit c4a894b25666cbaac66b40576e42089e9ae99bf2
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu Mar 28 22:00:23 2024 -0400
+
+    Refactor interface to be more presentable and write calc_state_results
+    
+    - Wrote calc_state_results which takes a state * float tuple and outputs a Naive Bayes calculation
+
+commit 3a553e920322663ca31cdc3bb8e89d6b9f9a8278
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu Mar 28 21:41:55 2024 -0400
+
+    Describe how to execute the program
+
+commit 1a550243bae927f4823413227a683ff10142c27e
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu Mar 28 21:27:39 2024 -0400
+
+    Fix grammar mistakes and change location of prompting function
+
+commit ec10f20bf2e0580a306f8d2fd48ea3ff88d1e3cb
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu Mar 28 21:14:35 2024 -0400
+
+    Move the location of the file INSTALL.txt
+
+commit b41b8e0194abc32d3437c9e389bbdbc89a251ce7
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu Mar 28 17:58:24 2024 -0400
+
+    Fix typo in interface (main.ml)
+    
+    - Remove typo from main.ml
+
+commit 508706095814d936823b4e9ab0a0b952c99f7eba
+Merge: 2fb9614 3076661
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Thu Mar 28 17:55:36 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:ayk36/cs3110-final
+
+commit 30766617f47f91a5b59ff4c7b9726c2a6649d02e
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu Mar 28 17:52:52 2024 -0400
+
+    Fix bug with interface
+    
+    - Fixed bug with interface that led to infinite loop
+
+commit cd3ec7aed35ef27e49d060d07eb6642982a36a60
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu Mar 28 17:30:09 2024 -0400
+
+    Add INSTALL.txt
+    
+    - Wrote INSTALL.txt, containg information on how to install and build the system
+    - Removed unused sample state data
+
+commit 2fb96149195601cd5c02f56f8d34394628431e5c
+Merge: 9ce52da 66d5951
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Thu Mar 28 17:23:58 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:ayk36/cs3110-final
+
+commit 9ce52daaf02670b48659e265b6c13e7c2f6aa494
+Merge: 5ea90b7 9a0e1a5
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Thu Mar 28 17:20:24 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:ayk36/cs3110-final
+
+commit 66d595133670422af5557d944fdf43906208970e
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Thu Mar 28 17:13:37 2024 -0400
+
+    Fully implemented interface in main.ml
+
+commit 7cbe643c0f1c28a283e8520137b7aff46b6bf38c
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Thu Mar 28 17:08:53 2024 -0400
+
+    Fixed typing error in prompt_and_print (main.ml)
+
+commit 1306802e70cc4218c36ef17ea72f0f2e2066c29f
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Thu Mar 28 16:55:33 2024 -0400
+
+    Removed weird annotations that git made
+
+commit 1bad6d2757f5651866660f75da27130c1aadf338
+Merge: 91a3479 6f018ab
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Thu Mar 28 16:53:07 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:ayk36/cs3110-final
+
+commit 91a3479ba3dfcc9a1fd3fffe44456807bf240767
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Thu Mar 28 16:48:27 2024 -0400
+
+    Implemented prompt_and_print in main.ml
+    - Also implemented secondary probability function
+
+commit 6f018ab14933321c60c805870b5868d6bfa07364
+Author: Andrew <ayk36@cornell.edu>
+Date:   Thu Mar 28 16:40:03 2024 -0400
+
+    Remove redundant code from core files
+    
+    - Removed run () from main.ml
+    - Removed redundant functions from State module
+
+commit 5ea90b7d372187c2531dce2dcdb93729c067e0af
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Thu Mar 28 16:28:05 2024 -0400
+
+    deleted run()
+
+commit 9a0e1a5543b12a812b2ad9681fea247a2f805353
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu Mar 28 16:17:15 2024 -0400
+
+    Highlight in main where additional functionality for winner calculation should be added
+
+commit 07ccb620d21fb64ebbadd55742ede131848350fb
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu Mar 28 16:13:44 2024 -0400
+
+    Improve state extraction and track vote counts
+    
+    - Implemented function to extract candidate string names
+    - Tally votes for each candidate as they win each state
+    - Interface improvements
+    - Note: computation of the "winner" is still naive and only considers a state's preferred candidate
+
+commit 4d0caec7206e4701ac0f46923d6bbf139c43dd57
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu Mar 28 15:37:52 2024 -0400
+
+    Make filler implementation of election prediction for each state
+
+commit a3f7ad2f4a32f39723ee3b79c3bee5f7c7aa1373
+Author: Srivatsa Kundurthy <srk247@cornell.edu>
+Date:   Thu Mar 28 01:08:02 2024 -0400
+
+    Implement Naive Bayes Classifier
+    
+    Incorporate Prior
+
+commit 07c7c9ee374bfb18f44ee2e654e47d86e535cbe4
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu Mar 28 00:58:58 2024 -0400
+
+    Modify states_list to contain our new states
+
+commit f3e4beaecaca9e0f182be169f3bc308ed981ceb4
+Author: Srivatsa Kundurthy <srk247@cornell.edu>
+Date:   Thu Mar 28 00:58:12 2024 -0400
+
+    Add NC polling data
+
+commit 00680a4bdb1079e307c212956bd2f5d8c680f1c2
+Author: Srivatsa Kundurthy <srk247@cornell.edu>
+Date:   Thu Mar 28 00:57:37 2024 -0400
+
+    Add Data Files
+    
+    Include Polling Data to be used as samples for predictions for the given 3 states in the MVP
+
+commit 5163259f768d32f52edfa7a6bc639c0c9bbb49cb
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Thu Mar 28 00:51:08 2024 -0400
+
+    Updated specifications in state.mli
+
+commit 8ccd0fde9693db8565c6ea2f0f3e35f8e7e49d80
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu Mar 28 00:49:50 2024 -0400
+
+    Make candidate representation type exposed
+
+commit 7de66a23872d5aac8d6cc216fdb9f8d1d7d4bc0e
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Thu Mar 28 00:48:37 2024 -0400
+
+    Updated north_carolina.txt and pennsylvania.txt
+
+commit 3544454242c479f2f49891c637f6416186b84137
+Author: Srivatsa Kundurthy <srk247@cornell.edu>
+Date:   Thu Mar 28 00:43:36 2024 -0400
+
+    Author NJ state data file
+
+commit af3c7c6ff9e256770c7957b36879728e2c0d63f8
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Thu Mar 28 00:37:27 2024 -0400
+
+    Updated YAML file with project description
+
+commit 7723a832a9acbcf6b2ecda560fa898d26876fd4d
+Merge: 99a080b 8494a0b
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Thu Mar 28 00:35:06 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:ayk36/cs3110-final
+    Refactor Codebase to be more readable and meaningful
+
+commit 8494a0b05beb5c121b4640291686a1d69c94fafc
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu Mar 28 00:27:30 2024 -0400
+
+    Fix implementation of of_data in state
+
+commit 99a080b0abdf13883d7447a7d665ce3813123a3a
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Thu Mar 28 00:22:09 2024 -0400
+
+    Fixed some grammar errors
+
+commit b930d67078a94eb48376d0dee4f5d957a177b0a3
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Thu Mar 28 00:18:08 2024 -0400
+
+    Make state type and data exposed
+
+commit 30824f3e6d2e15746aa23b91b60b1b9dcccf297c
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Wed Mar 27 23:53:09 2024 -0400
+
+    Representation type changes in state
+    
+    - preferred candidate changed to string
+    - representation type of data is now (string * float) list
+    - fix implementation of outcome
+    - reflect changes in state interface
+
+commit 6572c65379402dba05ba599082f341de48ffdd29
+Merge: 2de972d edbece2
+Author: Srivatsa Kundurthy <srk247@cornell.edu>
+Date:   Wed Mar 27 23:21:02 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:ayk36/cs3110-final
+
+commit 2de972dad54ebaaf8f5b9b4deef31841c920af39
+Author: Srivatsa Kundurthy <srk247@cornell.edu>
+Date:   Wed Mar 27 23:20:39 2024 -0400
+
+    Update Representation type for Candidates in the state module
+    
+    Represent candidates as association lists of names and caandidate types
+
+commit edbece2b909c3cc4c1ea9e381f24030e830575f4
+Merge: aa55b80 c322987
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Wed Mar 27 22:34:46 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:ayk36/cs3110-final
+
+commit aa55b806fc8f6a1464d95a2c2cd5256af99996f9
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Wed Mar 27 22:33:55 2024 -0400
+
+    Rename candidate files
+
+commit c322987d417f18fe2bcee947753454a0776a7cce
+Author: Srivatsa Kundurthy <srk247@cornell.edu>
+Date:   Wed Mar 27 22:32:36 2024 -0400
+
+    Alter Function Names in Signature and Implementatino files to match Ocaml Idoms
+
+commit 26f2ad61f9f1d24d398a3591e03b8ba513943600
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Wed Mar 27 22:27:49 2024 -0400
+
+    Prefix all data files with data/
+
+commit cfc5b7e8fcf6a14d29a10b7faa94863e6049fad3
+Author: Srivatsa Kundurthy <srk247@cornell.edu>
+Date:   Wed Mar 27 22:23:57 2024 -0400
+
+    Alter Representation type for candidate
+
+commit bf5f201960d82f417bf0c530a623f4bb6270f2ef
+Author: Andrew <ayk36@cornell.edu>
+Date:   Wed Mar 27 16:26:21 2024 -0400
+
+    Implement partial user interface
+    
+    - Implemented partial version of interface
+    - Added needed functions to State module
+
+commit b4e32e6e8736630233772d724b179c9711893824
+Author: Andrew <ayk36@cornell.edu>
+Date:   Wed Mar 27 15:49:35 2024 -0400
+
+    Modify State module to be of ExtractableType
+    
+    - Re-implemented State within sub-module S
+    - Added necessary functions for ExtractableType
+
+commit c5b12a17020899a835c225c14543d119bff7c1e8
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Tue Mar 26 21:51:34 2024 -0400
+
+    Run hardcoded output
+
+commit 5ac8c5a729d969dc712e3469de16aca0a4734e5e
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Tue Mar 26 21:51:07 2024 -0400
+
+    Create root dune file
+
+commit 89b3a6162bada664af0548473c084cd159b4be24
+Author: Andrew <ayk36@cornell.edu>
+Date:   Tue Mar 26 20:44:14 2024 -0400
+
+    Implement outline for main.ml
+    
+    - Hard-coded desired output into main.ml for use as reference
+
+commit 1006f9c174e4481ae886f4ec2fc72fae61ad6d84
+Author: Andrew <ayk36@cornell.edu>
+Date:   Tue Mar 26 20:04:36 2024 -0400
+
+    Add default data
+    
+    - Created text files representing candidates and states
+    - Added appropriate data to all text files
+
+commit de524a16570081fc01c44e38a405696718e85d57
+Author: Andrew <ayk36@cornell.edu>
+Date:   Tue Mar 26 15:38:25 2024 -0400
+
+    Fix typing issue with State module
+    
+    - Use parantheses to clarify types for compiler in state.ml and state.mli
+
+commit 5d71accaf4a9abb34320fd0da563940e22b15e6a
+Author: Andrew <ayk36@cornell.edu>
+Date:   Tue Mar 26 15:30:08 2024 -0400
+
+    Re-implement Candidate module to be of ExtractableType
+    
+    - Wrote implementation in candidate.ml
+    - Wrote specifications in candidate.mli
+    - Fixed typo in file.ml
+
+commit 11c27bb8d0b0028d25c00e6e7a06438c9e439c94
+Author: Andrew <ayk36@cornell.edu>
+Date:   Tue Mar 26 14:56:05 2024 -0400
+
+    Create File module to extract data from files
+    
+    - Wrote implementation in file.ml
+    - Wrote specifications in file.mli
+    - Added 'csv' and 'batteries' as libraries in dune file
+
+commit b305fd121fe6661c97d7788af8d0bad3ed971d9d
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Tue Mar 26 11:03:07 2024 -0400
+
+    Create candidate.ml file
+
+commit 8bc41093b3603e7098f0cefe1ab29bacaf02f386
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Tue Mar 26 10:54:43 2024 -0400
+
+    Add better functionality to State's outcome function
+    
+    - The function will now perform some computations to make a prediction
+    - Modified state interface to have abstract representation types
+
+commit ffad6fa5635eaa7bf8dacc6b9f03969495ddf7f9
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Tue Mar 26 10:54:27 2024 -0400
+
+    Add .ocamlformat file
+
+commit 08f9523300ba6261ee027446314c52e254f660c4
+Merge: 30f3f62 5e309e2
+Author: Srivatsa Kundurthy <srk247@cornell.edu>
+Date:   Mon Mar 25 23:29:47 2024 -0400
+
+    erge branch 'main' of github.coecis.cornell.edu:ayk36/cs3110-final
+    Merge resolves conflicts between redundant implementations of the same function across multiple machines.
+    Steps have been taken to ensure best practices are maintained for working with git in the future.
+
+commit 30f3f621d5e558cec31493af3f8662038238f436
+Author: Srivatsa Kundurthy <srk247@cornell.edu>
+Date:   Mon Mar 25 23:29:40 2024 -0400
+
+    Update Project File with Blank Details and Start Implentation of state
+
+commit 69f05bb5740bd12db350c7ca8b3d3d8158510371
+Author: Srivatsa Kundurthy <srk247@cornell.edu>
+Date:   Mon Mar 25 14:28:54 2024 -0400
+
+    Create YAML file
+    
+    write basic information about project
+    
+    write names and IDs in alphabetical order
+    
+    PENDING: We Must write a short and attention-grabbing project description
+
+commit 5e309e28326183fd10434d94f8d8295e8ca2b354
+Author: Nathan Dang <nd432@cornell.edu>
+Date:   Sun Mar 24 14:24:01 2024 -0400
+
+    Added candidate variant
+
+commit 7f55191438e4c8a2f85ddf67599c9390e322d017
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Sat Mar 23 21:28:58 2024 -0400
+
+    Create State compilation unit
+    
+    - Started basic implementation
+
+commit b6423249aea0c533dc4fbab2dfa66aaab9d213cc
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Sat Mar 23 21:28:28 2024 -0400
+
+    Run dune build on the project
+
+commit 1d943e41fab5b07ac51ef1a74188a22682092448
+Author: Srivatsa Kundurthy <srk247@cornell.edu>
+Date:   Sat Mar 23 19:04:10 2024 -0400
+
+    Initialize Dune Project
+    
+    Refactor .gitignore
+
+commit 1466b7179a5b83168090a850730d1640228adbab
+Author: Srivatsa Kundurthy <srk247@cornell.edu>
+Date:   Thu Mar 14 16:28:08 2024 -0400
+
+    Add name and netid to Readme.md file (srk247)
+
+commit 6bf22cded3e5f2196395dcf7fb7c2bdbda34a6ab
+Author: Leon Jiao <lsj47@cornell.edu>
+Date:   Wed Mar 13 22:46:06 2024 -0400
+
+    Modify README to add my name and netID (Leon Jiao, lsj47)
+
+commit 7f1dc03df7aebf6d0a8cdc93a87e718b2b1bb42d
+Author: Leon Huang <lyh7@cornell.edu>
+Date:   Wed Mar 13 15:58:41 2024 -0400
+
+    Added my name and netID (Leon Huang, lyh7)
+
+commit 07acf8414cb33e30129a48698f5f7374a2150d9f
+Author: nd432 <16930+nd432@users.noreply.github.coecis.cornell.edu>
+Date:   Tue Mar 12 17:59:38 2024 -0400
+
+    Update README.txt
+
+commit 1ab139152d4c24c418ff776a70a79465720db279
+Author: Andrew <ayk36@cornell.edu>
+Date:   Mon Mar 4 18:37:20 2024 -0500
+
+    Create README.txt with initial info for ayk36
+    
+    - Created README.txt
+    - Added name and NetID to README.txt file
+
+commit d06f41187bd9dd88f4bc6318c8283ec22a6903e9
+Author: Andrew <ayk36@cornell.edu>
+Date:   Mon Mar 4 18:34:41 2024 -0500
+
+    Initial commit
