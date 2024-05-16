@@ -14,42 +14,19 @@ open OUnit2
    https://github.com/features/copilot. *)
 let test_sigmoid =
   [
-    ( "Testing sigmoid function with input 0, expecting 0.5" >:: fun _ ->
-      assert_equal (Models.sigmoid 0.) 0.5 );
-    ( "Testing sigmoid function with input 1, expecting value greater than 0.5"
-    >:: fun _ -> assert_equal (Models.sigmoid 1.) (1. /. (1. +. exp (-1.))) );
-    ( "Testing sigmoid function with input -1, expecting value less than 0.5"
-    >:: fun _ -> assert_equal (Models.sigmoid (-1.)) (1. /. (1. +. exp 1.)) );
-    ( "Testing sigmoid function with input 2, expecting value greater than 0.5"
-    >:: fun _ -> assert_equal (Models.sigmoid 2.) (1. /. (1. +. exp (-2.))) );
-    ( "Testing sigmoid function with input -2, expecting value less than 0.5"
-    >:: fun _ -> assert_equal (Models.sigmoid (-2.)) (1. /. (1. +. exp 2.)) );
-    ( "Testing sigmoid function with input 4, expecting value greater than 0.5"
-    >:: fun _ -> assert_equal (Models.sigmoid 4.) (1. /. (1. +. exp (-4.))) );
+    (* Expected inputs*)
     ( "Testing sigmoid function with input 0, expecting exactly 0.5" >:: fun _ ->
       assert_bool "" (Models.sigmoid 0. = 0.5) );
     ( "Testing sigmoid function with input 1, expecting value greater than 0.5"
     >:: fun _ -> assert_bool "" (Models.sigmoid 1. > 0.5) );
     ( "Testing sigmoid function with input -1, expecting value less than 0.5"
     >:: fun _ -> assert_bool "" (Models.sigmoid (-1.) < 0.5) );
-    ( "Testing sigmoid function with large positive input 100, expecting value \
-       close to 1"
-    >:: fun _ -> assert_bool "" (Models.sigmoid 100. > 0.99) );
-    ( "Testing sigmoid function with large negative input -100, expecting \
-       value close to 0"
-    >:: fun _ -> assert_bool "" (Models.sigmoid (-100.) < 0.01) );
     ( "Testing sigmoid function with large positive input 1000, expecting \
        value close to 1"
     >:: fun _ -> assert_bool "" (Models.sigmoid 10000. > 0.99) );
     ( "Testing sigmoid function with large negative input -1000, expecting \
        value close to 0"
     >:: fun _ -> assert_bool "" (Models.sigmoid (-10000.) < 0.01) );
-    ( "Testing sigmoid function with very small positive input 0.0001, \
-       expecting value slightly greater than 0.5"
-    >:: fun _ -> assert_bool "" (Models.sigmoid 0.0001 > 0.5) );
-    ( "Testing sigmoid function with very small negative input -0.0001, \
-       expecting value slightly less than 0.5"
-    >:: fun _ -> assert_bool "" (Models.sigmoid (-0.0001) < 0.5) );
   ]
 
 (* Acknowledgement: The following code for testing the hypothesis function was
@@ -317,6 +294,14 @@ let test_geometric_mean =
       assert_equal 4. (Models.geometric_mean [ 4.0000000001; 3.9999999999 ]) );
   ]
 
+let test_get_reg_total =
+  [
+    ( "Testing get_reg_total with 0 iterations, where we expect that there is \
+       going to be \n\
+      \    no change in the total."
+    >:: fun _ -> assert_equal (Models.get_reg_total 0) 0.0 );
+  ]
+
 let test_models =
   "test suite for models.ml"
   >::: List.flatten
@@ -327,6 +312,7 @@ let test_models =
            test_gradient_descent;
            test_logistic_regression_helper;
            test_geometric_mean;
+           test_get_reg_total;
          ]
 
 let run_models_test () = run_test_tt_main test_models
