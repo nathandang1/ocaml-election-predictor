@@ -38,15 +38,6 @@ let rec concatenate_lists lst1 lst2 =
       | [] -> []
       | h2 :: t2 -> (h1, h2) :: concatenate_lists t1 t2)
 
-(* print functions *)
-(* let print_string_list_list lst = List.iter (fun sublist -> List.iter (fun s
-   -> print_endline s) sublist) lst *)
-
-(* let print_string_list lst = List.iter (fun s -> print_string (s ^ " "))
-   lst *)
-(* let print_float_list lst = List.iter (fun x -> Printf.printf "%.*f\n" 4 x)
-   lst *)
-
 (* Perform computations *)
 let do_computations () =
   let () = Random.self_init () in
@@ -76,21 +67,6 @@ let do_computations () =
   in
 
   (issues_titles_weights, (trump_sum, biden_sum))
-
-(* Print results *)
-(* let print_issues () = let result = do_computations () in let
-   issues_titles_weights = fst result in
-
-   let () = List.iter (fun (title, value) -> print_string (title ^ " ");
-   print_float value; print_endline "") issues_titles_weights in () *)
-
-(* let print_totals () = let result = do_computations () in
-
-   let trump_sum = fst (snd result) in let biden_sum = snd (snd result) in
-
-   let () = print_string "Trump weight: "; print_float trump_sum; print_endline
-   ""; print_string "Biden weight: "; print_float biden_sum; print_endline "\n"
-   in () *)
 
 (** [diff val1 val2] computes the unsigned percent difference between [val1] and
     [val2]. Requires: [val1 +. val2 != 0] *)
