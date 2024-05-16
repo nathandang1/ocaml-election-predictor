@@ -6,7 +6,7 @@ let geometric_mean lst =
 
 let get_reg_total iterations =
   let percent_total = ref 0. in
-  for i = 0 to iterations do
+  for _ = 0 to iterations do
     let result = Regularizer.do_computations () in
     let trump_sum = fst (snd result) in
     let biden_sum = snd (snd result) in

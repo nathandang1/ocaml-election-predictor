@@ -1,7 +1,7 @@
 let () = Random.self_init ()
 let open_metadata path = Csv.load path
 
-(** [ones n] creates a float list of [n] ones. *)
+(** [ones n] creates a list of [n] ones. *)
 let ones n = List.init n (fun _ -> 1.)
 
 (** [issues_weights issues] applies a random weight between 0.0 and 1.0 to each
@@ -39,11 +39,13 @@ let rec concatenate_lists lst1 lst2 =
       | h2 :: t2 -> (h1, h2) :: concatenate_lists t1 t2)
 
 (* print functions *)
-let print_string_list_list lst =
-  List.iter (fun sublist -> List.iter (fun s -> print_endline s) sublist) lst
+(* let print_string_list_list lst = List.iter (fun sublist -> List.iter (fun s
+   -> print_endline s) sublist) lst *)
 
-let print_string_list lst = List.iter (fun s -> print_string (s ^ " ")) lst
-let print_float_list lst = List.iter (fun x -> Printf.printf "%.*f\n" 4 x) lst
+(* let print_string_list lst = List.iter (fun s -> print_string (s ^ " "))
+   lst *)
+(* let print_float_list lst = List.iter (fun x -> Printf.printf "%.*f\n" 4 x)
+   lst *)
 
 (* Perform computations *)
 let do_computations () =
@@ -76,12 +78,9 @@ let do_computations () =
   (issues_titles_weights, (trump_sum, biden_sum))
 
 (* Print results *)
-let print_issues_and_totals () =
+let print_issues () =
   let result = do_computations () in
-
   let issues_titles_weights = fst result in
-  let trump_sum = fst (snd result) in
-  let biden_sum = snd (snd result) in
 
   let () =
     List.iter
@@ -91,32 +90,16 @@ let print_issues_and_totals () =
         print_endline "")
       issues_titles_weights
   in
-  let () =
-    print_string "Trump weight: ";
-    print_float trump_sum;
-    print_endline "";
-    print_string "Biden weight: ";
-    print_float biden_sum;
-    print_endline "\n"
-  in
   ()
 
-let print_totals_only () =
-  let result = do_computations () in
+(* let print_totals () = let result = do_computations () in
 
-  let trump_sum = fst (snd result) in
-  let biden_sum = snd (snd result) in
+   let trump_sum = fst (snd result) in let biden_sum = snd (snd result) in
 
-  let () =
-    print_string "Trump weight: ";
-    print_float trump_sum;
-    print_endline "";
-    print_string "Biden weight: ";
-    print_float biden_sum;
-    print_endline "\n"
-  in
-  ()
+   let () = print_string "Trump weight: "; print_float trump_sum; print_endline
+   ""; print_string "Biden weight: "; print_float biden_sum; print_endline "\n"
+   in () *)
 
-(* More computations *)
+(** [diff val1 val2] computes the unsigned percent difference between [val1] and
+    [val2]. Requires: [val1 +. val2 != 0] *)
 let diff val1 val2 = 200. *. (val1 -. val2) /. (val1 +. val2)
-(* let () = print_float diff *)
