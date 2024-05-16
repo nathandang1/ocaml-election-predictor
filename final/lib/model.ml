@@ -1,6 +1,7 @@
 type model =
   | Uniform
   | Bayes
+  | Logistic
 
 let uniform_model candidates =
   List.map
@@ -22,11 +23,27 @@ let bayes_model (state : State.t) =
         (Candidate.create ("Donald Trump", "Republican"), rep);
       ]
 
+let logistic_model (state : State.t) =
+  let data =
+    List.tl
+      (Csv.load
+         ("data/data-extraction/state-data/"
+         ^ String.lowercase_ascii state.name
+         ^ ".csv"))
+  in
+  match Models.logistic_regression data with
+  | dem, rep ->
+      [
+        (Candidate.create ("Joe Biden", "Democrat"), dem);
+        (Candidate.create ("Donald Trump", "Republican"), rep);
+      ]
+
 let run ((candidates : Candidate.t list), (state : State.t)) model =
   let probabilities =
     match model with
     | Uniform -> uniform_model candidates
     | Bayes -> bayes_model (state : State.t)
+    | Logistic -> logistic_model (state : State.t)
   in
   (state, probabilities)
 

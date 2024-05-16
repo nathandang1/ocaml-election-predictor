@@ -1,6 +1,7 @@
 type model =
   | Uniform
   | Bayes
+  | Logistic
 
 val run :
   Candidate.t list * State.t -> model -> State.t * (Candidate.t * float) list

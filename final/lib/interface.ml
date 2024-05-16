@@ -219,13 +219,28 @@ let naive_bayes () =
      likelihoods of each candidate winning the election. It conducts a \
      simulation based on that assumption. \n";
   print_endline "";
-  ANSITerminal.print_string [] "< Enable Randomization [Y/n]? }> \n";
+  ANSITerminal.print_string [] "< Enable Randomization [Y/n]? > \n";
   print_endline "";
   let randomized = read_line () = "Y" in
   let cand_path = "data/metadata/candidates.csv" in
   let state_path = "data/metadata/states.csv" in
   match Extractor.data (cand_path, state_path) with
   | cands, states -> Results (cands, states, Bayes, randomized)
+
+let logistic_model () =
+  ANSITerminal.erase Screen;
+  ANSITerminal.print_string [ ANSITerminal.Bold ] "LOGISTIC MODEL \n";
+  print_endline "";
+  ANSITerminal.print_string []
+    "Logistic regression is a classic machine learning model. \n";
+  print_endline "";
+  ANSITerminal.print_string [] "< Enable Randomization [Y/n]? > \n";
+  print_endline "";
+  let randomized = read_line () = "Y" in
+  let cand_path = "data/metadata/candidates.csv" in
+  let state_path = "data/metadata/states.csv" in
+  match Extractor.data (cand_path, state_path) with
+  | cands, states -> Results (cands, states, Logistic, randomized)
 
 let simulator () =
   ANSITerminal.erase Screen;
@@ -235,9 +250,12 @@ let simulator () =
   print_endline "";
   ANSITerminal.print_string [] "[2] Naive Bayes \n";
   print_endline "";
+  ANSITerminal.print_string [] "[3] Logistic Regression \n";
+  print_endline "";
   match read_line () with
   | "1" -> uniform_model ()
   | "2" -> naive_bayes ()
+  | "3" -> logistic_model ()
   | _ -> Simulator
 
 let rec print_outcomes = function

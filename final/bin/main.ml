@@ -21,8 +21,4 @@ open Final
    let () = Printf.printf "%.*f\n" 4 (fst output) let () = Printf.printf
    "%.*f\n" 4 (snd output) *)
 
-let data = List.tl (Csv.load "data/data-extraction/state-data/new jersey.csv")
-let out = Models.logistic_regression data
-let () = print_endline (string_of_float (fst out))
-let () = print_endline (string_of_float (snd out))
-(*let _ = Interface.transition Title*)
+let _ = Interface.transition Title
