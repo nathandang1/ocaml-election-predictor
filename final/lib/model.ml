@@ -8,7 +8,7 @@ let uniform_model candidates =
     (fun cand -> (cand, 1. /. float_of_int (List.length candidates)))
     candidates
 
-let bayes_model (state : State.t) =
+let bayes_model (state : State.t) randomness =
   let local =
     Local.shadow
       ("data/local/data-extraction/state-data/"
@@ -19,7 +19,7 @@ let bayes_model (state : State.t) =
       ^ ".csv")
   in
   let path = Local.path local in
-  match Models.naive_bayes_randomized (List.tl (Csv.load path)) with
+  match Models.naive_bayes_randomized (List.tl (Csv.load path)) randomness with
   | dem, rep ->
       [
         (Candidate.create ("Joe Biden", "Democrat"), dem);
@@ -49,7 +49,7 @@ let run ((candidates : Candidate.t list), (state : State.t)) model =
   let probabilities =
     match model with
     | Uniform -> uniform_model candidates
-    | Bayes _ -> bayes_model (state : State.t)
+    | Bayes randomness -> bayes_model (state : State.t) randomness
     | Logistic -> logistic_model (state : State.t)
   in
   (state, probabilities)

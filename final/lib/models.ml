@@ -14,7 +14,7 @@ let get_reg_total iterations =
   done;
   !percent_total
 
-let naive_bayes_randomized state_data =
+let naive_bayes_randomized state_data randomness =
   let dem_wins =
     List.filter
       (fun lst -> List.nth lst (List.length lst - 1) = "dem")
@@ -57,7 +57,7 @@ let naive_bayes_randomized state_data =
   (* Intuition: if net percent change (get_reg_total 10) < 0, reg_factor < 1. If
      net percent change > 0, reg_factor > 1. Only have to change one
      computation. *)
-  let net_change = get_reg_total 10 in
+  let net_change = get_reg_total randomness in
   (* let () = print_float net_change in let () = print_endline "" in *)
   let total_likelihood = likelihood_dem +. likelihood_rep in
   let multiply_factor = (100. +. net_change) /. 100. in

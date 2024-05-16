@@ -12,12 +12,14 @@ val get_reg_total : int -> float
     [iters] number of times. Returns a summed percentage change across these
     iterations. *)
 
-val naive_bayes_randomized : string list list -> float * float
-(** [naive_bayes_randomized data] takes in [data] with the following format:
+val naive_bayes_randomized : string list list -> int -> float * float
+(** [naive_bayes_randomized data randomness] takes in [data] with the following
+    format:
     [[year; state; republican votes; democrat votes; winner]; ..(more rows)..]
     and outputs [(dem, rep)] corresponding to the randomized probabilities that
-    a Democrat/Republican candidate wins the state. Requires: all values in the
-    [state] column to be uniform. *)
+    a Democrat/Republican candidate wins the state. The factor of randomization
+    is determined by [randomness]. Requires: all values in the [state] column to
+    be uniform. *)
 
 val sigmoid : float -> float
 (** [sigmoid z] applies the sigmoid function to argument [z]. *)
