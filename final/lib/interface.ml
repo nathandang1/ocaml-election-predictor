@@ -332,6 +332,13 @@ let uniform_model () =
   match Extractor.data (cand_path, state_path) with
   | cands, states -> Results (cands, states, Uniform, true)
 
+let rec randomization_query () =
+  ANSITerminal.print_string [] "< Enable Randomization [Y/n]? > ";
+  match read_line () with
+  | "Y" -> true
+  | "n" -> false
+  | _ -> randomization_query ()
+
 let naive_bayes () =
   ANSITerminal.erase Screen;
   ANSITerminal.print_string [ ANSITerminal.Bold ] "BAYES MODEL \n";
@@ -341,8 +348,7 @@ let naive_bayes () =
      likelihoods of each candidate winning the election. It conducts a \
      simulation based on that assumption. \n";
   print_endline "";
-  let () = ANSITerminal.print_string [] "< Enable Randomization [Y/n]? > " in
-  let randomized = read_line () = "Y" in
+  let randomized = randomization_query () in
   let () = print_endline "" in
   let randomness =
     read_int_rec_range (0, 20) "< Randomness Score? [0 - 20]? > "
@@ -361,9 +367,7 @@ let logistic_model () =
      classification. In this simulation the LR model gives strong weightage to \
      the preferences expressed by states through past election data. \n";
   print_endline "";
-  ANSITerminal.print_string [] "< Enable Randomization [Y/n]? > \n";
-  print_endline "";
-  let randomized = read_line () = "Y" in
+  let randomized = randomization_query () in
   let cand_path = Local.path cand_local in
   let state_path = Local.path state_local in
   match Extractor.data (cand_path, state_path) with
