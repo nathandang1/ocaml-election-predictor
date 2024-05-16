@@ -11,7 +11,10 @@ let bayes_model (state : State.t) =
   match
     Models.naive_bayes_randomized
       (List.tl
-         (Csv.load ("data/data-extraction/state-data/" ^ state.name ^ ".csv")))
+         (Csv.load
+            ("data/data-extraction/state-data/"
+            ^ String.lowercase_ascii state.name
+            ^ ".csv")))
   with
   | dem, rep ->
       [
