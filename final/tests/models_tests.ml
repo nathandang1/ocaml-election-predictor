@@ -250,7 +250,10 @@ let test_gradient_descent =
         (List.nth result 1 >= 6. && List.nth result 1 <= 7.) );
   ]
 
-let rec repeat n f acc = if n = 0 then acc else repeat (n - 1) f (f () :: acc)
+(** [repeat n f accum] constructs a list with the specified property [f] for [n]
+    iterations in order to enable averaging over random algorithms.*)
+let rec repeat n f accum =
+  if n = 0 then accum else repeat (n - 1) f (f () :: accum)
 
 let average r =
   let sum = List.fold_left ( +. ) 0. r in
