@@ -1,0 +1,9 @@
+# Citations
+
+#### Training Data
+
+Training Data for the elections, which is under `data-extraction/state-data`, 
+is sourced from the "U.S. President 1976–2020" dataset: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/42MVDX
+
+#### Metadata 
+
