@@ -150,8 +150,11 @@ let mutability_tests =
       let new_states_length = List.length (Countrypoll.get_states country2) in
       assert_equal new_states_length original_states_length );
   ]
-
+let rec print_csv lst = match lst with 
+| [] -> print_endline ""
+| h :: t -> print_endline h; print_csv t
 let good_csv = Csv.load "test.csv"
+let () = print_csv (List.nth good_csv 1)
 let bad_csv_1 = Csv.load "test_bad.csv"
 let bad_csv_2 = Csv.load "test_bad_2.csv"
 

@@ -12,7 +12,6 @@ let create_state lst = try
 match lst with 
 | nam :: abbr :: votes :: pop :: pref_can :: pref_percent :: [] ->
   {
-    
     name = nam; 
     abbreviation = abbr; 
     preferred_candidate = pref_can; 
@@ -20,8 +19,8 @@ match lst with
     num_votes = int_of_string votes; 
     population = int_of_string pop 
   }
-| _ -> raise (ImproperList "")
-with _ -> raise (ImproperList "")
+| _ -> raise (ImproperList "length")
+with _ -> raise (ImproperList "rows bad")
 
 let equals (state1 : state) state2 = state1 = state2 
 let get_name st = st.name 

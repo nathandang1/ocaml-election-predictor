@@ -54,6 +54,7 @@ let rec get_names_helper lst acc = match lst with
 | [] -> acc
 | h :: t -> get_names_helper t ((Statepoll.get_name h) :: acc)
 
+
 let rec create_country_csv_helper lst acc = match lst with 
 | [] -> acc
 | h :: t -> create_country_csv_helper t ((Statepoll.create_state h) :: acc)
@@ -67,16 +68,15 @@ let create_country lst boo nam =
 let create_country_from_CSV (csv : Csv.t) name bool = 
   if (Csv.columns csv) <> 6 
     then raise 
-  (ImproperCSV "Please make sure you only have 6 columns. 
-  Refer to the specification for more detail")
+  (ImproperCSV "6 columns")
 else 
   try 
-  let states = create_country_csv_helper csv [] in 
+  let states = create_country_csv_helper (List.tl csv) [] in 
   create_country states bool name
 with 
-| _ -> raise (ImproperCSV "Please make sure your rows are formatter properly. 
-Refer to the specification for more detail.")
-
+| Statepoll.ImproperList x -> 
+  print_endline x; 
+  raise (ImproperCSV ("Rows ugly" ^ x))
 
 let get_population cnt = count_pop cnt.states 0 
 
