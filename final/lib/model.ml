@@ -19,12 +19,19 @@ let bayes_model (state : State.t) randomness =
       ^ ".csv")
   in
   let path = Local.path local in
-  match Models.naive_bayes_randomized (List.tl (Csv.load path)) randomness with
-  | dem, rep ->
-      [
-        (Candidate.create ("Joe Biden", "Democrat"), dem);
-        (Candidate.create ("Donald Trump", "Republican"), rep);
-      ]
+  try
+    let data = List.tl (Csv.load path) in
+    match Models.naive_bayes_randomized data randomness with
+    | dem, rep ->
+        [
+          (Candidate.create ("Joe Biden", "Democrat"), dem);
+          (Candidate.create ("Donald Trump", "Republican"), rep);
+        ]
+  with _ ->
+    [
+      (Candidate.create ("Joe Biden", "Democrat"), 0.5);
+      (Candidate.create ("Donald Trump", "Republican"), 0.5);
+    ]
 
 let logistic_model (state : State.t) =
   let local =
@@ -37,13 +44,19 @@ let logistic_model (state : State.t) =
       ^ ".csv")
   in
   let path = Local.path local in
-  let data = List.tl (Csv.load path) in
-  match Models.logistic_regression data with
-  | dem, rep ->
-      [
-        (Candidate.create ("Joe Biden", "Democrat"), dem);
-        (Candidate.create ("Donald Trump", "Republican"), rep);
-      ]
+  try
+    let data = List.tl (Csv.load path) in
+    match Models.logistic_regression data with
+    | dem, rep ->
+        [
+          (Candidate.create ("Joe Biden", "Democrat"), dem);
+          (Candidate.create ("Donald Trump", "Republican"), rep);
+        ]
+  with _ ->
+    [
+      (Candidate.create ("Joe Biden", "Democrat"), 0.5);
+      (Candidate.create ("Donald Trump", "Republican"), 0.5);
+    ]
 
 let run ((candidates : Candidate.t list), (state : State.t)) model =
   let probabilities =
