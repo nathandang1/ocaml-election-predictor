@@ -215,7 +215,9 @@ let naive_bayes () =
   ANSITerminal.print_string [ ANSITerminal.Bold ] "BAYES MODEL \n";
   print_endline "";
   ANSITerminal.print_string []
-    "The Naive Bayes model is the Naive Bayes model. \n";
+    "The Naive Bayes model uses Bayesian inference to determine the \
+     likelihoods of each candidate winning the election. It conducts a \
+     simulation based on that assumption. \n";
   print_endline "";
   ANSITerminal.print_string [] "< Enable Randomization [Y/n]? }> \n";
   print_endline "";
