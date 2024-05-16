@@ -41,11 +41,11 @@ let country states =
         Statepoll.create_state
           [
             state.name;
-            state.pref_can;
-            "" (* PLACEHOLDER *);
-            string_of_float state.pref_percent;
+            state.abbr;
             string_of_int state.votes;
             string_of_int state.pop;
+            state.pref_can;
+            string_of_float state.pref_percent;
           ])
       states
   in
@@ -168,6 +168,75 @@ let remove_state (_, states) =
   let nation = country other_states in
   Countrypoll.save_data_locally nation "data/metadata/states.csv"
 
+let print_statepoll (s : Statepoll.state) =
+  print_endline ("Name: " ^ Statepoll.get_name s);
+  print_endline ("Abbreviation: " ^ Statepoll.get_abbreviation s);
+  print_endline ("* Votes: " ^ string_of_int (Statepoll.get_num_votes s));
+  print_endline ("* Population: " ^ string_of_int (Statepoll.get_population s));
+  print_endline
+    ("* Preferred Candidate: " ^ Statepoll.get_preferred_candidate_name s);
+  print_endline
+    ("* Preferred Margin: " ^ string_of_float (Statepoll.get_preferred_margin s))
+
+let modify_state (_, states) =
+  ANSITerminal.erase Screen;
+  ANSITerminal.print_string [ ANSITerminal.Bold ] "MODIFYING STATES: \n";
+  print_states states;
+  print_endline "";
+  ANSITerminal.print_string []
+    "Please specify the state you would like to modify: \n";
+  ANSITerminal.print_string [] "ABBR: ";
+  let state_abbr = read_line () in
+  let (selected_state : State.t) =
+    List.hd (List.filter (fun (s : State.t) -> s.abbr = state_abbr) states)
+  in
+  let other_states =
+    List.filter (fun (s : State.t) -> s.abbr <> state_abbr) states
+  in
+  let modifying_state =
+    Statepoll.create_state
+      [
+        selected_state.name;
+        selected_state.abbr;
+        string_of_int selected_state.votes;
+        string_of_int selected_state.pop;
+        selected_state.pref_can;
+        string_of_float selected_state.pref_percent;
+      ]
+  in
+  print_endline "";
+  ANSITerminal.print_string [ ANSITerminal.Bold ]
+    (String.uppercase_ascii selected_state.name ^ ": \n");
+  print_statepoll modifying_state;
+  print_endline "";
+  ANSITerminal.print_string []
+    "Please specify the field you would like to modify: \n";
+  let () = ANSITerminal.print_string [] "FIELD NAME: " in
+  let field_name = read_line () in
+  let () = ANSITerminal.print_string [] "NEW VALUE: " in
+  let _ =
+    match field_name with
+    | "Votes" ->
+        Statepoll.set_num_votes modifying_state (int_of_string (read_line ()))
+    | "Population" ->
+        Statepoll.set_population modifying_state (int_of_string (read_line ()))
+    | "Preferred Candidate" ->
+        Statepoll.set_preferred_candidate modifying_state (read_line ())
+    | "Preferred Margin" ->
+        Statepoll.set_preferred_margin modifying_state
+          (float_of_string (read_line ()))
+    | _ -> ()
+  in
+  ();
+  print_endline "";
+  ANSITerminal.print_string [ ANSITerminal.Bold ] "UPDATED STATE: \n";
+  print_statepoll modifying_state;
+  print_endline "";
+  ignore (read_line ());
+  let nation = country other_states in
+  let () = Countrypoll.add_state nation modifying_state in
+  Countrypoll.save_data_locally nation "data/metadata/states.csv"
+
 let state_poll () =
   ANSITerminal.erase Screen;
   ANSITerminal.print_string [ ANSITerminal.Bold ] "POLLING DATA \n";
@@ -180,6 +249,8 @@ let state_poll () =
   print_endline "";
   ANSITerminal.print_string [] "[4] Remove State \n";
   print_endline "";
+  ANSITerminal.print_string [] "[5] Modify State \n";
+  print_endline "";
   let cand_path = "data/metadata/candidates.csv" in
   let state_path = "data/metadata/states.csv" in
   let current_data = Extractor.data (cand_path, state_path) in
@@ -189,6 +260,7 @@ let state_poll () =
     | "2" -> remove_poll current_data
     | "3" -> add_state current_data
     | "4" -> remove_state current_data
+    | "5" -> modify_state current_data
     | _ -> ()
   in
   ();
