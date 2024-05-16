@@ -151,7 +151,7 @@ let add_state (_, states) =
       (new_state :: states)
   in
   let nation = country all_states in
-  Countrypoll.save_data_locally nation "data/metadata/states.csv"
+  Countrypoll.save_data_locally nation "data/metadata/states"
 
 let remove_state (_, states) =
   ANSITerminal.erase Screen;
@@ -166,7 +166,7 @@ let remove_state (_, states) =
     List.filter (fun (s : State.t) -> s.abbr <> state_abbr) states
   in
   let nation = country other_states in
-  Countrypoll.save_data_locally nation "data/metadata/states.csv"
+  Countrypoll.save_data_locally nation "data/metadata/states"
 
 let print_statepoll (s : Statepoll.state) =
   print_endline ("Name: " ^ Statepoll.get_name s);
@@ -213,16 +213,19 @@ let modify_state (_, states) =
     "Please specify the field you would like to modify: \n";
   let () = ANSITerminal.print_string [] "FIELD NAME: " in
   let field_name = read_line () in
-  let () = ANSITerminal.print_string [] "NEW VALUE: " in
   let _ =
     match field_name with
     | "Votes" ->
+        ANSITerminal.print_string [] "NEW VALUE: ";
         Statepoll.set_num_votes modifying_state (int_of_string (read_line ()))
     | "Population" ->
+        ANSITerminal.print_string [] "NEW VALUE: ";
         Statepoll.set_population modifying_state (int_of_string (read_line ()))
     | "Preferred Candidate" ->
+        ANSITerminal.print_string [] "NEW VALUE: ";
         Statepoll.set_preferred_candidate modifying_state (read_line ())
     | "Preferred Margin" ->
+        ANSITerminal.print_string [] "NEW VALUE: ";
         Statepoll.set_preferred_margin modifying_state
           (float_of_string (read_line ()))
     | _ -> ()
@@ -235,7 +238,7 @@ let modify_state (_, states) =
   ignore (read_line ());
   let nation = country other_states in
   let () = Countrypoll.add_state nation modifying_state in
-  Countrypoll.save_data_locally nation "data/metadata/states.csv"
+  Countrypoll.save_data_locally nation "data/metadata/states"
 
 let state_poll () =
   ANSITerminal.erase Screen;
