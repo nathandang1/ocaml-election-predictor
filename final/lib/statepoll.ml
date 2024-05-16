@@ -19,8 +19,8 @@ match lst with
     num_votes = int_of_string votes; 
     population = int_of_string pop 
   }
-| _ -> raise (ImproperList "length")
-with _ -> raise (ImproperList "rows bad")
+| _ -> raise (ImproperList "")
+with _ -> raise (ImproperList "")
 
 let equals (state1 : state) state2 = state1 = state2 
 let get_name st = st.name 

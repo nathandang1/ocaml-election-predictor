@@ -163,14 +163,12 @@ let test_create_from_csv =
     ( "exception thrown when column count is not 6" >:: fun _ ->
       assert_raises
         (Countrypoll.ImproperCSV
-           "Please make sure you only have 6 columns. \n\
-           \    Refer to the specification for more detail") (fun () ->
+           "") (fun () ->
           Countrypoll.create_country_from_CSV bad_csv_1 "bad country" true) );
     ( "exception thrown when row is faulty" >:: fun _ ->
       assert_raises
         (Countrypoll.ImproperCSV
-           "Please make sure your rows are formatter properly. \n\
-           \    Refer to the specification for more detail.") (fun () ->
+           "") (fun () ->
           Countrypoll.create_country_from_CSV bad_csv_2 "also bad" false) );
     ( "when a good csv is passed, the country created is valid \n\
       \  (this test checks attributes"

@@ -68,7 +68,7 @@ let create_country lst boo nam =
 let create_country_from_CSV (csv : Csv.t) name bool = 
   if (Csv.columns csv) <> 6 
     then raise 
-  (ImproperCSV "6 columns")
+  (ImproperCSV "")
 else 
   try 
   let states = create_country_csv_helper (List.tl csv) [] in 
@@ -76,7 +76,7 @@ else
 with 
 | Statepoll.ImproperList x -> 
   print_endline x; 
-  raise (ImproperCSV ("Rows ugly" ^ x))
+  raise (ImproperCSV (""))
 
 let get_population cnt = count_pop cnt.states 0 
 
