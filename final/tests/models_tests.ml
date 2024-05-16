@@ -197,14 +197,78 @@ let test_gradient_descent =
       assert_bool "" (List.for_all (( < ) 0.) theta) );
   ]
 
+let florida =
+  [
+    [ "1992"; "FLORIDA"; "0.4090249693604387"; "0.3899012156452978"; "rep" ];
+    [ "1996"; "FLORIDA"; "0.4232454874966859"; "0.4802557119781926"; "dem" ];
+    [ "2000"; "FLORIDA"; "0.4884682657204043"; "0.4883782120403614"; "rep" ];
+    [ "2004"; "FLORIDA"; "0.5209751623233695"; "0.4709111002771423"; "rep" ];
+    [ "2008"; "FLORIDA"; "0.4821531916597622"; "0.5103330527066491"; "dem" ];
+    [ "2012"; "FLORIDA"; "0.4913097776197552"; "0.5000786506869869"; "dem" ];
+    [ "2016"; "FLORIDA"; "0.4902194141659073"; "0.4782331580580505"; "rep" ];
+    [ "2020"; "FLORIDA"; "0.5121981962250404"; "0.4786145072544223"; "rep" ];
+  ]
+
+let rec repeat n f acc = if n = 0 then acc else repeat (n - 1) f (f () :: acc)
+
+let average r =
+  let sum = List.fold_left ( +. ) 0. r in
+  sum /. float_of_int (List.length r)
+
+let test_logistic_regression_helper =
+  [
+    ( "Testing average over several tries, given randomness of logistic \
+       regression model"
+    >:: fun _ ->
+      let florida =
+        [
+          [
+            "1992"; "FLORIDA"; "0.4090249693604387"; "0.3899012156452978"; "rep";
+          ];
+          [
+            "1996"; "FLORIDA"; "0.4232454874966859"; "0.4802557119781926"; "dem";
+          ];
+          [
+            "2000"; "FLORIDA"; "0.4884682657204043"; "0.4883782120403614"; "rep";
+          ];
+          [
+            "2004"; "FLORIDA"; "0.5209751623233695"; "0.4709111002771423"; "rep";
+          ];
+          [
+            "2008"; "FLORIDA"; "0.4821531916597622"; "0.5103330527066491"; "dem";
+          ];
+          [
+            "2012"; "FLORIDA"; "0.4913097776197552"; "0.5000786506869869"; "dem";
+          ];
+          [
+            "2016"; "FLORIDA"; "0.4902194141659073"; "0.4782331580580505"; "rep";
+          ];
+          [
+            "2020"; "FLORIDA"; "0.5121981962250404"; "0.4786145072544223"; "rep";
+          ];
+        ]
+      in
+      let results =
+        repeat 1000
+          (fun () -> Models.logistic_regression_helper florida 0.01 1000)
+          []
+      in
+      let avg = average results in
+      assert_bool "" (avg < 0.3) );
+  ]
+
 let test_geometric_mean =
   [
-    ( "" >:: fun _ ->
+    ( "Testing geometric_mean with a list of 1s" >:: fun _ ->
       assert_equal 1. (Models.geometric_mean (List.init 5 (fun _ -> 1.))) );
-    ("" >:: fun _ -> assert_equal 4. (Models.geometric_mean [ 2.; 4.; 8. ]));
-    ("" >:: fun _ -> assert_equal 0. (Models.geometric_mean [ 1.; 2.; 0.; 3. ]));
-    ("" >:: fun _ -> assert_equal 1. (Models.geometric_mean []));
-    ( "" >:: fun _ ->
+    ( "Testing geometric_mean with a list of [2.; 4.; 8.]" >:: fun _ ->
+      assert_equal 4. (Models.geometric_mean [ 2.; 4.; 8. ]) );
+    ( "Testing geometric_mean with a list containing 0" >:: fun _ ->
+      assert_equal 0. (Models.geometric_mean [ 1.; 2.; 0.; 3. ]) );
+    ( "Testing geometric_mean with an empty list" >:: fun _ ->
+      assert_equal 1. (Models.geometric_mean []) );
+    ( "Testing geometric_mean with a list of [4.0000000001; 3.9999999999]"
+    >:: fun _ ->
       assert_equal 4. (Models.geometric_mean [ 4.0000000001; 3.9999999999 ]) );
   ]
 
@@ -216,6 +280,7 @@ let test_models =
            test_hypothesis;
            test_gradient;
            test_gradient_descent;
+           test_logistic_regression_helper;
            test_geometric_mean;
          ]
 
