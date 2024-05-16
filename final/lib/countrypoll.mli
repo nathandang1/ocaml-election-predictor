@@ -8,6 +8,16 @@ type country = {
 }
 (** [country] is an abstract type that will represent a country. *)
 
+exception ImproperCSV of string
+(** [ImproperCSV] will be thrown if the csv inserted into
+    [create_country_from_CSV] is improperly formatted. refer to specification for more
+    detail.*)
+
+val create_country_from_CSV : Csv.t -> string -> bool -> country
+(** [create_country_from_CSV csv name electoral] creates a new country from csv [csv] with name
+    [name] and electoral college toggle [electoral]
+    The CSV must have six columns and be formatted in how a state is formatted, otherwise ImproperCSV is thrown*)
+
 val create_country : (state list) -> bool -> string -> country 
 (** [create_country a b c] creates a country with states [a], electoral college enabling [b] and name [c]*)
 

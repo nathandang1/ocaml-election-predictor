@@ -12,6 +12,7 @@ let create_state lst = try
 match lst with 
 | nam :: abbr :: votes :: pop :: pref_can :: pref_percent :: [] ->
   {
+    
     name = nam; 
     abbreviation = abbr; 
     preferred_candidate = pref_can; 
