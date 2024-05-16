@@ -136,10 +136,49 @@ in
     assert_equal new_states_length original_states_length
     )
 ]
+
+let good_csv = Csv.load "test.csv"
+let bad_csv_1 = Csv.load "test_bad.csv"
+let bad_csv_2 = Csv.load "test_bad_2.csv"
+let test_create_from_csv = [
+  "exception thrown when column count is not 6" >:: (fun _ ->
+    assert_raises 
+    (Countrypoll.ImproperCSV "Please make sure you only have 6 columns. 
+    Refer to the specification for more detail")
+    (fun () -> Countrypoll.create_country_from_CSV bad_csv_1 "bad country" true)
+    ); 
+  "exception thrown when row is faulty" >:: (fun _ -> 
+    assert_raises
+    (Countrypoll.ImproperCSV "Please make sure your rows are formatter properly. 
+    Refer to the specification for more detail.")
+    (fun () -> Countrypoll.create_country_from_CSV bad_csv_2 "also bad" false)
+    ); 
+  "when a good csv is passed, the country created is valid 
+  (this test checks attributes" >:: (fun _ -> 
+    let country = Countrypoll.create_country_from_CSV good_csv "good" true 
+  in 
+    assert_equal (List.length (Countrypoll.get_states country)) 4
+    ); 
+]
+
+let alabama = Statepoll.create_state ["Alabama"; "al"; "9"; "5108468"; "Trump"; "0.18875664116805574"]
+let alaska = Statepoll.create_state ["Alaska"; "ak"; "3"; "733406"; "Trump"; "0.051270956337204764"]
+let arizona = Statepoll.create_state ["Arizona"; "az"; "11"; "7341344"; "Biden"; "0.1731993941811405"]
+let arkansas = Statepoll.create_state ["Arkansas"; "ar"; "6"; "3067732"; "Trump"; "0.19474136752138244"]
+let state_list_test = [alabama; alaska; arizona; arkansas]
+let test_country = Countrypoll.create_country state_list_test true "temu US"
+let test_country_from_csv = Countrypoll.create_country_from_CSV good_csv "good" true 
+let test_create_from_csv2 = [
+  "equals is true (the state lists are accurate)" >:: (fun _ ->
+    assert_equal (Countrypoll.equals test_country test_country_from_csv) true
+    ); 
+]
 let countrypoll_tests = "full test suite" >::: List.flatten [
   test_equals; 
   test_contains; 
   getter_tests; 
   mutability_tests;
+  test_create_from_csv; 
+  test_create_from_csv2; 
 ]
 let run_countrypoll_tests = run_test_tt_main countrypoll_tests
