@@ -8,21 +8,28 @@ type state =  {
   }
 
 exception ImproperList of string 
+
 let create_state lst = try 
 match lst with 
 | nam :: abbr :: votes :: pop :: pref_can :: pref_percent :: [] ->
+  if ((int_of_string (String.trim votes)) <= 0) || 
+    (int_of_string (String.trim pop) <= 0) || 
+  (float_of_string (String.trim pref_percent) <= 0.0) 
+    then 
+      raise (ImproperList "")
+else 
   {
-    name = nam; 
-    abbreviation = abbr; 
-    num_votes = int_of_string votes; 
-    population = int_of_string pop; 
-    preferred_candidate = pref_can; 
-    preferred_margin = float_of_string pref_percent
+    name = String.trim nam; 
+    abbreviation = String.trim abbr; 
+    num_votes = int_of_string (String.trim votes); 
+    population = int_of_string (String.trim pop); 
+    preferred_candidate = String.trim pref_can; 
+    preferred_margin = float_of_string (String.trim pref_percent)
   }
 | _ -> raise (ImproperList "")
 with _ -> raise (ImproperList "")
 
-let equals (state1 : state) state2 = state1 = state2 
+let equals (state1 : state) state2 = state1.name = state2.name
 let get_name st = st.name 
 let get_preferred_candidate_name st = st.preferred_candidate
 let get_abbreviation st = st.abbreviation
@@ -36,13 +43,8 @@ let set_num_votes st vot = st.num_votes <- vot
 let set_population st pop = st.population <- pop 
 
 let export_state_to_csv st = 
-  let attributes = [
-  "name"; 
-  "abbr"; 
-  "votes"; 
-  "pop"; 
-  "pref_can"; 
-  "pref_percent"
+  let attributes = ["name"; "abbr"; "votes"; 
+  "pop"; "pref_can"; "pref_percent"
   ] 
 in 
   let state_data = [get_name st; 

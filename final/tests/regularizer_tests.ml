@@ -13,7 +13,7 @@ let test_opens =
     let _ = Regularizer.open_metadata "data/metadata/metadata.csv" in
     ()
   with _ ->
-    assert_failure "Expected no exception, but an exception was thrown."
+    assert_failure "Unexpected Exception."
 
 let test_open =
   [ ("ensures function does not throw an exception" >:: fun _ -> test_opens) ]

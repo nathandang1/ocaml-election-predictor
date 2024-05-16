@@ -13,35 +13,74 @@ let state =
 
 (* Getter Method Tests*)
 let state_attributes = [ "New York"; "ny"; "28"; "196800000"; "Biden"; "3.2" ]
-
+let state_whitespace = Statepoll.create_state
+    [ "   New York    "; "  ny   "; "  28  "; "  196800000  "; " Biden "; " 0.1   " ] 
 let create_test =
   [
     ( "valid creation" >:: fun _ ->
-      assert_equal (Statepoll.create_state state_attributes) state );
+      assert_equal (Statepoll.create_state state_attributes) state);
     ( "error is thrown (length of list is faulty)" >:: fun _ ->
       assert_raises (Statepoll.ImproperList "") (fun () ->
           Statepoll.create_state
             ("hi"
             :: [ "New York"; "Biden"; "Democratic"; "3.2"; "28"; "196800000" ]))
     );
-    ( "error is thrown (one of the attributes is wrong)" >:: fun _ ->
+    ( "error is thrown (non numeric number of votes)" >:: fun _ ->
       assert_raises (Statepoll.ImproperList "") (fun () ->
           Statepoll.create_state
-            [ "New York"; "ny"; "Hi"; "Biden"; "whats good Rowan" ]) );
+            [ "New York"; "ny"; "hello"; "196800000"; "Biden"; "3.2" ]) );
+    ( "error is thrown (non numeric number of votes)" >:: fun _ ->
+      assert_raises (Statepoll.ImproperList "") (fun () ->
+        Statepoll.create_state
+          [ "New York"; "ny"; "28"; "heyo"; "Biden"; "3.2" ]) );
+    ( "error is thrown (non numeric number of votes)" >:: fun _ ->
+        assert_raises (Statepoll.ImproperList "") (fun () ->
+          Statepoll.create_state
+            [ "New York"; "ny"; "28"; "100"; "Biden"; "blurb" ]) );
+    ( "error is throw (population is negative)" >:: fun _ -> 
+      assert_raises (Statepoll.ImproperList "") (fun () -> 
+        Statepoll.create_state
+        [ "New York"; "ny"; "28"; "-196800000"; "Biden"; "3.2" ])); 
+    ("error is throw (votes are negative)" >:: fun _ ->
+      assert_raises (Statepoll.ImproperList "") (fun () -> 
+        Statepoll.create_state
+        [ "New York"; "ny"; "-28"; "196800000"; "Biden"; "3.2" ])); 
+    ("error is throw (margin of preference is negative)" >:: fun _ ->
+      assert_raises (Statepoll.ImproperList "") (fun () -> 
+        Statepoll.create_state
+          [ "New York"; "ny"; "28"; "196800000"; "Biden"; "-3.2" ])); 
+    ( "error is throw (population is zero)" >:: fun _ -> 
+      assert_raises (Statepoll.ImproperList "") (fun () -> 
+        Statepoll.create_state
+          [ "New York"; "ny"; "28"; "0"; "Biden"; "3.2" ])); 
+    ("error is throw (votes are zero)" >:: fun _ ->
+        assert_raises (Statepoll.ImproperList "") (fun () -> 
+          Statepoll.create_state
+            [ "New York"; "ny"; "0"; "196800000"; "Biden"; "3.2" ])); 
+    ("error is throw (margin of preference is zero)" >:: fun _ ->
+        assert_raises (Statepoll.ImproperList "") (fun () -> 
+          Statepoll.create_state
+            [ "New York"; "ny"; "28"; "196800000"; "Biden"; "0.0" ])); 
+    ("whitespace name is trimmed" >:: fun _ ->  
+      assert_equal (Statepoll.get_name state_whitespace) ("New York")); 
+    ("whitespace abbreviation is trimmed" >:: fun _ ->  
+      assert_equal (Statepoll.get_abbreviation state_whitespace) ("ny")); 
+    ("whitespace votes are trimmed" >:: fun _ ->  
+      assert_equal (Statepoll.get_num_votes state_whitespace) (28)); 
+    ("whitespace population is trimmed" >:: fun _ -> 
+      assert_equal (Statepoll.get_population state_whitespace) (196800000)); 
+    ("whitespace candidate name is trimmed" >:: fun _ ->
+      assert_equal (Statepoll.get_preferred_candidate_name state_whitespace)
+      ("Biden")); 
+    ("whitespace margin of victory is trimmed" >:: fun _ ->
+      assert_equal (Statepoll.get_preferred_margin state_whitespace) (0.1))
   ]
 
 let state_copy = state
 let state_copy_2 = state_copy
+let state2_attributes = ["California"; "ca"; "28"; "196800000"; "Trump"; "3.2"]
 
-let state2 =
-  {
-    Statepoll.name = "California";
-    Statepoll.abbreviation = "ca";
-    Statepoll.preferred_candidate = "Trump";
-    Statepoll.preferred_margin = 3.2;
-    Statepoll.num_votes = 28;
-    Statepoll.population = 196800000;
-  }
+let state2 = Statepoll.create_state state2_attributes
 
 let test_equals =
   [
