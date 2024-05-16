@@ -170,20 +170,27 @@ let good_csv = Csv.load "test.csv"
 let () = print_csv (List.nth good_csv 1)
 let bad_csv_1 = Csv.load "test_bad.csv"
 let bad_csv_2 = Csv.load "test_bad_2.csv"
+let empty_csv = Csv.load "empty_country.csv"
 
 let test_create_from_csv =
   [
     ( "exception thrown when column count is not 6" >:: fun _ ->
-      assert_raises (Countrypoll.ImproperCSV "") (fun () ->
+      assert_raises (Countrypoll.ImproperCSV "") 
+      (fun () ->
           Countrypoll.create_country_from_CSV bad_csv_1 "bad country" true) );
     ( "exception thrown when row is faulty" >:: fun _ ->
-      assert_raises (Countrypoll.ImproperCSV "") (fun () ->
+      assert_raises (Countrypoll.ImproperCSV "") 
+      (fun () ->
           Countrypoll.create_country_from_CSV bad_csv_2 "also bad" false) );
     ( "when a good csv is passed, the country created is valid \n\
       \  (this test checks attributes"
     >:: fun _ ->
       let country = Countrypoll.create_country_from_CSV good_csv "good" true in
       assert_equal (List.length (Countrypoll.get_states country)) 4 );
+    ("an empty CSV throws an exception" >:: fun _ -> 
+      assert_raises (Countrypoll.ImproperCSV "") 
+      (fun () ->
+        Countrypoll.create_country_from_CSV empty_csv "empty" true)) 
   ]
 
 let alabama =

@@ -149,15 +149,17 @@ let fake_state = Statepoll.create_state ["California";"ca";"10";"10";"Biden";"2.
 
 let answer_key_2 = Csv.load "fake_state_2.csv"
 let even_faker_state = Statepoll.create_state["California";"ca";"1000000000";"100000000000000000";"Trump";"99.9"]
-let () = Statepoll.save_data_locally even_faker_state "very fake"
 let csv_method_tests = [
   ( "test for Statepoll.export_state_to_csv" >:: fun _ ->
     let csv_cali_fake = Statepoll.export_state_to_csv fake_state in
     assert_equal (Csv.compare csv_cali_fake answer_key) 0 );
   ( "test for Statepoll.export_state_to_csv, bigger numbers">:: fun _ ->
     let csv_cali_faker = Statepoll.export_state_to_csv even_faker_state in
-    assert_equal (Csv.compare csv_cali_faker answer_key_2) 0 )
+    assert_equal (Csv.compare csv_cali_faker answer_key_2) 0 ); 
+  ( "test to ensure that Statepoll.save_data_locally does not throw an exception" >::
+  fun _ -> Statepoll.save_data_locally even_faker_state "this data is fake")
 ]
+
 
 let statepoll_tests =
   "full test suite"
