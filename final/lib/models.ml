@@ -1,4 +1,4 @@
-(** [geometric_mean lst] computes the geometric mean of [lst] *)
+(* This file contains the Naive Bayes and Logistic Regression models.*)
 let geometric_mean lst =
   let product = List.fold_left ( *. ) 1. lst in
   if List.length lst > 0 then exp (log product /. float_of_int (List.length lst))
@@ -14,8 +14,6 @@ let get_reg_total iterations =
   done;
   !percent_total
 
-(** [naive_bayes_randomized data] takes in
-    [[year; state; republican votes; democrat votes; winner] ...] *)
 let naive_bayes_randomized state_data =
   let dem_wins =
     List.filter
@@ -56,7 +54,6 @@ let naive_bayes_randomized state_data =
     (dem_frac *. geometric_mean dem_rep_percentages)
     +. (rep_frac *. geometric_mean rep_rep_percentages)
   in
-
   (* Intuition: if net percent change (get_reg_total 10) < 0, reg_factor < 1. If
      net percent change > 0, reg_factor > 1. Only have to change one
      computation. *)
@@ -73,13 +70,11 @@ let naive_bayes_randomized state_data =
    OCaml.', GitHub Copilot, OpenAI/Microsoft, 15 May 2024,
    https://github.com/features/copilot. *)
 
-(* Sigmoid function *)
 let sigmoid z = 1. /. (1. +. exp (-.z))
 
 let hypothesis theta x =
   sigmoid (List.fold_left2 (fun acc t x -> acc +. (t *. x)) 0.0 theta x)
 
-(* Gradient of the cost function *)
 let gradient theta xs ys =
   let m = float_of_int (List.length ys) in
   let n = List.length theta in
@@ -133,9 +128,3 @@ let logistic_regression data =
   let iters = 1000 in
   let pred = logistic_regression_helper data alpha iters in
   (pred, 1. -. pred)
-
-(*in if pred < 0.5 then let r_pred = (1. -. pred) *. r_prior in let d_pred =
-  pred *. d_prior in let s = r_pred +. d_pred in (d_pred, r_pred) (*(r_pred /.
-  s, d_pred /. s)*) else let r_pred = pred *. r_prior in let d_pred = (1. -.
-  pred) *. d_prior in let s = r_pred +. d_pred in (d_pred, r_pred) (*(r_pred /.
-  s, d_pred /. s)*) *)

@@ -1,12 +1,17 @@
 open Final
 open OUnit2
 
-let lst1 = [ 1.1; 2.2; 3.3 ]
-
 (* As the sigmoid function is critical to logistic regression, it is tested
    extensively even though coverage is achieved. However, given challenges with
    roundoff, assert_equal is preferred to evaluate large/small number
    performance.*)
+(* Acknowledgement: The following code for testing the sigmoid function was
+   enhanced with the guidance of Github Copilot. Copilot helped add
+   approximately 4 extra tests cases.*)
+(* Citation: 'Given this function for the sigmoid function and this current test
+   suite, enhance the test suite by adding tests that cover unique input
+   types.', GitHub Copilot, OpenAI/Microsoft, 15 May 2024,
+   https://github.com/features/copilot. *)
 let test_sigmoid =
   [
     ( "Testing sigmoid function with input 0, expecting 0.5" >:: fun _ ->
@@ -47,6 +52,13 @@ let test_sigmoid =
     >:: fun _ -> assert_bool "" (Models.sigmoid (-0.0001) < 0.5) );
   ]
 
+(* Acknowledgement: The following code for testing the hypothesis function was
+   enhanced with the guidance of Github Copilot. Copilot helped add
+   approximately 3 extra tests cases.*)
+(* Citation: 'Given this function for the hypothesis function in a logistic
+   regression implementation, and this current test suite, enhance the test
+   suite by adding tests that cover unique input types.', GitHub Copilot,
+   OpenAI/Microsoft, 16 May 2024, https://github.com/features/copilot. *)
 let test_hypothesis =
   [
     ( "Testing hypothesis function with theta [1.; 2.; 3.] and x [1.; 2.; 3.], \
@@ -96,6 +108,13 @@ let test_hypothesis =
     );
   ]
 
+(* Acknowledgement: The following code for testing the gradient function was
+   enhanced with the guidance of Github Copilot. Copilot helped add
+   approximately 4 extra tests cases.*)
+(* Citation: 'Given this function for computing the gradient in a logistic
+   regression implementation, and this current test suite, enhance the test
+   suite by adding tests that cover unique input types.', GitHub Copilot,
+   OpenAI/Microsoft, 16 May 2024, https://github.com/features/copilot. *)
 let test_gradient =
   [
     ( "Testing gradient function with varying list sizes" >:: fun _ ->
@@ -135,6 +154,13 @@ let test_gradient =
       done );
   ]
 
+(* Acknowledgement: The following code for testing the hypothesis function was
+   enhanced with the guidance of Github Copilot. Copilot helped add
+   approximately 3 extra tests cases.*)
+(* Citation: 'Given this function for gradient descent in a logistic regression
+   implementation, and this current test suite, enhance the test suite by adding
+   tests that cover unique input types.', GitHub Copilot, OpenAI/Microsoft, 15
+   May 2024, https://github.com/features/copilot. *)
 let test_gradient_descent =
   [
     ( "Testing gradient_descent function with num_iters = 0, expecting theta \
@@ -206,8 +232,12 @@ let average r =
 let test_logistic_regression_helper =
   [
     ( "Right leaning state: Testing average over several tries for a right \
-       leaning state, given randomness of logistic regression model"
+       leaning state, given randomness of logistic regression model. The \
+       prediction for a right leaning state is < 0.5, and left leaning state \
+       is greater than 0.5. We know this should be the case for Florida, which \
+       is a strong right state. "
     >:: fun _ ->
+      (* pass in florida election data*)
       let florida =
         [
           [
@@ -244,8 +274,13 @@ let test_logistic_regression_helper =
       let avg = average results in
       assert_bool "" (avg < 0.5) );
     ( "Left leaning state: Testing average over several tries for a left \
-       leaning state, given randomness of logistic regression model"
+       leaning state, given randomness of logistic regression model. The \
+       prediction \n\
+      \       for a right leaning state is < 0.5, and left leaning state is \
+       greater than 0.5. We know this should be the case for California, which \
+       is a strong left state."
     >:: fun _ ->
+      (* pass in california election data.*)
       let california =
         [
           [
