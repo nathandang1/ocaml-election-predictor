@@ -395,6 +395,41 @@ let test_naive_bayes =
       in
       let results = Models.naive_bayes_randomized data 0 in
       assert_bool "" (snd results > fst results) );
+    ( "Naive Bayes for Sample Input data for a fake state in which republican \
+       candidate consistently dominates the democrat candidate (as evidence by \
+       the entire label column being rep), and where the probabilities ARE 1 \
+       and 0."
+    >:: fun _ ->
+      let data =
+        [
+          [ "1992"; "C"; "1.0"; "0.0"; "rep" ];
+          [ "1996"; "C"; "1.0"; "0.0"; "rep" ];
+          [ "2000"; "C"; "1.0"; "0.0"; "rep" ];
+          [ "2004"; "C"; "1.0"; "0.0"; "rep" ];
+          [ "2008"; "C"; "1.0"; "0.0"; "rep" ];
+          [ "2012"; "C"; "1.0"; "0.0"; "rep" ];
+        ]
+      in
+      let results = Models.naive_bayes_randomized data 0 in
+      assert_bool "" (snd results > fst results) );
+    ( "Naive Bayes for Sample Input data for a fake state in which democrat \
+       candidate consistently dominates the republican candidate (as evidence \
+       by the entire label column being rep), and where the probabilities ARE \
+       0 and 1."
+    >:: fun _ ->
+      let data =
+        [
+          [ "1992"; "D"; "0.0"; "1.0"; "dem" ];
+          [ "1996"; "D"; "0.0"; "1.0"; "dem" ];
+          [ "2004"; "D"; "0.0"; "1.0"; "dem" ];
+          [ "2008"; "D"; "0.0"; "1.0"; "dem" ];
+          [ "2012"; "D"; "0.0"; "1.0"; "dem" ];
+          [ "2016"; "D"; "0.0"; "1.0"; "dem" ];
+          [ "2020"; "D"; "0.0"; "1.0"; "dem" ];
+        ]
+      in
+      let results = Models.naive_bayes_randomized data 0 in
+      assert_bool "" (fst results > snd results) );
   ]
 
 let test_models =
