@@ -128,6 +128,30 @@ let test_gradient =
         assert_bool ""
           (Models.gradient theta xs ys <> List.init i (fun _ -> 0.0))
       done );
+    ( "Testing gradient function evaluation to an exact value based on \
+       hand-computed values for the gradient, starting from standard theta = \
+       [0.,0.]"
+    >:: fun _ ->
+      let theta = [ 0.0; 0.0 ] in
+      let xs = [ [ 2.0; 3.0 ]; [ 3.0; 4.0 ]; [ 4.0; 5.0 ] ] in
+      let ys = [ 2.0; 3.0; 4.0 ] in
+      let result = Models.gradient theta xs ys in
+      assert_bool "First entry not in range [-9, -8]"
+        (List.nth result 0 > -9. && List.nth result 0 < -8.);
+      assert_bool "Second entry not in range [-11, -10]"
+        (List.nth result 1 > -11. && List.nth result 1 < -10.) );
+    ( "Testing gradient function evaluation to an exact value based on \
+       hand-computed \n\
+      \      values for the gradient, starting from arbitrary theta"
+    >:: fun _ ->
+      let theta = [ 0.5; 0.5 ] in
+      let xs = [ [ 1.0; 2.0 ]; [ 2.0; 3.0 ]; [ 3.0; 4.0 ] ] in
+      let ys = [ 1.0; 2.0; 3.0 ] in
+      let result = Models.gradient theta xs ys in
+      assert_bool "First entry not in range [-3, -2]"
+        (List.nth result 0 > -3. && List.nth result 0 < -2.);
+      assert_bool "Second entry not in range [-4, -3]"
+        (List.nth result 1 > -4. && List.nth result 1 < -3.) );
   ]
 
 (* Acknowledgement: The following code for testing the hypothesis function was
