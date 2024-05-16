@@ -1,17 +1,6 @@
 open Final
 open OUnit2
 
-(* As the sigmoid function is critical to logistic regression, it is tested
-   extensively even though coverage is achieved. However, given challenges with
-   roundoff, assert_equal is preferred to evaluate large/small number
-   performance.*)
-(* Acknowledgement: The following code for testing the sigmoid function was
-   enhanced with the guidance of Github Copilot. Copilot helped add
-   approximately 4 extra tests cases.*)
-(* Citation: 'Given this function for the sigmoid function and this current test
-   suite, enhance the test suite by adding tests that cover unique input
-   types.', GitHub Copilot, OpenAI/Microsoft, 15 May 2024,
-   https://github.com/features/copilot. *)
 let test_sigmoid =
   [
     (* Expected inputs*)
